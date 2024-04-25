@@ -206,7 +206,7 @@ which prints contents like above
 
 Now we can start manipulating our data. First, let's check the data type of the
 data stored in `all_works_df` using the `type` method. **The `type` method and
-`__class__` attribute** tell us that `all_works_df` is `<class 'pandas.core.frame.DataFrame'>`.
+`__class__` attribute** tell us that `all_works_df` is `<class 'pandas.core.frame.DataFrame'`.
 
 ```python
 type(all_works_df)
@@ -459,7 +459,7 @@ TODO:
 
 ### Quickly Creating Summary Counts in Pandas
 
-Let's next count the number of publications for each author or author group. We can do this in a few
+Let's next count the number of publications for each author(s). We can do this in a few
 ways, but we'll use `groupby` combined with **a `count()` method**.
 
 ```python
@@ -491,109 +491,112 @@ all_works_df.checkout_percentage
 We can plot our summary stats using Pandas, too.
 
 ```python
-resource_count = all_works_df.groupby("resource_type")["is_dei"].count() 
+resource_count = all_works_df.groupby("resource_type")["mms_id"].count() 
 # Filter to keep only counts over 1000 since there are so many categories
-filtered_resource_count = resource_count[resource_count > 1000]
+filtered_resource_count = resource_count[resource_count  1000]
 # Plotting the result with a logrithmic scale since the values vary so widely
 filtered_resource_count.plot(kind="bar",logy=True)
 ```
 
-![](fig/01_weight_by_date.png){alt='Weight by Species Plot'}
 
 What does this graph show? Let's step through
 
-- `all_works_df.groupby("Date")` : This groups the texts by the date in which they
-  were published
-- `all_works_df.groupby("Date")["Status"]` : This chooses a single column to count,
-  rather than counting all columns
-- `all_works_df.groupby("Date")["Status"].count()` : this counts the instances, i.e.
-  how many texts in a given year have a status?
-- `date_count.plot(kind="bar")` : this plots that data as a bar chart
+- `all_works_df.groupby("resource_type")` : This groups the works by the resource type.
+- `all_works_df.groupby("resource_type")["mms_id"]` : This chooses a single column to count,
+  rather than counting all columns since we only want one number to plot. You could effectively pick an column.
+- `all_works_df.groupby("resource_type")["mms_id"].count()` : this counts the instances, i.e.
+  how many works per given resource type?
+- `resource_count[resource_count  1000]`: this eliminate all resource types that have a fewer than 1000 items.
+  Without this the graph would be way too crowded.
+
+- `filtered_resource_count.plot(kind="bar",logy=True)` this plots a bar chart with the resource type on x axis and count on the y axis.
+  We used a logrithmic y axis since the range of values is significant.
 
 ````
 
-> ## Challenge - Plots
->
-> 1. Create a plot of Authors across all Places per plot. Does it look how you
-expect it to look?
-{: .challenge}
+:::::::::::::::::::::::::::::::::::::::  challenge
+ ## Summary Plotting Challenge
 
-> ## Summary Plotting Challenge
->
-> Create a stacked bar plot, showing the total pages published, per year, with
-> the different publishing locations stacked on top of each other. The Date
-> should go on the X axis, and the Page Count on the Y axis. Some tips are below
-> to help you solve this challenge:
->
-> * [For more on Pandas plots, visit this link.](http://pandas.pydata.org/pandas-docs/stable/visualization.html#basic-plotting-plot)
-> * You can use the code that follows to create a stacked bar plot but the data to stack
->  need to be in individual columns.  Here's a simple example with some data where
->  'a', 'b', and 'c' are the groups, and 'one' and 'two' are the subgroups.
->
-> ```
-> d = {'one' : pd.Series([1., 2., 3.], index=['a', 'b', 'c']),'two' : pd.Series([1., 2., 3., 4.], index=['a', 'b', 'c', 'd'])}
-> pd.DataFrame(d)
-> ```
->
-> shows the following data
->
-> ```
->       one  two
->   a    1    1
->   b    2    2
->   c    3    3
->   d  NaN    4
-> ```
->
-> We can plot the above with
->
-> ```
-> # plot stacked data so columns 'one' and 'two' are stacked
-> my_df = pd.DataFrame(d)
-> my_df.plot(kind='bar', stacked=True, title="The title of my graph")
-> ```
->
-> ![Stacked Bar Plot](../fig/stackedBar1.png)
->
-> * You can use the `.unstack()` method to transform grouped data into columns
-> for each plotting.  Try running `.unstack()` on some DataFrames above and see
-> what it yields.
->
-> Start by transforming the grouped data into an unstacked layout, then create
-> a stacked plot.
->
->
->> ## Solution to Summary Challenge
->>
->> First we group data by date and then by place. 
->>
->> ```python
->> date_place = all_works_df.groupby(['Date','Place'])
->> page_sum = date_place['Page Count'].sum()
->> ```
->>
->> This calculates the sums for each place, for each date, as a table
->>
->> ```
->> page_sum
->> Date    Place
->> 1515    London    302
->> 1519    Londini   74
->> 1526     London   150
->> 1528    London    386
->> <other plots removed for brevity>
->> ```
->> 
->> After that, we use the `.unstack()` function on our grouped data to figure
->> out the total contribution of each place, to each year, and then plot the
->> data
->> ```python
->> table = page_sum.unstack()
->> plot = table.plot(kind="bar", stacked=True, title="Pages published per year", figsize=(10,5))
->> plot.set_ylabel("Pages")
->> ```
-> {: .solution}
-{: .challenge}
-````
+ Create a stacked bar plot, showing the checkouts, per language_code, with
+ the is_dei stacked on top of each other for the 10 languages with the most checkouts. Drop any records where is_dei True column is NAN. The language_code should go on the X axis, and the checkouts on the Y axis. Some tips are below
+ to help you solve this challenge:
+
+ * [For more on Pandas plots, visit this link.](http://pandas.pydata.org/pandas-docs/stable/visualization.html#basic-plotting-plot)
+ * You can use the code that follows to create a stacked bar plot but the data to stack
+  need to be in individual columns.  Here's a simple example with some data where
+  'a', 'b', and 'c' are the groups, and 'one' and 'two' are the subgroups.
+
+ ```
+ d = {'one' : pd.Series([1., 2., 3.], index=['a', 'b', 'c']),'two' : pd.Series([1., 2., 3., 4.], index=['a', 'b', 'c', 'd'])}
+ pd.DataFrame(d)
+ ```
+
+ shows the following data
+
+ ```
+       one  two
+   a    1    1
+   b    2    2
+   c    3    3
+   d  NaN    4
+ ```
+
+ We can plot the above with
+
+ ```
+ # plot stacked data so columns 'one' and 'two' are stacked
+ my_df = pd.DataFrame(d)
+ my_df.plot(kind='bar', stacked=True, title="The title of my graph")
+ ```
+
+ ![Stacked Bar Plot](../fig/stackedBar1.png)
+
+ * You can use the `.unstack()` method to transform grouped data into columns
+ for each plotting.  Try running `.unstack()` on some DataFrames above and see
+ what it yields.
+
+ Start by transforming the grouped data into an unstacked layout, then create
+ a stacked plot.
+
+:::::::::::::::  solution
+
+ First we group data by language_code and then by is_dei. 
+
+ ```python
+grouping = all_works_df.groupby(['language_code','is_dei'])
+checkouts = grouping['checkouts'].sum()
+top_checkouts = checkouts.sort_values(ascending=False).head(10)
+ ```
+
+ This calculates the sum of checkouts, for each language_code further broken down be DEI boolean flag, as a table
+
+ ```
+language_code  is_dei
+eng            False     1354282925
+               True       319997234
+spa            False       32781372
+zxx            False       25671210
+ger            False       16468846
+fre            False       15891002
+spa            True        10662043
+lat            False        9711483
+ita            False        4356075
+por            False        4296064
+Name: checkouts, dtype: int64
+ ```
+ 
+ After that, we use the `.unstack()` function on our grouped data to figure
+ out the total contribution of DEI verse non-DEI for each language_code, and then plot the
+ data.  We also drop the records where any column is NAN.
+ ```python
+ plot = top_checkouts.unstack.dropna(how="any").plot(kind="bar", stacked=True, title="DEI Checkouts By Language", figsize=(10,5))
+ plot.set_ylabel("Checkouts")
+ ```
+
+
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
