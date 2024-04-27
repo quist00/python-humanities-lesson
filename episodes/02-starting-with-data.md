@@ -86,17 +86,16 @@ This section will use the `all_works.csv` file that can be found in your data fo
 | resource_type     | Type of resource, e.g. physical, electronic                       | 
 | acquisition_date  | Date of Acquisition                                               | 
 | is_dei            | Boolean for whether work meets broadest definition of a DEI work  | 
-| subject_count     | Count of number of subjects                                       | 
-| checkouts         | Count of number of times | 
+| checkouts         | Count of number of times                                          | 
 
 If we open the `all_works.csv` data file using a text editor, the first few rows of our first file look like this:
 
 ```
-title,subjects,mms_id,author,publication_date,publication_place,language_code,resource_type,acquisition_date,is_dei,subject_count,checkouts
-"""A god of justice?"" : the problem of evil in twentieth-century Black literature","['American literature--African American authors--History and criticism', 'African Americans--Intellectual life--20th century', 'African Americans--Intellectual lif', 'American literature--African American author']",991004617919702908,"Whitted, Qiana J., 1974-",2009.0,Charlottesville,eng,Book - Physical,2011-11-13 20:21:49,True,4,78
-"""Baad bitches"" and sassy supermamas : Black power action films","['Blaxploitation films--United States--History and criticism', 'African American women heroes in motion pictures', 'African American women heroes in motion picture', 'Blaxploitation film', 'Blaxploitation Film']",991003607949702908,"Dunn, Stephane, 1967-",2008.0,Urbana,eng,Book - Physical,2015-07-13 23:35:00,True,5,78
-"""Codependent lesbian space alien seeks same""","['Lesbians--Drama', 'Lesbians', 'Video recordings for the hearing impaired']",991013190057102908,"Olnek, Madeleine.; Space Aliens, LLC.",2011.0,"[New York, NY?]",eng,Projected medium - Physical,2018-06-04 16:01:35,True,3,78
-"""Lactilla tends her fav'rite cow"" : ecocritical readings of animals and women in eighteenth-century British labouring-class women's poetry","['English poetry--Women authors--History and criticism', 'Working class writings, English--History and criticism', 'Ecofeminism in literature', 'English poetry--Women authors', 'Working class women in literature', 'Working class writings, English']",991003662979702908,"Milne, Anne.",2008.0,Lewisburg,eng,Book - Physical,2020-05-21 13:07:09,True,8,78
+title,subjects,mms_id,author,publication_date,publication_place,language_code,resource_type,acquisition_date,is_dei,subject_count,chekcouts
+"""A god of justice?"" : the problem of evil in twentieth-century Black literature","['American literature--African American authors--History and criticism', 'African Americans--Intellectual life--20th century', 'African Americans--Intellectual lif', 'American literature--African American author']",991004617919702908,"Whitted, Qiana J., 1974-",2009.0,Charlottesville,eng,Book - Physical,2016-06-26 23:51:01,True,4,
+"""Baad bitches"" and sassy supermamas : Black power action films","['Blaxploitation films--United States--History and criticism', 'African American women heroes in motion pictures', 'African American women heroes in motion picture', 'Blaxploitation film', 'Blaxploitation Film']",991003607949702908,"Dunn, Stephane, 1967-",2008.0,Urbana,eng,Book - Physical,2011-12-13 03:51:20,True,5,1.0
+"""Codependent lesbian space alien seeks same""","['Lesbians--Drama', 'Lesbians', 'Video recordings for the hearing impaired']",991013190057102908,"Olnek, Madeleine.; Space Aliens, LLC.",2011.0,"[New York, NY?]",eng,Projected medium - Physical,2016-11-10 07:56:09,True,3,1.0
+"""Lactilla tends her fav'rite cow"" : ecocritical readings of animals and women in eighteenth-century British labouring-class women's poetry","['English poetry--Women authors--History and criticism', 'Working class writings, English--History and criticism', 'Ecofeminism in literature', 'English poetry--Women authors', 'Working class women in literature', 'Working class writings, English']",991003662979702908,"Milne, Anne.",2008.0,Lewisburg,eng,Book - Physical,2015-10-07 16:31:28,True,8,
 ```
 
 ***
@@ -161,24 +160,23 @@ an element in the data structure.
 The above command yields the **output** similar to below, but formatted differently
 
 ```
-                                                   title  ... is_dei
-                                                     title  ... checkouts
-0                                      !!!!Que Rico Mambo.  ...         3
-1                                    !Click song : a novel  ...       348
-2        !Darwinistas! the construction of evolutionary...  ...       178
-3        !Kung Bushmen childrens games : children throw...  ...       360
-4                !Kung Bushmen childrens games : lion game  ...       171
-...                                                    ...  ...       ...
-3674733                                           한국임상약학회지  ...       598
-3674734                                       한국중재학회지:중재연구  ...       151
-3674735                                           한국치위생학회지  ...       211
-3674736                                              현대사광장  ...       412
-3674737                �As Nutayune�an: We still live here  ...       268
+                                                   title                                           subjects  ...  is_dei checkouts
+0      "A god of justice?" : the problem of evil in t...  ['American literature--African American author...  ...    True         0
+1      "Baad bitches" and sassy supermamas : Black po...  ['Blaxploitation films--United States--History...  ...    True         1
+2           "Codependent lesbian space alien seeks same"  ['Lesbians--Drama', 'Lesbians', 'Video recordi...  ...    True         1
+3      "Lactilla tends her fav'rite cow" : ecocritica...  ['English poetry--Women authors--History and c...  ...    True         0
+4      "The useless mouths", and other literary writings  ['French drama--20th century--Translations int...  ...    True         1
+...                                                  ...                                                ...  ...     ...       ...
+14227  ¡Ban c/s this! : the BSP anthology of Xican@ l...  ["Littérature américaine--Auteurs américain...  ...   False         0
+14228  ¡Muy pop! : conversations on Latino popular cu...  ['Popular culture--United States', "Littératu...  ...   False         1
+14229  ¡Viva la historieta! : Mexican comics, NAFTA, ...  ['Mondialisation dans la littérature', "Mondi...  ...   False         0
+14230                 Đời về cơ bản là buồn cười  ['Life--Comic books, strips, etc', 'Life', 'Co...  ...   False         3
+14231  Đường vào văn chương : phê bình lý trí ...  ['Literature, Modern--History and criticism--T...  ...   False         0
 
-[3674738 rows x 11 columns]ex
+[14232 rows x 11 columns]
 ```
 
-We can see that there were 3674738 rows parsed. Each row has 11
+We can see that there were 14232 rows parsed. Each row has 11
 columns. The first column displayed is the **index** of the DataFrame. The index is used to
 identify the position of the data, but it is not an actual column of the DataFrame.
 It looks like  the `read_csv` function in Pandas  read our file properly. However,
@@ -186,7 +184,7 @@ we haven't saved any data to memory so we can not work with it yet. We need to a
 DataFrame to a variable so we can call and use the data. Remember that a variable is a name given to a value, such as `x`,
 or  `data`. We can create a new  object with a variable name by assigning a value to it using `=`.
 
-Let's call the imported survey data `all_works_df`:
+Let's call the imported data `all_works_df`:
 
 ```python
 all_works_df = pd.read_csv("all_works.csv")
@@ -226,44 +224,20 @@ all_works_df.dtypes
 which returns output similar to:
 
 ```
-title                 object
-subjects              object
-mms_id                 int64
-author                object
-publication_date     float64
-publication_place     object
-language_code         object
-resource_type         object
-is_dei                  bool
-subject_count          int64
-checkouts              int64
-dtype: object
-```
-
-We'll talk a bit more about what the different dtypes mean in a different lesson, but for now let's take a 
-moment to correct pandas interpretation of two of our columns that will create issues later.  It is interpreting our publication date as a float and our MMS ID as a integer. For now, lets just convert them both to string representations using the following syntax.  This will prevent pandas from trying to do summary statistics on these columns and also allow for MMS IDs that start with zeros.  The integer datatype would normally drop any preceding zeros.
-
-```python
-all_works_df.publication_date = all_works_df.publication_date.astype(str)
-all_works_df.mms_id = all_works_df.mms_id.astype(str)
-all_works_df.dtypes
-```
-which **returns**:
-
-```
 title                object
 subjects             object
-mms_id               object
+mms_id                int64
 author               object
-publication_date     object
+publication_date      int64
 publication_place    object
 language_code        object
 resource_type        object
+acquisition_date     object
 is_dei                 bool
-subject_count         int64
 checkouts             int64
 dtype: object
 ```
+
 
 #### Useful Ways to View DataFrame objects in Python
 
@@ -325,8 +299,8 @@ which **returns**:
 
 ```
 array(['title', 'subjects', 'mms_id', 'author', 'publication_date',
-       'publication_place', 'language_code', 'resource_type', 'is_dei',
-       'subject_count', 'checkouts'], dtype=object)
+       'publication_place', 'language_code', 'resource_type',
+       'acquisition_date', 'is_dei', 'checkouts'], dtype=object)
 ```
 
 Let's get a list of all the publication locations. The `pd.unique` function tells us all of
@@ -365,31 +339,31 @@ We can calculate basic statistics for all records in a single column using the
 syntax below:
 
 ```python
-all_works_df['subject_count'].describe()
+all_works_df['checkouts'].describe()
 ```
 
 gives **output**
 
 ```python
 count    14232.000000
-mean        14.600689
-std         12.331483
-min          1.000000
-25%          5.000000
-50%         12.000000
-75%         21.000000
-max        166.000000
-Name: subject_count, dtype: float64
+mean         0.526349
+std          1.432189
+min          0.000000
+25%          0.000000
+50%          0.000000
+75%          1.000000
+max         43.000000
+Name: checkouts, dtype: float64
 ```
 
 We can also extract specific metrics for one or various columns if we wish:
 
 ```python
-all_works_df['subject_count'].min()
-all_works_df['subject_count'].max()
-all_works_df['subject_count'].mean()
-all_works_df['subject_count'].std()
-all_works_df['subject_count'].count()
+all_works_df['checkouts'].min()
+all_works_df['checkouts'].max()
+all_works_df['checkouts'].mean()
+all_works_df['checkouts'].std()
+all_works_df['checkouts'].count()
 ```
 
 But if we want to summarize by one or more variables, for example checkouts by language_code, we can
@@ -413,22 +387,13 @@ grouped_data.mean()
 `grouped_data.mean(numeric_only=True)` **OUTPUT:**
 
 ```python
-                 is_dei  subject_count   checkouts
-language_code                                     
-###            0.981481       2.370370  405.444444
-- N            0.000000       1.000000   32.000000
-0 0            0.000000       8.000000  225.000000
-aar            0.500000       4.000000  365.000000
-ach            0.500000       5.000000  309.500000
-...                 ...            ...         ...
-zen            0.000000       7.500000  964.000000
-zul            0.476190       9.285714  455.285714
-zxx            0.126793       6.299896  500.117399
-zza            0.000000       4.500000  374.000000
-|||            0.390547       1.957711  500.622720
-
-[314 rows x 3 columns]
-
+	mms_id	publication_date	is_dei	checkouts
+language_code				
+ara	9.910032e+17	2009.000000	0.400000	0.000000
+bos	9.910132e+17	2018.000000	0.500000	0.000000
+cat	9.910131e+17	2011.000000	0.500000	0.000000
+chi	9.910073e+17	2011.400000	0.500000	0.700000
+# Truncated for brevity
 ```
 
 The `groupby` command is powerful in that it allows us to quickly generate
@@ -440,7 +405,7 @@ summary stats.
 
 Create your own groupy object based on publicatin_place and take the mean.
 
-1. What is the mean number of subjects for works published in `[Washington, D.C.]`.
+1. What is the mean number of checkout for works published in `[Washington, D.C.]`.
 2. What does the summary stats uncover about the quality of data in the publication_place column?
 3. What happens when you group by two columns using the following syntax and
   then grab mean values:
@@ -491,26 +456,25 @@ all_works_df.checkout_percentage
 We can plot our summary stats using Pandas, too.
 
 ```python
-resource_count = all_works_df.groupby("resource_type")["mms_id"].count() 
-# Filter to keep only counts over 1000 since there are so many categories
-filtered_resource_count = resource_count[resource_count  1000]
-# Plotting the result with a logrithmic scale since the values vary so widely
-filtered_resource_count.plot(kind="bar",logy=True)
+# group data
+is_dei_count = all_works_df.groupby("is_dei")["mms_id"].count() 
+# set equal to variable so we can set additional parameters
+plot = is_dei_count.plot(kind="bar", title="Checkout by DEI Status")
+#lablel the y-axis
+plot.set_ylabel("Checkouts")
 ```
 
 
 What does this graph show? Let's step through
 
-- `all_works_df.groupby("resource_type")` : This groups the works by the resource type.
-- `all_works_df.groupby("resource_type")["mms_id"]` : This chooses a single column to count,
+- `all_works_df.groupby("is_dei")` : This groups the works by the resource type.
+- `all_works_df.groupby("is_dei")["mms_id"]` : This chooses a single column to count,
   rather than counting all columns since we only want one number to plot. You could effectively pick an column.
-- `all_works_df.groupby("resource_type")["mms_id"].count()` : this counts the instances, i.e.
-  how many works per given resource type?
-- `resource_count[resource_count  1000]`: this eliminate all resource types that have a fewer than 1000 items.
-  Without this the graph would be way too crowded.
+- `all_works_df.groupby("is_dei")["mms_id"].count()` : this counts the instances, i.e. how many works per given resource type?
 
-- `filtered_resource_count.plot(kind="bar",logy=True)` this plots a bar chart with the resource type on x axis and count on the y axis.
-  We used a logrithmic y axis since the range of values is significant.
+
+- `plot = is_dei_count.plot(kind="bar",logy=True)` : this plots a bar chart with the resource type on x axis and count on the y axis.
+- `plot.set_ylabel("Checkouts")` : this labels the y-axis
 
 ````
 
@@ -568,28 +532,25 @@ checkouts = grouping['checkouts'].sum()
 top_checkouts = checkouts.sort_values(ascending=False).head(10)
  ```
 
- This calculates the sum of checkouts, for each language_code further broken down be DEI boolean flag, as a table
+ The last two lines above calculates the sum of checkouts, for each language_code further broken down be DEI boolean flag, as a table and keeps only the top 10 most checked out items.
 
  ```
 language_code  is_dei
-eng            False     1354282925
-               True       319997234
-spa            False       32781372
-zxx            False       25671210
-ger            False       16468846
-fre            False       15891002
-spa            True        10662043
-lat            False        9711483
-ita            False        4356075
-por            False        4296064
-Name: checkouts, dtype: int64
+is_dei	False	True
+language_code		
+eng	4441.0	2530.0
+spa	95.0	92.0
+fre	70.0	62.0
+per	27.0	26.0
+ita	21.0	NaN
+jpn	NaN	20.0
  ```
  
  After that, we use the `.unstack()` function on our grouped data to figure
  out the total contribution of DEI verse non-DEI for each language_code, and then plot the
- data.  We also drop the records where any column is NAN.
+ data. 
  ```python
- plot = top_checkouts.unstack.dropna(how="any").plot(kind="bar", stacked=True, title="DEI Checkouts By Language", figsize=(10,5))
+ plot = top_checkouts.unstack.plot(kind="bar", stacked=True, title="DEI Checkouts By Language", figsize=(10,5),logy=True)
  plot.set_ylabel("Checkouts")
  ```
 
