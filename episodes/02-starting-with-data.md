@@ -184,18 +184,18 @@ we haven't saved any data to memory so we can not work with it yet. We need to a
 DataFrame to a variable so we can call and use the data. Remember that a variable is a name given to a value, such as `x`,
 or  `data`. We can create a new  object with a variable name by assigning a value to it using `=`.
 
-Let's call the imported data `all_works_df`:
+Let's call the imported data `works_df`:
 
 ```python
-all_works_df = pd.read_csv("all_works.csv")
+works_df = pd.read_csv("all_works.csv")
 ```
 
 Notice that when you assign the imported DataFrame to a variable, Python does not
-produce any output on the screen. We can print the value of the `all_works_df`
-object by typing its name into the cell and running it.  If you were doing this in a script file, you would need to use `print(all_works_df)`. Not needing to do so here is another convenience feature of Jupyter.
+produce any output on the screen. We can print the value of the `works_df`
+object by typing its name into the cell and running it.  If you were doing this in a script file, you would need to use `print(works_df)`. Not needing to do so here is another convenience feature of Jupyter.
 
 ```python
-all_works_df
+works_df
 ```
 
 which prints contents like above
@@ -203,22 +203,22 @@ which prints contents like above
 ### Manipulating Our Index Data
 
 Now we can start manipulating our data. First, let's check the data type of the
-data stored in `all_works_df` using the `type` method. **The `type` method and
-`__class__` attribute** tell us that `all_works_df` is `<class 'pandas.core.frame.DataFrame'`.
+data stored in `works_df` using the `type` method. **The `type` method and
+`__class__` attribute** tell us that `works_df` is `<class 'pandas.core.frame.DataFrame'`.
 
 ```python
-type(all_works_df)
+type(works_df)
 # this does the same thing as the above!
-all_works_df.__class__
+works_df.__class__
 ```
 
-We can also run `all_works_df.dtypes` in a cell to view the data type for each
+We can also run `works_df.dtypes` in a cell to view the data type for each
 column in our DataFrame. `int64` represents numeric integer values - `int64` cells
 can not store decimals. `object` represents strings (letters and numbers). `float64`
 represents numbers with decimals.
 
 ```
-all_works_df.dtypes
+works_df.dtypes
 ```
 
 which returns output similar to:
@@ -244,18 +244,18 @@ dtype: object
 We can use attributes and methods provided by the DataFrame object to summarize and access the data stored in it.
 
 To access an attribute, use the DataFrame object name followed by the attribute
-name `df_object.attribute`. For example, we can access the [Index object](https://pandas.pydata.org/docs/reference/indexing.html) containing the column names of `all_works_df` by using its `columns` attribute
+name `df_object.attribute`. For example, we can access the [Index object](https://pandas.pydata.org/docs/reference/indexing.html) containing the column names of `works_df` by using its `columns` attribute
 
 ```python
-all_works_df.columns
+works_df.columns
 ```
 
 As we will see later, we can use the contents of the Index object to extract (slice) specific records from our DataFrame based on their values.
 
 Methods are called by using the syntax `df_object.method()`. Note the inclusion of open brackets at the end of the method. Python treats methods as **functions** associated with a dataframe rather than just a property of the object as with attributes. Similarly to functions, methods can include optional parameters inside the brackets to change their default behaviour.
 
-As an example, `all_works_df.head()` gets the first few rows in the DataFrame
-`all_works_df` using **the `head()` method**. With a method, we can supply extra
+As an example, `works_df.head()` gets the first few rows in the DataFrame
+`works_df` using **the `head()` method**. With a method, we can supply extra
 information within the open brackets to control its behaviour.
 
 Let's look at the data using these.
@@ -264,19 +264,19 @@ Let's look at the data using these.
 
 ### Challenge - DataFrames
 
-Using our DataFrame `all_works_df`, try out the attributes \& methods below to see
+Using our DataFrame `works_df`, try out the attributes \& methods below to see
 what they return.
 
-1. `all_works_df.columns`
+1. `works_df.columns`
 
-2. `all_works_df.shape` Take note of the output of `shape` - what format does it
+2. `works_df.shape` Take note of the output of `shape` - what format does it
   return the shape of the DataFrame in?
   
   HINT: [More on tuples, here](https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences).
 
-3. `all_works_df.head()` Also, what does `all_works_df.head(15)` do?
+3. `works_df.head()` Also, what does `works_df.head(15)` do?
 
-4. `all_works_df.tail()`
+4. `works_df.tail()`
   
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -292,7 +292,7 @@ Let's begin by exploring our data:
 
 ```python
 # Look at the column names
-all_works_df.columns.values
+works_df.columns.values
 ```
 
 which **returns**:
@@ -307,7 +307,7 @@ Let's get a list of all the publication locations. The `pd.unique` function tell
 the unique values in the `publication_place` column.
 
 ```python
-pd.unique(all_works_df['publication_place'])
+pd.unique(works_df['publication_place'])
 ```
 
 which **returns**:
@@ -324,7 +324,7 @@ array(['Charlottesville', 'Urbana', '[New York, NY?]', ...,
 1. Create a list of unique publicaton years found in the data. Call it
   `years`. How many unique years are there in the data?
 
-2. What is the difference between `len(years)` and `all_works_df['publication_date'].nunique()`?
+2. What is the difference between `len(years)` and `works_df['publication_date'].nunique()`?
   
   TODO: Solution
 
@@ -339,7 +339,7 @@ We can calculate basic statistics for all records in a single column using the
 syntax below:
 
 ```python
-all_works_df['checkouts'].describe()
+works_df['checkouts'].describe()
 ```
 
 gives **output**
@@ -359,11 +359,11 @@ Name: checkouts, dtype: float64
 We can also extract specific metrics for one or various columns if we wish:
 
 ```python
-all_works_df['checkouts'].min()
-all_works_df['checkouts'].max()
-all_works_df['checkouts'].mean()
-all_works_df['checkouts'].std()
-all_works_df['checkouts'].count()
+works_df['checkouts'].min()
+works_df['checkouts'].max()
+works_df['checkouts'].mean()
+works_df['checkouts'].std()
+works_df['checkouts'].count()
 ```
 
 But if we want to summarize by one or more variables, for example checkouts by language_code, we can
@@ -372,10 +372,10 @@ can quickly calculate summary statistics by a group of our choice. For example t
 
 ```python
 # Group data by status
-grouped_data = all_works_df.groupby('language_code')
+grouped_data = works_df.groupby('language_code')
 ```
 
-If we execute the **pandas function `describe`** on this new object we will obtain descriptive stats for all the numerical columns in `all_works_df` grouped by the different cities available in the `publication_place` column of the DataFrame.
+If we execute the **pandas function `describe`** on this new object we will obtain descriptive stats for all the numerical columns in `works_df` grouped by the different cities available in the `publication_place` column of the DataFrame.
 
 ```python
 # summary statistics for all numeric columns by place
@@ -410,7 +410,7 @@ Create your own groupy object based on publicatin_place and take the mean.
 3. What happens when you group by two columns using the following syntax and
   then grab mean values:
 
-- `grouped_data2 = all_works_df.groupby(['resource_type','language_code'])
+- `grouped_data2 = works_df.groupby(['resource_type','language_code'])
    grouped_data2.mean(numeric_only=True)`
 
 
@@ -429,14 +429,14 @@ ways, but we'll use `groupby` combined with **a `count()` method**.
 
 ```python
 # count the number of texts by authors / groups of authors
-author_counts = all_works_df.groupby('author')['mms_id'].count()
+author_counts = works_df.groupby('author')['mms_id'].count()
 author_counts
 ```
 
 Or, we can also count just the rows that have the a specifig author like  "Abate, Michelle Ann, 1975-":
 
 ```python
-author_counts = all_works_df.groupby('author')['mms_id'].count()['Abate, Michelle Ann, 1975-']
+author_counts = works_df.groupby('author')['mms_id'].count()['Abate, Michelle Ann, 1975-']
 author_counts
 ```
 
@@ -446,9 +446,9 @@ author_counts
 If we wanted to, we could perform math on an entire numerical column of our data. To demonstrate this, let's add another column that shows what percentage of total checkouts for each work.
 
 ```
-all_checkouts = all_works_df.checkouts.sum()
-all_works_df["checkout_percentage"] = (all_works_df.checkouts / all_checkouts) * 100
-all_works_df.checkout_percentage
+all_checkouts = works_df.checkouts.sum()
+works_df["checkout_percentage"] = (works_df.checkouts / all_checkouts) * 100
+works_df.checkout_percentage
 ```
 
 ## Quick \& Easy Plotting Data Using Pandas
@@ -457,7 +457,7 @@ We can plot our summary stats using Pandas, too.
 
 ```python
 # group data
-is_dei_count = all_works_df.groupby("is_dei")["mms_id"].count() 
+is_dei_count = works_df.groupby("is_dei")["mms_id"].count() 
 # set equal to variable so we can set additional parameters
 plot = is_dei_count.plot(kind="bar", title="Checkout by DEI Status")
 #lablel the y-axis
@@ -467,10 +467,10 @@ plot.set_ylabel("Checkouts")
 
 What does this graph show? Let's step through
 
-- `all_works_df.groupby("is_dei")` : This groups the works by the resource type.
-- `all_works_df.groupby("is_dei")["mms_id"]` : This chooses a single column to count,
+- `works_df.groupby("is_dei")` : This groups the works by the resource type.
+- `works_df.groupby("is_dei")["mms_id"]` : This chooses a single column to count,
   rather than counting all columns since we only want one number to plot. You could effectively pick an column.
-- `all_works_df.groupby("is_dei")["mms_id"].count()` : this counts the instances, i.e. how many works per given resource type?
+- `works_df.groupby("is_dei")["mms_id"].count()` : this counts the instances, i.e. how many works per given resource type?
 
 
 - `plot = is_dei_count.plot(kind="bar",logy=True)` : this plots a bar chart with the resource type on x axis and count on the y axis.
@@ -527,7 +527,7 @@ What does this graph show? Let's step through
  First we group data by language_code and then by is_dei. 
 
  ```python
-grouping = all_works_df.groupby(['language_code','is_dei'])
+grouping = works_df.groupby(['language_code','is_dei'])
 checkouts = grouping['checkouts'].sum()
 top_checkouts = checkouts.sort_values(ascending=False).head(10)
  ```
