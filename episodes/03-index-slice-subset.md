@@ -41,7 +41,7 @@ using:
 
 ## Loading our data
 
-We will continue to use the surveys dataset that we worked with in the last
+We will continue to use the works dataset that we worked with in the last
 lesson. Let's reopen and read in the data again:
 
 ```python
@@ -61,7 +61,7 @@ numeric ranges, or specific x,y index locations.
 ## Selecting data using Labels (Column Headings)
 
 We use square brackets `[]` to select a subset of an Python object. As we saw in the previous espisode,
-we can select all data from the column named `checkouts` from the `surveys_df`
+we can select all data from the column named `checkouts` from the `works_df`
 DataFrame by name. There are two ways to do this:
 
 ```python
@@ -77,7 +77,7 @@ We can also create a new object that contains only the data within the
 
 ```python
 # creates an object, checkouts_series, that only contains the `checkouts` column
-checkouts_series = works_df['Status']
+checkouts_series = works_df['checkouts']
 ```
 
 We can pass a list of column names too, as an index to select columns in that
@@ -184,7 +184,7 @@ ref_works_df = works_df
 ```
 
 You might think that the code `ref_works_df = works_df` creates a fresh
-distinct copy of the `surveys_df` DataFrame object. However, using the `=`
+distinct copy of the `works_df` DataFrame object. However, using the `=`
 operator in the simple statement `y = x` does **not** create a copy of our
 DataFrame. Instead, `y = x` creates a new variable `y` that references the
 **same** object that `x` refers to. To state this another way, there is only
@@ -207,16 +207,16 @@ Let's try the following code:
 # ref_works_df was created using the '=' operator
  ref_works_df.head()
 
- # surveys_df is the original dataframe
+ # works_df is the original dataframe
  works_df.head()
 ````
 
 What is the difference between these two dataframes?
 
 When we assigned the first 3 columns the value of `0` using the
-`ref_surveys_df` DataFrame, the `surveys_df` DataFrame is modified too.
+`ref_works_df` DataFrame, the `works_df` DataFrame is modified too.
 Remember we created the reference `ref_survey_df` object above when we did
-`ref_survey_df = surveys_df`. Remember `surveys_df` and `ref_surveys_df`
+`ref_survey_df = works_df`. Remember `works_df` and `ref_works_df`
 refer to the same exact DataFrame object. If either one changes the object,
 the other will see the same changes to the reference object.
 
@@ -356,7 +356,7 @@ works_df[(works_df.publication_date >= 2010) & (works_df.publication_date <= 201
 ### Python Syntax Cheat Sheet
 
 Use can use the syntax below when querying data by criteria from a DataFrame.
-Experiment with selecting various subsets of the "surveys" data.
+Experiment with selecting various subsets of the "works" data.
 
 - Equals: `==`
 - Not equals: `!=`
@@ -432,7 +432,7 @@ null (missing or NaN) data values. We can use the `isnull` method to do this.
 The `isnull` method will compare each cell with a null value. If an element
 has a null value, it will be assigned a value of  `True` in the output object.
 
-Our data was carefully constructed to have no missing values in the form of `null` or `NaN`. Thus you won't get anything back if we use the works_df. Let's create a copy called `null_df` and add some bogus entries to demonstrate this since real world data is often messy or might use such on purpose. 
+Our data was carefully constructed to have no missing values in the form of `null` or `NaN`. Thus you won't get anything back if we use the works_df to attempt this. Let's create a copy called `null_df` and add some bogus entries to demonstrate this since real world data is often messy or might use such NaN or Null values on purpose. 
 
 ```python
 # import numpy so we can access np.nan
@@ -440,7 +440,9 @@ import numpy as np
 # make a true copy
 null_df = works_df.copy()
 
+# set all columns for all records where subject contains the word "Diversity" equal to NaN
 null_df.loc[null_df["subjects"].str.contains("Diversity", na=False)] = np.nan
+# set only the author column to NaN for records where publication_date is bewteen 2010 and 2015
 null_df.loc[((null_df.publication_date >= 2010) & (null_df.publication_date <= 2015)), ["author"]] = np.nan
 ```
 ```python
@@ -463,24 +465,22 @@ the mask as an index to subset our data as follows:
 
 ```python
 # To select just the rows with NaN values, we can use the 'any()' method
-null_df[
-        pd.isnull(null_df).any(axis=1)
-        ]
+null_df[pd.isnull(null_df).any(axis=1)]
 ```
-
-
 
 We can run `isnull` on a particular column too. What does the code below do?
 
 ```python
 # what does this do?
-empty_authors = null_df[pd.isnull(null_df['author'])]['author']
+empty_authors = null_df[null_df['author'].isnull()]
 print(empty_authors)
 ```
 
 Let's take a minute to look at the statement above. We are using the Boolean
-object `pd.isnull(nukll_df['author'])` as an index to `null_df`. We are
-asking Python to select rows that have a `NaN` value of author.
+object `null_df['author'].isnull()` as an index to `null_df`. We are
+asking Python to select rows that have a `NaN` value of author. While we obtained 
+the booleans using a method of the author column, we could have done it using 
+`pd.isnull(null_df['author'])` instead if we preferred.
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
