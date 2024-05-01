@@ -26,60 +26,27 @@ the data. The pandas package provides [various methods for combining
 DataFrames](https://pandas.pydata.org/pandas-docs/stable/merging.html) including
 `merge` and `concat`.
 
-To work through the examples below, we first need to load the species and
-surveys files into pandas DataFrames. The authors.csv and places.csv data can be found in the data folder.
+In order to get more practice with slicing and subsetting, we will opt to create subsets
+of the works_df instead of loading in data from multiple files.
 
 ```python
-import pandas as pd
-authors_df = pd.read_csv("authors.csv",
-                         keep_default_na=False, na_values=[""])
-authors_df
-
-        TCP                                             Author
-0    A00002                         Aylett, Robert, 1583-1655?
-1    A00005  Higden, Ranulf, d. 1364. Polycronicon. English...
-2    A00007             Higden, Ranulf, d. 1364. Polycronicon.
-3    A00008          Wood, William, fl. 1623, attributed name.
-4    A00011
-
-places_df = pd.read_csv("places.csv",
-                         keep_default_na=False, na_values=[""])
-places_df
-    A00002                         London
-0   A00005                         London
-1   A00007                         London
-2   A00008               The Netherlands?
-3   A00011                      Amsterdam
-4   A00012                         London
-5   A00014                         London
+top_concat_df = works_df.head()
+bottom_concat = works_df.tail().reset_index()
+left_concat_df = works_df.iloc[:,0:3]
+right_concat_df = works_df.iloc[:,3:]
+left_merge_df = works_df[['mms_id','title']]
+right_merge_df = works_df[['mms_id','author']]
+left_merge_df = works_df[['mms_id','title']]
+right_merge_df = works_df[['mms_id','author']].sample(int(works_df.shape[0] * .8))
 
 ```
-
-Take note that the `read_csv` method we used can take some additional options which
-we didn't use previously. Many functions in python have a set of options that
-can be set by the user if needed. In this case, we have told Pandas to assign
-empty values in our CSV to NaN `keep_default_na=False, na_values=[""]`.
-[More about all of the read\_csv options here.](https://pandas.pydata.org/pandas-docs/dev/generated/pandas.io.parsers.read_csv.html)
 
 ## Concatenating DataFrames
 
 We can use the `concat` function in Pandas to append either columns or rows from
-one DataFrame to another.  Let's grab two subsets of our data to see how this
-works.
-
-```python
-# read in first 10 lines of the places table
-place_sub = places_df.head(10)
-# grab the last 20 rows 
-place_sub_last10 = places_df.tail(20)
-#reset the index values to the second dataframe appends properly
-place_sub_last10 = place_sub_last10.reset_index(drop=True)
-# drop=True option avoids adding new index column with old index values
-```
-
-When we concatenate DataFrames, we need to specify the axis. `axis=0` tells
-Pandas to stack the second DataFrame under the first one. It will automatically
-detect whether the column names are the same and will stack accordingly.
+one DataFrame to another.  When we concatenate DataFrames, we need to specify the axis.
+ `axis=0` tells Pandas to stack the second DataFrame under the first one. It will 
+ automatically detect whether the column names are the same and will stack accordingly.
 `axis=1` will stack the columns in the second DataFrame to the RIGHT of the
 first DataFrame. To stack the data vertically, we need to make sure we have the
 same columns and associated column format in both datasets. When we stack
@@ -88,17 +55,22 @@ related in some way).
 
 ```python
 # stack the DataFrames on top of each other
-vertical_stack = pd.concat([place_sub, place_sub_last10], axis=0)
+vertical_stack = pd.concat([top_concat_df, bottom_concat_df], axis=0)
 
 # place the DataFrames side by side
-horizontal_stack = pd.concat([place_sub, place_sub_last10], axis=1)
+horizontal_stack = pd.concat([left_concat_df, right_concat_df], axis=1)
 ```
 
 #### Row Index Values and Concat
 
 Have a look at the `vertical_stack` dataframe? Notice anything unusual?
-The row indexes for the two data frames `place_sub` and `place_sub_last10`
+The row indexes for the two data frames `top_concat_df` and `bottom_concat_df`
 have been repeated. We can reindex the new dataframe using the `reset_index()` method.
+
+```python
+# reset index and drop previous index values rather than convert to data column
+vertical_stack.reset_index(drop=True,inplace=True)
+```
 
 ### Writing Out Data to CSV
 
@@ -119,7 +91,8 @@ it imports properly.
 
 ```python
 # for kicks read our output back into python and make sure all looks good
-new_output = pd.read_csv('out.csv', keep_default_na=False, na_values=[""])
+new_output = pd.read_csv('out.csv')
+new_output
 ```
 
 :::::::::::::::::::::::::::::::::::::::  challenge
