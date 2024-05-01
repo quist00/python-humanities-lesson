@@ -37,7 +37,7 @@ right_concat_df = works_df.iloc[:,3:]
 left_merge_df = works_df[['mms_id','title']]
 right_merge_df = works_df[['mms_id','author']]
 left_merge_df = works_df[['mms_id','title']]
-right_merge_df = works_df[['mms_id','author']].sample(int(works_df.shape[0] * .8))
+right_merge_df = works_df[['mms_id','author']].sample(frac=.8,random_state=42).drop_duplicates()
 
 ```
 
@@ -99,21 +99,8 @@ new_output
 
 ### Challenge - Combine Data
 
-In the data folder, there are two catalogue data files: `1635.csv` and
-`1640.csv`. Read the data into python and combine the files to make one
-new data frame.
-
-:::::::::::::::  solution
-
-### Solution to Challenge
-
-```python
- csv_1 = pd.read_csv("1635.csv")
- csv_2 = pd.read_csv("1640.csv")
- combined = pd.concat( [csv_1, csv_2], axis=0).reset_index(drop=True)
-```
-
-:::::::::::::::::::::::::
+Make your own subsets and combine them however you like.  Output at least once and read it back in.
+Did you get what you expected?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -130,12 +117,6 @@ table" containing additional data that we want to include in the other.
 NOTE: This process of joining tables is similar to what we do with tables in an
 SQL database.
 
-The `places.csv` file is table that contains the place and EEBO id for some titles.
-When we want to access that information, we can create a query that joins the additional
-columns of information to the author data.
-
-Storing data in this way has many benefits including:
-
 ### Identifying join keys
 
 To identify appropriate join keys we first need to know which field(s) are
@@ -145,21 +126,10 @@ the same name that also contain the same data. If we are less lucky, we need to
 identify a (differently-named) column in each DataFrame that contains the same
 information.
 
-```python
->>> authors_df.columns
 
-Index(['TCP', 'Author'], dtype='object')
+In our example, the join key is the column containing the identifier, which is called `mms_id`.
 
->>> places_df.columns
-
-Index(['TCP', 'Place'], dtype='object')
-
-```
-
-In our example, the join key is the column containing the identifier, which is called `TCP`.
-
-Now that we know the fields with the common TCP ID attributes in each
-DataFrame, we are almost ready to join our data. However, since there are
+Now that we have a common key, we are almost ready to join our data. However, since there are
 [different types of joins](https://blog.codinghorror.com/a-visual-explanation-of-sql-joins/), we
 also need to decide which type of join makes sense for our analysis.
 
@@ -180,56 +150,44 @@ The pandas function for performing joins is called `merge` and an Inner join is
 the default option:
 
 ```python
-merged_inner = pd.merge(left=authors_df,right=places_df, left_on='TCP', right_on='TCP')
-# in this case `species_id` is the only column name in  both dataframes, so if we skippd `left_on`
-# and `right_on` arguments we would still get the same result
+merged_inner = pd.merge(left=left_merge_df,right=right_merge_df, on='mms_id')
 
 # what's the size of the output data?
-merged_inner.shape
+print(merged_inner.shape)
 merged_inner
 ```
 
 **OUTPUT:**
 
 ```
-      TCP                                             Author             Place
-0  A00002                         Aylett, Robert, 1583-1655?            London
-1  A00005  Higden, Ranulf, d. 1364. Polycronicon. English...            London
-2  A00007             Higden, Ranulf, d. 1364. Polycronicon.            London
-3  A00008          Wood, William, fl. 1623, attributed name.  The Netherlands?
-4  A00011                                                NaN         Amsterdam
+(12848, 3)
+mms_id	title	author
+0	991004617919702908	"A god of justice?" : the problem of evil in t...	Whitted, Qiana J., 1974-
+1	991004617919702908	"A god of justice?" : the problem of evil in t...	Whitted, Qiana J., 1974-
+2	991003607949702908	"Baad bitches" and sassy supermamas : Black po...	Dunn, Stephane, 1967-
+3	991003607949702908	"Baad bitches" and sassy supermamas : Black po...	Dunn, Stephane, 1967-
+4	991013190057102908	"Codependent lesbian space alien seeks same"	Olnek, Madeleine.; Space Aliens, LLC.
 ```
 
-The result of an inner join of `authors_df` and `places_df` is a new DataFrame
+The result of an inner join of `left_merge_df` and `right_merge_df` is a new DataFrame
 that contains the combined set of columns from those tables. It
-*only* contains rows that have two-letter species codes that are the same in
-both the `authos_df` and `place_df` DataFrames. In other words, if a row in
-`authors_df` has a value of `TCP` that does *not* appear in the `TCP`
-column of `TCP`, it will not be included in the DataFrame returned by an
-inner join.  Similarly, if a row in `places_df` has a value of `TCP`
-that does *not* appear in the `TCP` column of `places_df`, that row will not
-be included in the DataFrame returned by an inner join.
+*only* contains rows that have *mms_id* codes that are the same in
+both DataFrames. 
 
-The two DataFrames that we want to join are passed to the `merge` function using
-the `left` and `right` argument. The `left_on='TCP'` argument tells `merge`
-to use the `TCP` column as the join key from `places_df` (the `left`
-DataFrame). Similarly , the `right_on='TCP'` argument tells `merge` to
-use the `TCP` column as the join key from `authors_df` (the `right`
-DataFrame). For inner joins, the order of the `left` and `right` arguments does
-not matter.
+The two DataFrames that we want to join were passed to the `merge` function using `on` 
+since the key colums in boht dataframes was the same.  If they had been different, 
+we could still do it but we would have to use `left_on` and `right_on` arguments
+with the appropriate column names instead of just one. 
 
-The result `merged_inner` DataFrame contains all of the columns from `authors`
-(TCP, Person) as well as all the columns from `places_df`
-(TCP, Place).
 
-Notice that `merged_inner` has fewer rows than `place_sub`. This is an
-indication that there were rows in `place_df` with value(s) for `EEBO` that
-do not exist as value(s) for `EEBO` in `authors_df`.
+Notice that `merged_inner` has fewer rows than `left_merge_df`. This is an
+indication that there were rows in `left_merge_df` with value(s) for `mms_id` that
+do not exist as value(s) for `mms_id` in `right_merge_df`.
 
 ### Left joins
 
-What if we want to add information from `cat_sub` to `survey_sub` without
-losing any of the information from `survey_sub`? In this case, we use a different
+What if we wanted to merge these two  without losing any of the information 
+from `left_merge_df`? In this case, we use a different
 type of join called a "left outer join", or a "left join".
 
 Like an inner join, a left join uses join keys to combine two DataFrames. Unlike
@@ -248,24 +206,37 @@ A left join is performed in pandas by calling the same `merge` function used for
 inner join, but using the `how='left'` argument:
 
 ```python
-merged_left = pd.merge(left=places_df,right=authors_df, how='left', left_on='TCP', right_on='TCP')
+merged_left = pd.merge(left=left_merge_df,right=right_merge_df, on='mms_id',how='left')
+
+# what's the size of the output data?
+print("shape:", merged_left.shape)
+print("Missing Authors:", merged_left.author.isnull().sum())
 merged_left
 
 **OUTPUT:**
-      TCP             Place                                             Author
-0  A00002            London                         Aylett, Robert, 1583-1655?
-1  A00005            London  Higden, Ranulf, d. 1364. Polycronicon. English...
-2  A00007            London             Higden, Ranulf, d. 1364. Polycronicon.
-3  A00008  The Netherlands?          Wood, William, fl. 1623, attributed name.
-4  A00011         Amsterdam                                                NaN
+shape: (14232, 3)
+Missing Authors: 1384
+mms_id	title	author
+0	991004617919702908	"A god of justice?" : the problem of evil in t...	Whitted, Qiana J., 1974-
+1	991003607949702908	"Baad bitches" and sassy supermamas : Black po...	Dunn, Stephane, 1967-
+2	991013190057102908	"Codependent lesbian space alien seeks same"	Olnek, Madeleine.; Space Aliens, LLC.
+3	991003662979702908	"Lactilla tends her fav'rite cow" : ecocritica...	Milne, Anne.
+4	991008089169702908	"The useless mouths", and other literary writings	Beauvoir, Simone de, 1908-1986.
+...	...	...	...
+14227	991013597402302908	¡Ban c/s this! : the BSP anthology of Xican@ l...	Rivera, Santino J., editor.
+14228	991010673989702908	¡Muy pop! : conversations on Latino popular cu...	Stavans, Ilan.
+14229	991004452179702908	¡Viva la historieta! : Mexican comics, NAFTA, ...	Campbell, Bruce, 1964- author.
+14230	991013093859602908	Đời về cơ bản là buồn cười	Lê, Bích, author.
+14231	991013054957702908	Đường vào văn chương : phê bình lý trí ...	Đặng, Phùng Quân, 1942- author.
+14232 rows × 3 columns
 ```
 
 The result DataFrame from a left join (`merged_left`) looks very much like the
 result DataFrame from an inner join (`merged_inner`) in terms of the columns it
 contains. However, unlike `merged_inner`, `merged_left` contains the **same
-number of rows** as the original `place_sub` DataFrame. When we inspect
+number of rows** as the original `left_merge_df` DataFrame. When we inspect
 `merged_left`, we find there are rows where the information that should have
-come from `authors_df` (i.e., `Author`) is missing (they contain NaN values):
+come from `right_merge_df` (i.e., `author`) is missing (they contain NaN values):
 
 ```python
  merged_inner[ pd.isnull(merged_inner.Author) ]
