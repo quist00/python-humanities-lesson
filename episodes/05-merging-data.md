@@ -238,17 +238,6 @@ number of rows** as the original `left_merge_df` DataFrame. When we inspect
 `merged_left`, we find there are rows where the information that should have
 come from `right_merge_df` (i.e., `author`) is missing (they contain NaN values):
 
-```python
- merged_inner[ pd.isnull(merged_inner.Author) ]
-**OUTPUT:**
-        TCP Author      Place
-4    A00011    NaN  Amsterdam
-6    A00014    NaN     London
-8    A00018    NaN   Germany?
-```
-
-These rows are the ones where the value of `Author` from `authors_df` does not occur in `places_df`.
-
 ### Other join types
 
 The pandas `merge` function supports two other join types:
@@ -262,18 +251,51 @@ The pandas `merge` function supports two other join types:
   the result DataFrame will `NaN` where data is missing in one of the dataframes.
   This join type is very rarely used.
 
+ ### Making Composite Keys
+ Sometimes a data file might not have an obvious key in a single column, but we may be able to generate a
+ suitable key by combining two or more columns into what is known as a *composite* key.
+
+ Let's see an example of this by importing the *ethnicity.csv* and *gender.csv*, and then examining one of them.  
+
+```python
+ethicity_df = pd.read_csv('ethnicity.csv')
+gender_df = pd.read_csv('gender.csv')
+print(gender_df.head())
+print(ethicity_df.head())
+```
+They both have *term* and *year* columns that contain duplication.  However, we could combine these colums into a composite key that would be unique for each dataframe. We will also strip away any potentialleading
+ or trailing whitespace as a precaution.
+
+
+```python
+gender_df["key"] = gender_df.year.astype(str).str.strip() + gender_df.term.str.strip()
+ethnicity_df["key"] = ethnicity_df.year.astype(str).str.strip() + ethnicity_df.term.str.strip()
+gender_df
+```
+
+Now that we have a shared key, we will drop the *term* and *year* columns from one of the dataframes as we merge.  Otherwise, we would end up with duplicate columns that are automatically renamed with 
+a prefix to prevent naming collision.  Simply dropping won't always be the best approach, but is safe to
+do so in our case using a inner join.
+
+```python
+gender_ethnicity_df = pd.merge(gender_df.drop(columns=["term","year"]), ethnicity_df, on='key')
+print(gender_ethnicity_df.shape)
+gender_ethnicity_df
+```
+
 ## Final Challenges
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
-### Challenge - Distributions
+### Challenge - Joins
 
-Create a new DataFrame by joining the contents of the `authors.csv` and
-`places.csv` tables. Calculate the:
+Create a new DataFrame by joining the contents of the `gender.csv` and
+`ethnicity.csv` tables. Make it a left join where gender if the left dataframe.
 
-1. Number of unique places
-2. Number of books that do not have a known place
-3. Number of books that do not have either a known place or author
+ Calculate the:
+
+1. Number of ethnicity records that were dropped
+2. Number of rows where ethnicity data is NaN
 
 :::::::::::::::  solution
 
@@ -281,24 +303,17 @@ Create a new DataFrame by joining the contents of the `authors.csv` and
 
 ```python
 merged = pd.merge(
-                  left=pd.read_csv("authors.csv"),
-                  right=pd.read_csv("places.csv"),
-                  left_on="TCP",
-                  right_on="TCP"
+                  left=pd.read_csv("gender.csv"),
+                  right=pd.read_csv("ethnicity.csv"),
+                  on="['year','term']"
                   )
-# Part 1: number of unique places - we can use the .nunique() method
-num_unique_places = merged["Place"].nunique()
-# Part 2: we can take advantage of the behaviour that the .count() method
-#         excludes NaN values. So .count() gives us the number that have place
-#         values
-num_no_place = len(merged) - merged["Place"].count()
-# Part 3: This needs us to check both columns and combine the resulting masks
-#         Then  we can use the trick of converting boolean to int, and summing, 
-#         to convert the combined mask to a number of True values
-no_author = pd.isnull(merged["Author"]) # True where is null
-no_place = pd.isnull(merged["Place"])
-neither = no_author & no_place
-num_neither = sum(neither)
+# Part 1: Number of ethnicity records that were dropped
+ethnicity_df.shape[0] - merged.shape[0]
+# Part 2: Number of rows where ethnicity data is NaN
+merged.isnull().sum() # this will find all colums with null values
+# you can then use those ethnicity columns to filter the dataframe and take the first value of shape
+merged[merged.intl.isnull()| merged.pacific_islander.isnull()].shape[0]
+
 ```
 
 :::::::::::::::::::::::::
