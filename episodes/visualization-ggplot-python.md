@@ -1,5 +1,5 @@
 ---
-title: Plotting with bokeh
+title: Plotting
 teaching: 20
 exercises: 25
 ---
@@ -32,6 +32,21 @@ for this exercise, we will be using the [`bokeh`](https://docs.bokeh.org/en/late
 package, which facilitates the creation of highly-informative plots of
 structured data.
 
+
+## Plotting with Matplotlib
+
+Matplotlib is a Python library that can be used to visualize data. The
+toolbox `matplotlib.pyplot` is a collection of functions that make matplotlib
+work like MATLAB. In most cases, this is all that you will need to use, but
+there are many other useful tools in matplotlib that you should explore.
+
+We will cover a few basic commands for formatting plots in this lesson. A great
+resource for help styling your figures is the matplotlib gallery
+([http://matplotlib.org/gallery.html](https://matplotlib.org/gallery.html)), which includes plots in many different
+styles and the source code that creates them. The simplest of plots is the 2
+dimensional line plot. These examples walk through the basic commands for making
+line plots using pyplots.
+
 ```python
 works_plot_df = pd.read_csv( 'all_works.csv', index_col='mms_id')
 ```
@@ -41,6 +56,166 @@ works_plot_df = pd.read_csv( 'all_works.csv', index_col='mms_id')
 from bokeh.plotting import figure, output_file, show
 from bokeh.io import output_notebook
 ```
+
+### Using pyplot:
+
+First, import the pyplot toolbox:
+
+```python
+    import matplotlib.pyplot as plt
+```
+
+By default, matplotlib will create the figure in a separate window. When using
+ipython notebooks, we can make figures appear in-line within the notebook by
+writing:
+
+```python
+    %matplotlib inline
+```
+
+We can start by plotting the values of a list of numbers (matplotlib can handle
+many types of numeric data, including numpy arrays and pandas DataFrames - we
+are just using a list as an example!):
+
+```python
+    list_numbers = [1.5, 4, 2.2, 5.7]
+    plt.plot(list_numbers)
+    plt.show()
+```
+
+The command `plt.show()` prompts Python to display the figure. Without it, it
+creates an object in memory but doesn't produce a visible plot. The ipython
+notebooks (if using `%matplotlib inline`) will automatically show you the figure
+even if you don't write `plt.show()`, but get in the habit of including this
+command!
+
+If you provide the `plot()` function with only one list of numbers, it assumes
+that it is a sequence of y-values and plots them against their index (the first
+value in the list is plotted at `x=0`, the second at `x=1`, etc). If the
+function `plot()` receives two lists, it assumes the first one is the x-values
+and the second the y-values. The line connecting the points will follow the list
+in order:
+
+```python
+    plt.plot([6.8, 4.3, 3.2, 8.1], list_numbers)
+    plt.show()
+```
+
+A third, optional argument in `plot()` is a string of characters that indicates
+the line type and color for the plot. The default value is a continuous blue
+line. For example, we can make the line red (`'r'`), with circles at every data
+point (`'o'`), and a dot-dash pattern (`'-.'`). Look through the matplotlib
+gallery for more examples.
+
+```python
+    plt.plot([6.8, 4.3, 3.2, 8.1], list_numbers, 'ro-.')
+    plt.axis([0,10,0,6])
+    plt.show()
+```
+
+The command `plt.axis()` sets the limits of the axes from a list of `[xmin, xmax, ymin, ymax]` values (the square brackets are needed because the argument
+for the function `axis()` is one list of values, not four separate numbers!).
+The functions `xlabel()` and `ylabel()` will label the axes, and `title()` will
+write a title above the figure.
+
+A single figure can include multiple lines, and they can be plotted using the
+same `plt.plot()` command by adding more pairs of x values and y values (and
+optionally line styles):
+
+```python
+    import numpy as np
+
+    # create a numpy array between 0 and 10, with values evenly spaced every 0.5
+    t = np.arange(0., 10., 0.5)
+
+    # red dashes with no symbols, blue squares with a solid line, and green triangles with a dotted line
+    plt.plot(t, t, 'r--', t, t**2, 'bs-', t, t**3, 'g^:')
+
+    plt.xlabel('This is the x axis')
+    plt.ylabel('This is the y axis')
+    plt.title('This is the figure title')
+
+    plt.show()
+```
+
+We can include a legend by adding the optional keyword argument `label=''` in
+`plot()`. Caution: We cannot add labels to multiple lines that are plotted
+simultaneously by the `plt.plot()` command like we did above because Python
+won't know to which line to assign the value of the argument label. Multiple
+lines can also be plotted in the same figure by calling the `plot()` function
+several times:
+
+```python
+    # red dashes with no symbols, blue squares with a solid line, and green triangles with a dotted line
+    plt.plot(t, t, 'r--', label='linear')
+    plt.plot(t, t**2, 'bs-', label='square')
+    plt.plot(t, t**3, 'g^:', label='cubic')
+
+    plt.legend(loc='upper left', shadow=True, fontsize='x-large')
+
+    plt.xlabel('This is the x axis')
+    plt.ylabel('This is the y axis')
+    plt.title('This is the figure title')
+
+    plt.show()
+```
+
+The function `legend()` adds a legend to the figure, and the optional keyword
+arguments change its style. By default [typing just `plt.legend()`], the legend
+is on the upper right corner and has no shadow.
+
+Like MATLAB, pyplot is stateful; it keeps track of the current figure and
+plotting area, and any plotting functions are directed to those axes. To make
+more than one figure, we use the command `plt.figure()` with an increasing
+figure number inside the parentheses:
+
+```python
+    # this is the first figure
+    plt.figure(1)
+    plt.plot(t, t, 'r--', label='linear')
+
+    plt.legend(loc='upper left', shadow=True, fontsize='x-large')
+    plt.title('This is figure 1')
+
+    plt.show()
+
+    # this is a second figure
+    plt.figure(2)
+    plt.plot(t, t**2, 'bs-', label='square')
+
+    plt.legend(loc='upper left', shadow=True, fontsize='x-large')
+    plt.title('This is figure 2')
+
+    plt.show()
+```
+
+A single figure can also include multiple plots in a grid pattern. The
+`subplot()` command especifies the number of rows, the number of columns, and
+the number of the space in the grid that particular plot is occupying:
+
+```python
+    plt.figure(1)
+
+    plt.subplot(2,2,1) # two row, two columns, position 1
+    plt.plot(t, t, 'r--', label='linear')
+
+    plt.subplot(2,2,2) # two row, two columns, position 2
+    plt.plot(t, t**2, 'bs-', label='square')
+
+    plt.subplot(2,2,3) # two row, two columns, position 3
+    plt.plot(t, t**3, 'g^:', label='cubic')
+
+    plt.show()
+```
+
+###Make other types of plots:
+
+Matplotlib can make many other types of plots in much the same way that it makes
+2 dimensional line plots. Look through the examples in
+[http://matplotlib.org/users/screenshots.html](https://matplotlib.org/users/screenshots.html) and try a few of them (click on the
+"Source code" link and copy and paste into a new cell in ipython notebook or
+save as a text file with a `.py` extension and run in the command line).
+
 
 ## Plotting with bokeh
 
