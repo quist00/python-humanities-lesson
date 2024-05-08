@@ -6,9 +6,9 @@ exercises: 25
 
 ::::::::::::::::::::::::::::::::::::::: objectives
 
-- Create a ggplot object
+- Create plot objects
 - Set universal plot settings
-- Modify an existing ggplot object
+- Modify an existing plot object
 - Change the aesthetics of a plot such as colour
 - Edit the axis labels
 - Build complex plots using a step-by-step approach
@@ -27,11 +27,11 @@ exercises: 25
 
 ##### Disclaimer
 
-Python has powerful built-in plotting capabilities such as `matplotlib`, but
-for this exercise, we will be using the [`bokeh`](https://docs.bokeh.org/en/latest/)
-package, which facilitates the creation of highly-informative plots of
-structured data.
-
+Pandas has powerful built-in plotting capabilities based off of `matplotlib`, but
+more flexibility is available to us if access `matplotlib ` directly.  We will explore
+that here first, but there are other libraries like `seaborn` and `bokeh` that can simplify the steps required and /or add additional functionality. We will make some plots with the [`bokeh`](https://docs.bokeh.org/en/latest/) package to exemplify the differences.  The most important take away, though, is that you have plotting
+options and that you should not let some differences in syntax dissuade you from finding the right fit for
+your needs.
 
 ## Plotting with Matplotlib
 
@@ -42,20 +42,10 @@ there are many other useful tools in matplotlib that you should explore.
 
 We will cover a few basic commands for formatting plots in this lesson. A great
 resource for help styling your figures is the matplotlib gallery
-([http://matplotlib.org/gallery.html](https://matplotlib.org/gallery.html)), which includes plots in many different
-styles and the source code that creates them. The simplest of plots is the 2
-dimensional line plot. These examples walk through the basic commands for making
-line plots using pyplots.
+([http://matplotlib.org/gallery.html](https://matplotlib.org/gallery.html)), which includes plots in many different styles and the source code that creates them. 
 
-```python
-works_plot_df = pd.read_csv( 'all_works.csv', index_col='mms_id')
-```
-
-
-```python
-from bokeh.plotting import figure, output_file, show
-from bokeh.io import output_notebook
-```
+The simplest of plots is the 2 dimensional line plot.   These next few examples walk through the
+ basic commands for making line plots using pyplots.
 
 ### Using pyplot:
 
@@ -63,14 +53,6 @@ First, import the pyplot toolbox:
 
 ```python
     import matplotlib.pyplot as plt
-```
-
-By default, matplotlib will create the figure in a separate window. When using
-ipython notebooks, we can make figures appear in-line within the notebook by
-writing:
-
-```python
-    %matplotlib inline
 ```
 
 We can start by plotting the values of a list of numbers (matplotlib can handle
@@ -84,10 +66,7 @@ are just using a list as an example!):
 ```
 
 The command `plt.show()` prompts Python to display the figure. Without it, it
-creates an object in memory but doesn't produce a visible plot. The ipython
-notebooks (if using `%matplotlib inline`) will automatically show you the figure
-even if you don't write `plt.show()`, but get in the habit of including this
-command!
+creates an object in memory but doesn't produce a visible plot. 
 
 If you provide the `plot()` function with only one list of numbers, it assumes
 that it is a sequence of y-values and plots them against their index (the first
@@ -97,7 +76,7 @@ and the second the y-values. The line connecting the points will follow the list
 in order:
 
 ```python
-    plt.plot([6.8, 4.3, 3.2, 8.1], list_numbers)
+    plt.plot(list_numbers,[6.8, 4.3, 3.2, 8.1])
     plt.show()
 ```
 
@@ -108,19 +87,19 @@ point (`'o'`), and a dot-dash pattern (`'-.'`). Look through the matplotlib
 gallery for more examples.
 
 ```python
-    plt.plot([6.8, 4.3, 3.2, 8.1], list_numbers, 'ro-.')
-    plt.axis([0,10,0,6])
+    plt.plot(list_numbers,[6.8, 4.3, 3.2, 8.1], 'ro-.')
+    plt.axis([0,6,0,10])
     plt.show()
 ```
 
 The command `plt.axis()` sets the limits of the axes from a list of `[xmin, xmax, ymin, ymax]` values (the square brackets are needed because the argument
 for the function `axis()` is one list of values, not four separate numbers!).
-The functions `xlabel()` and `ylabel()` will label the axes, and `title()` will
-write a title above the figure.
+
 
 A single figure can include multiple lines, and they can be plotted using the
 same `plt.plot()` command by adding more pairs of x values and y values (and
-optionally line styles):
+optionally line styles) The functions `xlabel()` and `ylabel()` will label the axes, and `title()` will
+write a title above the figure:
 
 ```python
     import numpy as np
@@ -190,7 +169,7 @@ figure number inside the parentheses:
 ```
 
 A single figure can also include multiple plots in a grid pattern. The
-`subplot()` command especifies the number of rows, the number of columns, and
+`subplot()` command specifies the number of rows, the number of columns, and
 the number of the space in the grid that particular plot is occupying:
 
 ```python
@@ -207,15 +186,18 @@ the number of the space in the grid that particular plot is occupying:
 
     plt.show()
 ```
+:::::::::::::::::::::::::::::::::::::::  challenge
+### Make other types of plots:
 
-###Make other types of plots:
+1. Create a histogram of checkouts.
 
-Matplotlib can make many other types of plots in much the same way that it makes
-2 dimensional line plots. Look through the examples in
-[http://matplotlib.org/users/screenshots.html](https://matplotlib.org/users/screenshots.html) and try a few of them (click on the
-"Source code" link and copy and paste into a new cell in ipython notebook or
-save as a text file with a `.py` extension and run in the command line).
+2. Matplotlib can make many other types of plots in much the same way that it makes
+ 2 dimensional line plots. Look through the examples in
+ [http://matplotlib.org/users/screenshots.html](https://matplotlib.org/users/screenshots.html) and try a few of them (click on the
+ "Source code" link and copy and paste into a new cell in ipython notebook or
+ save as a text file with a `.py` extension and run in the command line).
 
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Plotting with bokeh
 
@@ -238,8 +220,13 @@ We also set some notebook settings with a "output\_notebook()" statement to get 
 and exportable plots
 
 ```python
-output_notebook()
+from bokeh.plotting import figure, output_file, show
+from bokeh.io import output_notebook
+```
 
+```python
+works_plot_df = pd.read_csv( 'all_works.csv', index_col='mms_id')
+output_notebook()
 p = figure(width=400, height=400)
 
 ```
