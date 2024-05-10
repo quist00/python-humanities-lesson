@@ -137,7 +137,24 @@ a = [1, 2, 3, 4, 5]
   ```python
   a[len(a)]
   ```
+:::::::::::: solution
+- What value does the code below return? `a[0]`
+  
+  `1`, as  Python starts with element 0 (for Matlab users: this is different!)
 
+- How about this: `a[5]`
+  
+  `IndexError`
+
+- In the example above, calling `a[5]` returns an error. Why is that?
+  
+  The list has no element with index 5 (going from 0 till 4).
+
+- What about? `a[len(a)]`
+  
+  `IndexError`
+
+:::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Slicing Subsets of Rows in Python

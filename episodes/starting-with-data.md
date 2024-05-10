@@ -278,7 +278,23 @@ what they return.
 
 4. `works_df.tail()`
   
+::::::: solution
 
+1. `works_df.columns`
+
+2. `works_df.head()`. Also, what does `works_df.head(15)` do?
+  
+  Show first `N` lines
+
+3. `works_df.tail()`
+  
+  Show last `N` lines
+
+4. `works_df.shape`. Take note of the output of the shape method. What format does it return the shape of the DataFrame in?
+  
+  `type(works_df.shape)` -> `Tuple`, (rows, columns), i.e. standard row-first Python format
+
+::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ### Calculating Statistics From Data In A Pandas DataFrame
@@ -326,7 +342,19 @@ array(['Charlottesville', 'Urbana', '[New York, NY?]', ...,
 
 2. What is the difference between `len(years)` and `works_df['publication_date'].nunique()`?
   
-  TODO: Solution
+
+:::::::: solution
+1. Create a list of unique locations found in the index data. Call it `places`. How many unique location are there in the data?
+  ```python
+  years = pd.unique(works_df["publication_date"])
+  len(years)
+```
+2. What is the difference between `len(years)` and `works_df["publication_date"].nunique()`?
+
+Both do result in the same output, making it alternative ways of getting the unique values. `nunique` combines the count and unique value extraction.
+
+
+:::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -403,21 +431,37 @@ summary stats.
 
 ### Challenge - Summary Data
 
-Create your own groupy object based on publicatin_place and take the mean.
-
-1. What is the mean number of checkout for works published in `[Washington, D.C.]`.
-2. What does the summary stats uncover about the quality of data in the publication_place column?
-3. What happens when you group by two columns using the following syntax and
+1. Create your own groupy object based on publicatin_place and take the mean of checkouts.
+2. What is the mean number of checkout for works published in `[Washington, D.C.]`.
+3. What does the summary stats uncover about the quality of data in the publication_place column?
+4. What happens when you group by two columns using the following syntax and
   then grab mean values:
 
-- `grouped_data2 = works_df.groupby(['resource_type','language_code'])
-   grouped_data2.mean(numeric_only=True)`
+``` python
+grouped_data2 = all_works_df.groupby(['resource_type', 'language_code'])
+mean_values_by_type_and_language = grouped_data2.mean(numeric_only=True)
+mean_values_by_type_and_language
+```
 
 
 :::::::::::::::  solution
+1.
+``` python
+grouped_data = all_works_df.groupby('publication_place')
+means_by_publication_place = grouped_data.mean(numeric_only=True)
+means_by_publication_place['checkouts']
+```
+2. We can see in the list that is *0.000000*.
+3. We can see that the entries vary in how they are formatted. For a real analysis, you would
+  likley want to clean this up before proceeding. We can browse the full list
+  using code like the following to confirm:
 
-TODO:
+``` python
+for place in sorted(all_works_df['publication_place'].unique()):
+    print(place)
+```
 
+4. This code will create a GroupBy object grouped by both resource_type and language_code and then calculate the mean of all numerical columns within each group. This is useful for seeing trends across different types of resources and languages, potentially revealing interactions between these categories.
 :::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -455,7 +499,7 @@ works_df.checkout_percentage
 
 We can plot our summary stats using Pandas, too.
 
-```python
+``` python
 # group data
 is_dei_count = works_df.groupby("is_dei")["mms_id"].count() 
 # set equal to variable so we can set additional parameters
@@ -476,10 +520,10 @@ What does this graph show? Let's step through
 - `plot = is_dei_count.plot(kind="bar",logy=True)` : this plots a bar chart with the resource type on x axis and count on the y axis.
 - `plot.set_ylabel("Checkouts")` : this labels the y-axis
 
-````
+
 
 :::::::::::::::::::::::::::::::::::::::  challenge
- ## Summary Plotting Challenge
+Summary Plotting Challenge
 
  Create a stacked bar plot, showing the checkouts, per language_code, with
  the is_dei stacked on top of each other for the 10 languages with the most checkouts. Drop any records where is_dei True column is NAN. The language_code should go on the X axis, and the checkouts on the Y axis. Some tips are below
