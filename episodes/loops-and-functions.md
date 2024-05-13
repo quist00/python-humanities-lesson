@@ -545,55 +545,5 @@ Change the value of `a` to see how this function works. The statement `elif`
 means "else if", and all of the conditional statements must end in a colon.
 
 
-:::::::::::::::::::::::::::::::::::::::  challenge
-
-## Challenge - Modifying functions
-
-1. The code below checks to see whether a directory exists and creates one if it
-  doesn't. Add some code to your function that writes out the CSV files, to check
-  for a directory to write to.
-
-```Python
-  if 'dir_name_here' in os.listdir('.'):
-      print('Processed directory exists')
-  else:
-      os.mkdir('dir_name_here')
-      print('Processed directory created')
-```
-
-::::::: solution
-
-  ```python
-  def one_year_csv_writer(this_year, all_data, folder_to_save, root_name):
-      """
-      Writes a csv file for data from a given year.
-
-      Parameters
-      ---------
-      this_year : int
-          year for which data is extracted
-      all_data: pd.DataFrame
-          DataFrame with multi-year data 
-      folder_to_save : str
-          folder to save the data files
-      root_name: str
-          root of the filenames to save the data
-      """
-      if folder_to_save in os.listdir('.'):
-        print('Output directory exists')
-      else:
-        os.mkdir(folder_to_save)
-        print('folder_to_save, directory created')
-      # Select data for the year
-      texts_year = all_data[all_data.year == this_year]
-
-      # Write the new DataFrame to a csv file
-      filename = os.path.join(folder_to_save, ''.join([root_name, str(this_year), '.csv']))
-      texts_year.to_csv(filename)
-      ```
-
-:::::::::::::::
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
