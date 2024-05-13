@@ -346,6 +346,12 @@ selects the element that is 3 rows down and 7 columns over in the DataFrame.
   - `works_df[:4]`
   - `works_df[:-1]`
 
+*Suggestion*: You can also select every Nth row: `eebworks_dfo_df[1:10:2]`. So, how to interpret `works_df[::-1]`?
+
+- What is the difference between `works_df.iloc[0:4, 1:4]` and `works_df.loc[0:4, 1:4]`?
+  
+  Check the position, or the name. The second is like it would be in a dictionary, asking for the key-names. Column names 1:4 do not exist, resulting in an error. Check also the difference between `works_df.loc[0:4]` and `works_df.iloc[0:4]`
+
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Subsetting Data using Criteria
@@ -399,17 +405,43 @@ Experiment with selecting various subsets of the "works" data.
           ]
   ```
 
-Use the `isin` function to find all books written by Robert Aylett and
-Robert Aytoun. How many are there?
+  Use the `isin` function to find all books published in either 2010 or 2015. How many are there?
 
 3. Experiment with other queries. Create a query that finds all rows with a
-  checkouts  > or equal to 1.
+  checkouts  greater than or equal to 1.
 
 4. The `~` symbol in Python can be used to return the OPPOSITE of the
   selection that you specify in Python. It is equivalent to **is not in**.
-  Write a query that selects all rows with publication_date NOT equal to 2002 or 2003 in
+  Write a query that selects all rows with publication_date NOT equal to 2010 or 2015 in
   the works data.
+
+:::::::::: solution
+1.
+  ``` python
+  works_df[(works_df.publication_date < 2010) & (works_df.checkouts < 5)]
+
+  ```
   
+2.
+  ``` python
+  works_df[works_df['publication_date'].isin([2010,2015])]
+
+  ```
+
+3. 
+  ``` python
+  works_df[works_df['checkouts']>=1]
+
+  ```
+
+4. 
+  ``` python
+  works_df[~works_df['publication_date'].isin([2010,2015])]
+
+  ```
+
+
+::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -503,14 +535,23 @@ the booleans using a method of the author column, we could have done it using
 
 ## Challenge - Putting it all together
 
-1. Create a new DataFrame that only contains titles with publication_location that
-  are **not equal** to Charlottesville. Assign each status value in the new DataFrame to a
-  new value of 'subset'. Determine the number of null values in the subset.
+1. Create a new DataFrame that only contains titles with publication_place that
+  are **not equal** to New York. 
 
 2. Create a new DataFrame that contains only works that were published in "New York, N.Y."
   and where checkouts are greater than 0.
-  
 
+:::::::::: solution
+1.
+```python
+works_df[works_df['publication_place']!='New York']
+```
+2.
+```python
+new_york_df = works_df[(works_df['publication_place']=='New York, N.Y.') & (works_df.checkouts > 0)]
+new_york_df
+```
+:::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 

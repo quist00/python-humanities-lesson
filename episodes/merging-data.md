@@ -200,8 +200,6 @@ for those columns in the resulting joined DataFrame.
 Note: a left join will still discard rows from the `right` DataFrame that do not
 have values for the join key(s) in the `left` DataFrame.
 
-![](https://blog.codinghorror.com/content/fig/uploads/2007/10/6a0120a85dcdae970b01287770273e970c-pi.png){alt='Left Join'}
-
 A left join is performed in pandas by calling the same `merge` function used for
 inner join, but using the `how='left'` argument:
 

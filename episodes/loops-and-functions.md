@@ -192,12 +192,27 @@ AND the file name itself.
 
 ## Challenge - Building loops
 
-1. Build a loop that reads in each file into a dataframe, counts how many records are in the df, 
-  and then prints that number out to the screen along with the filename.
+1. Build a loop that reads in each publications csv file into a dataframe, counts how
+  many records are in the df, and then prints that number out to the screen along with the filename.
+  Recommend using the glob library to simplfy this task, but if you are creative you can do it with os library
+  instead.
 
 
 2. Compare your results to the output of `all_works_df['publication_date'].value_counts().sort_index()`
-  
+
+:::::::::: solution
+1. 
+``` python
+import glob
+files = sorted(glob.glob('yearly_files/*Publication*.csv'))
+
+for f in files:
+    df = pd.read_csv(f)
+    print(f[13:17],df.shape[0])
+
+```
+
+:::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -260,7 +275,7 @@ Their product is: 10 (this is done outside the function!)
 
 1. Change the values of the arguments in the function and check its output
 2. Try calling the function by giving it the wrong number of arguments (not 2)
-  or not assigning the function call to a variable (no `product_of_inputs =`)
+  or not assigning the function call to a variable (no `var_name =`)
 3. Declare a variable inside the function and test to see where it exists (Hint:
   can you print it from outside the function?)
 4. Explore what happens when a variable both inside and outside the function
@@ -387,7 +402,67 @@ output to change.
   versus in the main (non-indented) body of your code. What is the scope of the
   variables (where are they visible)? What happens when they have the same name
   but are given different values?
-  
+
+::::::: solution
+1. 
+  ```python
+  def one_year_csv_writer(this_year, all_data, folder_to_save, root_name):
+      """
+      Writes a csv file for data from a given year.
+
+      Parameters
+      ---------
+      this_year : int
+          year for which data is extracted
+      all_data: pd.DataFrame
+          DataFrame with multi-year data 
+      folder_to_save : str
+          folder to save the data files
+      root_name: str
+          root of the filenames to save the data
+      """
+
+      # Select data for the year
+      texts_year = all_data[all_data.year == this_year]
+
+      # Write the new DataFrame to a csv file
+      filename = os.path.join(folder_to_save, ''.join([root_name, str(this_year), '.csv']))
+      texts_year.to_csv(filename)
+
+def yearly_data_csv_writer(start_year, end_year, all_data, folder_to_save, root_name):
+    """
+    Writes separate csv files for each year of data.
+
+    Parameters
+    ----------
+    start_year: int
+        the first year of data we want
+    end_year: int
+        the last year of data we want
+    all_data: pandas Dataframe
+        DataFrame with multi-year data
+    folder_to_save : str
+          folder to save the data files
+    root_name: str
+          root of the filenames to save the data
+    Returns
+    -------
+    None
+    """
+    years = all_data.publication_date.unique()
+    # "end_year" is the last year of data we want to pull, so we loop to end_year+1
+    for year in range(start_year, end_year+1):
+      if year in years:
+        one_year_csv_writer(str(year), all_data, folder_to_save, root_name)
+
+2. 
+
+3. 
+
+```
+
+
+:::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -488,7 +563,37 @@ means "else if", and all of the conditional statements must end in a colon.
       os.mkdir('dir_name_here')
       print('Processed directory created')
 ```
+:::::::: solution
+  ```python
+  def one_year_csv_writer(this_year, all_data, folder_to_save, root_name):
+      """
+      Writes a csv file for data from a given year.
 
+      Parameters
+      ---------
+      this_year : int
+          year for which data is extracted
+      all_data: pd.DataFrame
+          DataFrame with multi-year data 
+      folder_to_save : str
+          folder to save the data files
+      root_name: str
+          root of the filenames to save the data
+      """
+      if folder_to_save in os.listdir('.'):
+        print('Output directory exists')
+      else:
+        os.mkdir(folder_to_save)
+        print('folder_to_save, directory created')
+      # Select data for the year
+      texts_year = all_data[all_data.year == this_year]
+
+      # Write the new DataFrame to a csv file
+      filename = os.path.join(folder_to_save, ''.join([root_name, str(this_year), '.csv']))
+      texts_year.to_csv(filename)
+      ```
+
+:::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
