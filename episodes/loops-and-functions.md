@@ -201,16 +201,18 @@ AND the file name itself.
 2. Compare your results to the output of `all_works_df['publication_date'].value_counts().sort_index()`
 
 :::::::::: solution
+
 1. 
-``` python
-import glob
-files = sorted(glob.glob('yearly_files/*Publication*.csv'))
 
-for f in files:
-    df = pd.read_csv(f)
-    print(f[13:17],df.shape[0])
+  ```python
+  import glob
+  files = sorted(glob.glob('yearly_files/*Publication*.csv'))
 
-```
+  for f in files:
+      df = pd.read_csv(f)
+      print(f[13:17],df.shape[0])
+
+  ```
 
 :::::::::::::
 
@@ -240,6 +242,7 @@ easy to write functions that can be used by different programs.
 Functions are declared following this general structure:
 
 ```python
+
 def this_is_the_function_name(input_argument1, input_argument2):
     # The body of the function is indented
     """This is the docstring of the function. Wrapped in triple-quotes,
