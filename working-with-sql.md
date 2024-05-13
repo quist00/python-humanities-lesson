@@ -35,12 +35,12 @@ perform all kinds of operations with `.execute()`.
 import sqlite3
 
 # Create a SQL connection to our SQLite database
-con = sqlite3.connect("eebo.db")
+con = sqlite3.connect("all_works.db")
 
 cur = con.cursor()
 
 # the result of a "cursor.execute" can be iterated over by row
-for row in cur.execute('SELECT * FROM eebo;'):
+for row in cur.execute('SELECT * FROM all_works LIMIT 100;'):
     print(row)
 
 #Be sure to close the connection.
@@ -58,17 +58,17 @@ statement to filter your results based on some parameter.
 import sqlite3
 
 # Create a SQL connection to our SQLite database
-con = sqlite3.connect("eebo.db")
+con = sqlite3.connect("all_works.db")
 
 cur = con.cursor()
 
 # Return all results of query
-cur.execute('SELECT Title FROM eebo WHERE Status="Free"')
-cur.fetchall()
+cur.execute('SELECT mms_id FROM checkouts WHERE checkouts>0')
+checked_out = cur.fetchall()
 
 # Return first result of query
-cur.execute('SELECT Title FROM eebo WHERE Status="Free"')
-cur.fetchone()
+cur.execute('SELECT checkouts FROM checkouts WHERE mms_id="991000199359702908"')
+checkout_for_id = cur.fetchone()
 
 #Be sure to close the connection.
 con.close()
@@ -76,17 +76,15 @@ con.close()
 
 ## Accessing data stored in SQLite using Python and Pandas
 
-Using pandas, we can import results of a SQLite query into a dataframe. Note
-that you can use the same SQL commands / syntax that we used in the SQLite
-lesson. An example of using pandas together with sqlite is below:
+Using pandas, we can import results of a SQLite query into a dataframe.
 
 ```python
 import pandas as pd
 import sqlite3
 
 # Read sqlite query results into a pandas DataFrame
-con = sqlite3.connect("eebo.db")
-df = pd.read_sql_query("SELECT * from eebo", con)
+con = sqlite3.connect("all_works.db")
+df = pd.read_sql_query("SELECT * from all_works", con)
 
 # verify that result of SQL query is stored in the dataframe
 print(df.head())
@@ -105,39 +103,37 @@ benchmarks][these benchmarks]).
 
 ## Challenge - SQL
 
-1. Create a query that contains title data published between 1550 - 1650 that
-  includes book's Title, Author, and TCP id. How many records are returned?
+1. Create a query that contains title data published between 2008 and 2015 that
+  includes book's Title, Author, and mms_id. How many records are returned?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Storing data: Create new tables using Pandas
 
-We can also us pandas to create new tables within an SQLite database. Here, we run we re-do an excercise we did before with CSV files using our SQLite database. We first read in our survey data, then select only those survey results for 2002, and then save it out to its own table so we can work with it on its own later.
+We can also us pandas to create new tables within an SQLite database. Here, we will filter the dataframe to only works published in 2010, and then save it out to its own table so we can work with it on its own later.
 
 ```python
 import pandas as pd
 import sqlite3
 
-con = sqlite3.connect("eebo.db")
+# Establish connection to the SQLite database
+with sqlite3.connect("all_works.db") as con:
+    # Load the data into a DataFrame
+    books_df = pd.read_sql_query("SELECT * from all_works", con)
 
-# Load the data into a DataFrame
-books_df = pd.read_sql_query("SELECT * from eebo", con)
-
-# Select only data for 1640
-titles1640 = books_df[books_df.Date == '1640']
-
-# Write the new DataFrame to a new SQLite table
-titles1640.to_sql("titles1640", con, if_exists="replace")
-
-con.close()
+    # Select only data for 2010
+    titles_2010 = books_df[books_df.publication_date == '2010']
+with sqlite3.connect("all_works.db") as con:
+    # Write the new DataFrame to a new SQLite table
+    titles_2010.to_sql("titles_2010", con, if_exists="replace")
 ```
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
 ## Challenge - Saving your work
 
-1. For each of the challenges in the previous challenge block, modify your code to save the
-  results to their own tables in the eebo database.
+1. Create your own filter; modify the code to save
+  results to its own tables in the all_works database.
 
 2. What are some of the reasons you might want to save the results of your queries back into the
   database? What are some of the reasons you might avoid doing this.

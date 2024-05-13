@@ -35,9 +35,9 @@ Python's main advantages:
 
 ## Interpreter
 
-Python is an interpreted language which can be used in two ways:
+Python is an interpreted language which can be used in multiple ways:
 
-- "Interactive" Mode: It functions like an "advanced calculator" Executing
+- **"Interactive" Mode:** It functions like an "advanced calculator" Executing
   one command at a time:
 
 ```python
@@ -51,13 +51,15 @@ Type "help", "copyright", "credits" or "license" for more information.
 Hello World
 ```
 
-- "Scripting" Mode: Executing a series of "commands" saved in text file,
+- **"Scripting" Mode:** Executing a series of "commands" saved in text file,
   usually with a `.py` extension after the name of your file:
 
 ```bash
 user:host:~$ python my_script.py
 Hello World
 ```
+
+- **"Cell" Mode:** Commands are stored in specially formatted and interpreted files that contain independent cells that can be run seperately in any order we choose.  The **Scripting** and **Interactive** modes are native to python and always available with any installation. **Cell** mode, on the other hand, requires software seperate from python itself like JupyterLab or VS Code with extensions.  We will begin using **Cell** mode shortly after a few more examples using the built in modes.
 
 ## Introduction to Python built-in data types
 
@@ -67,9 +69,9 @@ Python has built-in numeric types for integers, floats, and complex numbers.
 Strings are a built-in textual type.:
 
 ```python
-text = "Data Carpentry"
-number = 42
-pi_value = 3.1415
+>>>text = "Data Carpentry"
+>>> number = 42
+>>> pi_value = 3.1415
 ```
 
 Here we've assigned data to variables, namely `text`, `number` and `pi_value`,
@@ -92,6 +94,9 @@ However, in a script, a `print` function is needed to output the `text`:
 # A Python script file
 # Comments in Python start with #
 # The next line uses the print function to print out the text string
+text = "Data Carpentry"
+number = 42
+pi_value = 3.1415
 print(text)
 ```
 
@@ -216,7 +221,19 @@ a_list = [1, 2, 3]
 1. What happens when you type `a_tuple[2]=5` vs `a_list[1]=5` ?
 2. Type `type(a_tuple)` into python - what is the object type?
 
+:::::::::::::::  solution
+
+1. As a tuple is immutable, it does not support item assignment. Elements in a list can be altered individually.
+
+2. `tuple`
+
+
+::::::::::::::::::::::
+
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+
 
 ## Dictionaries
 
@@ -295,18 +312,40 @@ or
 
 3. Now display `rev` again to see if it has changed.
 
+
+::::::::::: solution
+
+You should see the following output:
+  `{1: 'one', 2: 'two', 3: 'three'}`
+
+```python
+rev[2] = "apple-sauce"
+```
+
+```python
+{1: 'one', 2: 'apple-sauce', 3: 'three'}
+```
+
+:::::::::::::::::::::::
+
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-It is important to note that dictionaries are "unordered" and do not remember
-the sequence of their items (i.e. the order in which key:value pairs were
-added to the dictionary). Because of this, the order in which items are
-returned from loops over dictionaries might appear random and can even change
-with time.
+Dictionaries as of python 3.7 are now in inserstion order be default. Anything you see talking about 
+dictionaries beying unordered can be safely ignored as long as you are using python 3.7 or later.
 
 ## Functions
 
-Defining a section of code as a function in Python is done using the `def`
-keyword. For example a function that takes two arguments and returns their sum
+While functions work just fine in all three modes, let's open JupyterLab so we can use **cell** mode moving forward with the rest of the workshop for the sake of convenience.  Let's do that from our terminal where in order to save time in the next episode, we will launch JupyterLab with the workshop directory containing our data files as the working directory.
+
+*Opening JupyterLab*
+
+```bash
+# navigate to or start your terminal from the worskhop directory
+$ jupyter lab
+# you may see various status messages as it spins up jupyter server and launches your default browser
+```
+
+Defining a section of code as a function in Python is done using the `def` keyword. For example a function that takes two arguments and returns their sum
 can be defined as:
 
 ```python

@@ -78,17 +78,17 @@ is in the table below:
 
 Now that we're armed with a basic understanding of numeric and text data
 types, let's explore the format of our survey data. We'll be working with the
-same `surveys.csv` dataset that we've used in previous lessons.
+same `all_works.csv` dataset that we've used in previous lessons.
 
 ```python
 # note that pd.read_csv is used because we imported pandas as pd
-eebo_df = pd.read_csv("eebo.csv")
+works_df = pd.read_csv("all_works.csv")
 ```
 
 Remember that we can check the type of an object like this:
 
 ```python
-type(eebo_df)
+type(works_df)
 ```
 
 **OUTPUT:** `pandas.core.frame.DataFrame`
@@ -98,7 +98,7 @@ the type of one column in a DataFrame using the syntax
 `dataFrameName[column_name].dtype`:
 
 ```python
-eebo_df['TCP'].dtype
+works_df['subjects'].dtype
 ```
 
 **OUTPUT:** `dtype('O')`
@@ -107,7 +107,7 @@ A type 'O' just stands for "object" which in Pandas' world is a string
 (text).
 
 ```python
-eebo_df['EEBO'].dtype
+works_df['publication_date'].dtype
 ```
 
 **OUTPUT:** `dtype('int64')`
@@ -117,28 +117,28 @@ as a 64 bit integer. We can use the `dat.dtypes` command to view the data type
 for each column in a DataFrame (all at once).
 
 ```python
-eebo_df.dtypes
+works_df.dtypes
 ```
 
 which **returns**:
 
 ```
-TCP        object
-EEBO       int64
-VID        object
-STC        object
-Status     object
-Author     object
-Date       object
-Title      object
-Terms      object
-Page Count int64
-Place      object
+title                object
+subjects             object
+mms_id                int64
+author               object
+publication_date      int64
+publication_place    object
+language_code        object
+resource_type        object
+acquisition_date     object
+is_dei                 bool
+checkouts             int64
 dtype: object
 ```
 
-Note that most of the columns in our Survey data are of type `object`. This means
-that they are strings. But the EEBO column is a integer value
+Note that most of the columns in our works data are of type `object`. This means
+that they are strings. But the publication_date column is a integer value
 which means it contains whole numbers.
 
 ### Working With Integers and Floats
@@ -185,33 +185,32 @@ float(b)
 7.0
 ```
 
-## Working With Our Index Data
+## Working With Our Data
 
-Getting back to our data, we can modify the format of values within our data, if
-we want. For instance, we could convert the `EEBO` field to integer
-values.
+Getting back to our data, we can modify the format of values within it.
+Pandas interpreted the `mms_id` field as and integer, but it is often more
+appropriate to treat id fields as strings to prevent the dropping of leading zeros
+or to prevent inadvertent math opertions.
 
 ```python
-# convert the record_id field from an integer to a float
-eebo_df['Page Count'] = eebo_df['Page Count'].astype('float64')
-eebo_df['Page Count'].dtype
+# convert the record_id field from an integer to a string
+works_df['mms_id'] = works_df['mms_id'].astype('str')
+works_df['mms_id'].dtype
 ```
 
-**OUTPUT:** `dtype('float64')`
+**OUTPUT:** `dtype('O')`
 
 ### Missing Data Values - NaN
 
-What happened in the last challenge activity? Notice that this throws a value error:
-`ValueError: Cannot convert NA to integer`. If we look at the `weight` column in the surveys
-data we notice that there are NaN (**N**ot **a** **N**umber) values. *NaN* values are undefined
-values that cannot be represented mathematically. Pandas, for example, will read
-an empty cell in a CSV or Excel sheet as a NaN. NaNs have some desirable properties: if we
-were to average the `weight` column without replacing our NaNs, Python would know to skip
+*NaN* (**N**ot **a** **N**umber) values are undefined values that cannot be 
+represented mathematically. Pandas, for example, will read an empty cell in
+ a CSV or Excel sheet as a NaN. NaNs have some desirable properties: if we
+were to average the checkouts column in our *null_df* without replacing NaNs, Pandas would know to skip
 over those cells.
 
 ```python
-eebo_df['EEBO'].mean()
-84280511.94630873
+null_df['checkouts'].mean()
+0.5260636799098337
 ```
 
 Dealing with missing data values is always a challenge. It's sometimes hard to
@@ -231,43 +230,84 @@ in the future when you (or someone else) explores your data.
 
 #### Where Are the NaN's?
 
-Let's explore the NaN values in our data a bit further. Using the tools we
-learned in lesson 02, we can figure out how many rows contain NaN values for
-weight. We can also create a new subset from our data that only contains rows
-with weight values > 0 (ie select meaningful weight values):
+Two options for finding our more about the *NaN* values in our dataframe are as follows: 
 
 ```python
-len(eebo_df[pd.isnull(eebo_df.EEBO)])
-# how many rows have weight values?
-len(eebo_df[eebo_df.EEBO > 0])
+# this method provides several columns of information including one that is a count of the not null values in
+# each colum
+null_df.info()
+```
+which **returns**:
+```
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 14232 entries, 0 to 14231
+Data columns (total 11 columns):
+ #   Column             Non-Null Count  Dtype  
+---  ------             --------------  -----  
+ 0   title              14196 non-null  object 
+ 1   subjects           14196 non-null  object 
+ 2   mms_id             14196 non-null  float64
+ 3   author             8505 non-null   object 
+ 4   publication_date   14232 non-null  float64
+ 5   publication_place  14196 non-null  object 
+ 6   language_code      14196 non-null  object 
+ 7   resource_type      14196 non-null  object 
+ 8   acquisition_date   14196 non-null  object 
+ 9   is_dei             14196 non-null  object 
+ 10  checkouts          14232 non-null  float64
+dtypes: float64(3), object(8)
+memory usage: 1.2+ MB
 ```
 
-We can replace all NaN values with zeroes using the `.fillna()` method (after
-making a copy of the data so we don't lose our work):
+```python
+# this method takes advantage of the interpretation of true as 1 and false as 0
+# to return a series 
+null_df.isnull().sum()
+```
+which **returns**:
+```
+title                  36
+subjects               36
+mms_id                 36
+author               5727
+publication_date        0
+publication_place      36
+language_code          36
+resource_type          36
+acquisition_date       36
+is_dei                 36
+checkouts               0
+dtype: int64
+```
+
+#### Dealing with the NaN's?
+Assuming we determine that missing checkouts indeed should be zero, we
+ can replace all *NaN* values with zeroes using the `.fillna()` method:
 
 ```python
-df1 = eebo_df.copy()
 # fill all NaN values with 0
-df1['EEBO'] = df1['EEBO'].fillna(0)
+null_df['checkouts'] = null_df['checkouts'].fillna(0)
 ```
+
 
 However NaN and 0 yield different analysis results. The mean value when NaN
 values are replaced with 0 is different from when NaN values are simply thrown
 out or ignored.
 
 ```python
-df1['EEBO'].mean()
-52170900.611285985
+null_df['checkouts'].mean()
+0.5247329960652052
 ```
 
-We can fill NaN values with any value that we chose. The code below fills all
-NaN values with a mean for all weight values.
+We can fill NaN values with any value that we chose. While a bit silly, the code below fills all
+NaN values in the publication_date column with the mean for mean for all publication_dates.  This
+is possible because our publications_date is just the 4 digit year with dtype of integer.
 
 ```python
- df1['EEBO'] = eebo_df['EEBO'].fillna(eebo_df['EEBO'].mean())
+ null_df['publication_date'] = null_df['publication_date'].fillna(null_df['publication_date'].mean())
 ```
 
-We could also chose to create a subset of our data, only keeping rows that do
+We could also choose to create a subset of our data, only keeping rows that do
 not contain NaN values.
 
 The point is to make conscious decisions about how to manage missing data. This
@@ -275,18 +315,10 @@ is where we think about how our data will be used and how these values will
 impact the scientific conclusions made from the data.
 
 Python gives us all of the tools that we need to account for these issues. We
-just need to be cautious about how the decisions that we make impact scientific
-results.
-
-:::::::::::::::::::::::::::::::::::::::  challenge
-
-### Challenge - Counting
-
-Count the number of missing values per column. Hint: The method .count() gives you
-the number of non-NA observations per column. Try looking to the .isnull() method.
+just need to be cautious about how the decisions that we make impact the validity
+of any conclusions drawn from it.
 
 
-::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ### Recap
 
