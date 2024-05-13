@@ -432,38 +432,32 @@ output to change.
       filename = os.path.join(folder_to_save, ''.join([root_name, str(this_year), '.csv']))
       texts_year.to_csv(filename)
 
-def yearly_data_csv_writer(start_year, end_year, all_data, folder_to_save, root_name):
-    """
-    Writes separate csv files for each year of data.
+  def yearly_data_csv_writer(start_year, end_year, all_data, folder_to_save, root_name):
+      """
+      Writes separate csv files for each year of data.
 
-    Parameters
-    ----------
-    start_year: int
-        the first year of data we want
-    end_year: int
-        the last year of data we want
-    all_data: pandas Dataframe
-        DataFrame with multi-year data
-    folder_to_save : str
-          folder to save the data files
-    root_name: str
-          root of the filenames to save the data
-    Returns
-    -------
-    None
-    """
-    years = all_data.publication_date.unique()
-    # "end_year" is the last year of data we want to pull, so we loop to end_year+1
-    for year in range(start_year, end_year+1):
-      if year in years:
-        one_year_csv_writer(str(year), all_data, folder_to_save, root_name)
-
-2. 
-
-3. 
-
+      Parameters
+      ----------
+      start_year: int
+          the first year of data we want
+      end_year: int
+          the last year of data we want
+      all_data: pandas Dataframe
+          DataFrame with multi-year data
+      folder_to_save : str
+            folder to save the data files
+      root_name: str
+            root of the filenames to save the data
+      Returns
+      -------
+      None
+      """
+      years = all_data.publication_date.unique()
+      # "end_year" is the last year of data we want to pull, so we loop to end_year+1
+      for year in range(start_year, end_year+1):
+        if year in years:
+          one_year_csv_writer(str(year), all_data, folder_to_save, root_name)
 ```
-
 
 :::::::::::::::
 
