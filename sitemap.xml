@@ -46,10 +46,16 @@
     <loc>https://carpentries-incubator.github.io/python-humanities-lesson/aio.html</loc>
   </url>
   <url>
+    <loc>https://carpentries-incubator.github.io/python-humanities-lesson/data-types-and-format.html</loc>
+  </url>
+  <url>
     <loc>https://carpentries-incubator.github.io/python-humanities-lesson/discuss.html</loc>
   </url>
   <url>
     <loc>https://carpentries-incubator.github.io/python-humanities-lesson/images.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/python-humanities-lesson/index-slice-subset.html</loc>
   </url>
   <url>
     <loc>https://carpentries-incubator.github.io/python-humanities-lesson/index.html</loc>
@@ -100,10 +106,16 @@
     <loc>https://carpentries-incubator.github.io/python-humanities-lesson/instructor/aio.html</loc>
   </url>
   <url>
+    <loc>https://carpentries-incubator.github.io/python-humanities-lesson/instructor/data-types-and-format.html</loc>
+  </url>
+  <url>
     <loc>https://carpentries-incubator.github.io/python-humanities-lesson/instructor/discuss.html</loc>
   </url>
   <url>
     <loc>https://carpentries-incubator.github.io/python-humanities-lesson/instructor/images.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/python-humanities-lesson/instructor/index-slice-subset.html</loc>
   </url>
   <url>
     <loc>https://carpentries-incubator.github.io/python-humanities-lesson/instructor/index.html</loc>
@@ -115,10 +127,31 @@
     <loc>https://carpentries-incubator.github.io/python-humanities-lesson/instructor/key-points.html</loc>
   </url>
   <url>
+    <loc>https://carpentries-incubator.github.io/python-humanities-lesson/instructor/loops-and-functions.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/python-humanities-lesson/instructor/merging-data.html</loc>
+  </url>
+  <url>
     <loc>https://carpentries-incubator.github.io/python-humanities-lesson/instructor/profiles.html</loc>
   </url>
   <url>
+    <loc>https://carpentries-incubator.github.io/python-humanities-lesson/instructor/putting-it-all-together.html</loc>
+  </url>
+  <url>
     <loc>https://carpentries-incubator.github.io/python-humanities-lesson/instructor/reference.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/python-humanities-lesson/instructor/short-introduction-to-Python.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/python-humanities-lesson/instructor/starting-with-data.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/python-humanities-lesson/instructor/visualization-ggplot-python.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/python-humanities-lesson/instructor/working-with-sql.html</loc>
   </url>
   <url>
     <loc>https://carpentries-incubator.github.io/python-humanities-lesson/instructor-notes.html</loc>
@@ -127,9 +160,30 @@
     <loc>https://carpentries-incubator.github.io/python-humanities-lesson/key-points.html</loc>
   </url>
   <url>
+    <loc>https://carpentries-incubator.github.io/python-humanities-lesson/loops-and-functions.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/python-humanities-lesson/merging-data.html</loc>
+  </url>
+  <url>
     <loc>https://carpentries-incubator.github.io/python-humanities-lesson/profiles.html</loc>
   </url>
   <url>
+    <loc>https://carpentries-incubator.github.io/python-humanities-lesson/putting-it-all-together.html</loc>
+  </url>
+  <url>
     <loc>https://carpentries-incubator.github.io/python-humanities-lesson/reference.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/python-humanities-lesson/short-introduction-to-Python.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/python-humanities-lesson/starting-with-data.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/python-humanities-lesson/visualization-ggplot-python.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/python-humanities-lesson/working-with-sql.html</loc>
   </url>
 </urlset>

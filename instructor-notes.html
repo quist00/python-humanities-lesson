@@ -186,7 +186,7 @@
 <div class="accordion accordion-flush" id="accordionFlush2">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading2">
-        <a href="00-short-introduction-to-Python.html">1. Short Introduction to Programming in Python</a>
+        <a href="short-introduction-to-Python.html">1. Short Introduction to Programming in Python</a>
     </div>
 <!--/div.accordion-header-->
         
@@ -198,7 +198,7 @@
 <div class="accordion accordion-flush" id="accordionFlush3">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading3">
-        <a href="01-starting-with-data.html">2. Starting With Data</a>
+        <a href="starting-with-data.html">2. Starting With Data</a>
     </div>
 <!--/div.accordion-header-->
         
@@ -210,7 +210,7 @@
 <div class="accordion accordion-flush" id="accordionFlush4">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading4">
-        <a href="02-index-slice-subset.html">3. Indexing, Slicing and Subsetting DataFrames in Python</a>
+        <a href="index-slice-subset.html">3. Indexing, Slicing and Subsetting DataFrames in Python</a>
     </div>
 <!--/div.accordion-header-->
         
@@ -222,7 +222,7 @@
 <div class="accordion accordion-flush" id="accordionFlush5">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading5">
-        <a href="03-data-types-and-format.html">4. Data Types and Formats</a>
+        <a href="data-types-and-format.html">4. Data Types and Formats</a>
     </div>
 <!--/div.accordion-header-->
         
@@ -234,7 +234,7 @@
 <div class="accordion accordion-flush" id="accordionFlush6">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading6">
-        <a href="04-merging-data.html">5. Combining DataFrames with pandas</a>
+        <a href="merging-data.html">5. Combining DataFrames with pandas</a>
     </div>
 <!--/div.accordion-header-->
         
@@ -246,7 +246,7 @@
 <div class="accordion accordion-flush" id="accordionFlush7">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading7">
-        <a href="05-loops-and-functions.html">6. Data workflows and automation</a>
+        <a href="loops-and-functions.html">6. Data workflows and automation</a>
     </div>
 <!--/div.accordion-header-->
         
@@ -258,7 +258,7 @@
 <div class="accordion accordion-flush" id="accordionFlush8">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading8">
-        <a href="06-visualization-ggplot-python.html">7. Plotting with bokeh</a>
+        <a href="visualization-ggplot-python.html">7. Plotting</a>
     </div>
 <!--/div.accordion-header-->
         
@@ -270,7 +270,7 @@
 <div class="accordion accordion-flush" id="accordionFlush9">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading9">
-        <a href="07-putting-it-all-together.html">8. Data Ingest &amp; Visualization - Matplotlib &amp; Pandas</a>
+        <a href="working-with-sql.html">8. Accessing SQLite Databases Using Python &amp; Pandas</a>
     </div>
 <!--/div.accordion-header-->
         
@@ -282,7 +282,7 @@
 <div class="accordion accordion-flush" id="accordionFlush10">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading10">
-        <a href="08-working-with-sql.html">9. Accessing SQLite Databases Using Python &amp; Pandas</a>
+        <a href="putting-it-all-together.html">9. Putting It All Together</a>
     </div>
 <!--/div.accordion-header-->
         
@@ -346,551 +346,7 @@
     <main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Instructor Notes</h1>
         
-<div class="section level1">
-<h1 id="challenge-solutions">Challenge solutions<a class="anchor" aria-label="anchor" href="#challenge-solutions"></a>
-</h1>
-<div class="section level2">
-<h2 id="checking-installations-">Checking installations.<a class="anchor" aria-label="anchor" href="#checking-installations-"></a>
-</h2>
-<p>In the include/scripts directory, you will find a script called
-check_env.py This checks the functionality of the Anaconda install.</p>
-<p>By default, Data Carpentry does not have people pull the whole
-repository with all the scripts and addenda. Therefore, you, as the
-instructor, get to decide how you’d like to provide this script to
-learners, if at all. To use this, students can navigate into
-includes/scripts terminal, and execute the following:</p>
-<pre><code>python check_env.py </code></pre>
-<p>If learners receive an <code>AssertionError</code>, it will inform
-you how to help them correct this installation. Otherwise, it will tell
-you that the system is good to go and ready for Data Carpentry!</p>
-</div>
-<div class="section level2">
-<h2 id="short-introduction-to-python">00-short-introduction-to-Python<a class="anchor" aria-label="anchor" href="#short-introduction-to-python"></a>
-</h2>
-<div class="section level3">
-<h3 id="tuples-challenges">Tuples Challenges<a class="anchor" aria-label="anchor" href="#tuples-challenges"></a>
-</h3>
-<ul>
-<li>
-<p>What happens when you type <code>a_tuple[2] = 5</code> vs
-<code>a_list[1] = 5</code>?</p>
-<p>As a tuple is immutable, it does not support item assignment.
-Elements in a list can be altered individually.</p>
-</li>
-<li>
-<p>Type <code>type(a_tuple)</code> into the Python interpreter -
-what is the object type?</p>
-<p><code>tuple</code></p>
-</li>
-</ul>
-</div>
-<div class="section level3">
-<h3 id="dictionaries-challenges">Dictionaries Challenges<a class="anchor" aria-label="anchor" href="#dictionaries-challenges"></a>
-</h3>
-<ul>
-<li>Can you do reassignment in a dictionary? Give it a try.</li>
-</ul>
-<p>Make sure it is also clear that access to ‘the second value’ is
-actually just about the key name. Add for example
-<code>rev[10] = "ten"</code> to clarify it is not about the
-position.</p>
-<ul>
-<li>You should see the following output:
-<code>{1: 'one', 2: 'two', 3: 'three'}</code>
-</li>
-</ul>
-<div class="codewrapper sourceCode" id="cb2">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>rev[<span class="dv">2</span>] <span class="op">=</span> <span class="st">"apple-sauce"</span></span></code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb3">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>{<span class="dv">1</span>: <span class="st">'one'</span>, <span class="dv">2</span>: <span class="st">'apple-sauce'</span>, <span class="dv">3</span>: <span class="st">'three'</span>}</span></code></pre>
-</div>
-</div>
-</div>
-<div class="section level2">
-<h2 id="starting-with-data">01-starting-with-data<a class="anchor" aria-label="anchor" href="#starting-with-data"></a>
-</h2>
-<p>###Bug Note:</p>
-<p>Pandas &lt; .18.1 has a bug where surveys_df[‘weight’].describe() may
-return a runtime error. This refers to the old ecology data, not clear
-if it applies to the eebo data.</p>
-<div class="section level3">
-<h3 id="dataframe-challenges">Dataframe Challenges<a class="anchor" aria-label="anchor" href="#dataframe-challenges"></a>
-</h3>
-<ul>
-<li><p><code>eebo_df.columns</code></p></li>
-<li>
-<p><code>eebo_df.head()</code>. Also, what does
-<code>eebo_df.head(15)</code> do?</p>
-<p>Show first <code>N</code> lines</p>
-</li>
-<li>
-<p><code>eebo_df.tail()</code></p>
-<p>Show last <code>N</code> lines</p>
-</li>
-<li>
-<p><code>eebo_df.shape</code>. Take note of the output of the shape
-method. What format does it return the shape of the DataFrame in?</p>
-<p><code>type(surveys_df.shape)</code> -&gt; <code>Tuple</code>, (rows,
-columns), i.e. standard row-first Python format</p>
-</li>
-</ul>
-</div>
-<div class="section level3">
-<h3 id="calculating-statistics-challenges">Calculating Statistics Challenges<a class="anchor" aria-label="anchor" href="#calculating-statistics-challenges"></a>
-</h3>
-<ul>
-<li>
-<p>Create a list of unique locations found in the index data. Call
-it <code>places</code>. How many unique location are there in the
-data?</p>
-<p><code>places = pd.unique(eebo_df["Place"])</code>
-<code>len(places)</code></p>
-</li>
-<li><p>What is the difference between <code>len(places)</code> and
-<code>eebo_df["Place"].nunique()</code>?</p></li>
-</ul>
-<p>Both do result in the same output, making it alternative ways of
-getting the unique values. <code>nunique</code> combines the count and
-unique value extraction.</p>
-</div>
-<div class="section level3">
-<h3 id="plotting-challenges">Plotting Challenges<a class="anchor" aria-label="anchor" href="#plotting-challenges"></a>
-</h3>
-<ul>
-<li>
-<p>Create a plot of Authors across all Places per plot.</p>
-<ul>
-<li>This requires several steps in the correct order. The easiest one to
-miss is the .unstack() command</li>
-</ul>
-<div class="codewrapper sourceCode" id="cb4">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>date_place <span class="op">=</span> eebo_df.groupby([<span class="st">'Date'</span>,<span class="st">'Place'</span>])</span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>page_sum <span class="op">=</span> date_place[<span class="st">'Page Count'</span>].<span class="bu">sum</span>()</span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>table <span class="op">=</span> page_sum.unstack()</span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>plot <span class="op">=</span> table.plot(kind<span class="op">=</span><span class="st">"bar"</span>, stacked<span class="op">=</span><span class="va">True</span>, title<span class="op">=</span><span class="st">"Pages published per year"</span>)</span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>plot.set_ylabel(<span class="st">"Pages"</span>)</span></code></pre>
-</div>
-<ul>
-<li>Since the list of places is long, the legend tends to wind up hiding
-half the graph. It’s well worth specifying an increased figure size to
-compensate. Remember that the figsize is interpreted in inches assuming
-96dpi, i.e. <code>figsize=(16,8)</code> means 16 inches wide and 8
-inches high</li>
-</ul>
-</li>
-</ul>
-</div>
-</div>
-<div class="section level2">
-<h2 id="index-slice-subset">02-index-slice-subset<a class="anchor" aria-label="anchor" href="#index-slice-subset"></a>
-</h2>
-<div class="section level3">
-<h3 id="indexing-challenges">Indexing Challenges<a class="anchor" aria-label="anchor" href="#indexing-challenges"></a>
-</h3>
-<ul>
-<li>
-<p>What value does the code below return? <code>a[0]</code></p>
-<p><code>1</code>, as Python starts with element 0 (for Matlab users:
-this is different!)</p>
-</li>
-<li>
-<p>How about this: <code>a[5]</code></p>
-<p><code>IndexError</code></p>
-</li>
-<li>
-<p>In the example above, calling <code>a[5]</code> returns an error.
-Why is that?</p>
-<p>The list has no element with index 5 (going from 0 till 4).</p>
-</li>
-<li>
-<p>What about? <code>a[len(a)]</code></p>
-<p><code>IndexError</code></p>
-</li>
-</ul>
-</div>
-<div class="section level3">
-<h3 id="selection-challenges">Selection Challenges<a class="anchor" aria-label="anchor" href="#selection-challenges"></a>
-</h3>
-<ul>
-<li>
-<p>What happens when you type:</p>
-<p><code>eebo_df[0:3]</code> <code>eebo_df[:5]</code> slicing from first
-element makes 0 redundant <code>eebo_df[-1:]</code> you can count
-backwards</p>
-<p><em>Suggestion</em>: You can also select every Nth row:
-<code>eebo_df[1:10:2]</code>. So, how to interpret
-<code>eebo_df[::-1]</code>?</p>
-</li>
-<li>
-<p>What is the difference between
-<code>eebo_df.iloc[0:4, 1:4]</code> and
-<code>eebo_df.loc[0:4, 1:4]</code>?</p>
-<p>Check the position, or the name. Cfr. the second is like it would be
-in a dictionary, asking for the key-names. Column names 1:4 do not
-exist, resulting in an error. Check also the difference between
-<code>eebo_df.loc[0:4]</code> and
-<code>eebo_df.iloc[0:4]</code></p>
-</li>
-</ul>
-<p>Questions seem to arise around queries in the form of
-`eebo_df[eebo_df[…]], i.e. compound indexing in a single line. It may be
-helpful to explain the order in which these statements are evaluated by
-splitting them into multiple lines.</p>
-</div>
-<div class="section level3">
-<h3 id="advanced-queries-challenges">Advanced Queries Challenges<a class="anchor" aria-label="anchor" href="#advanced-queries-challenges"></a>
-</h3>
-<ul>
-<li>
-<p>Select a subset of rows in the <code>eebo_df</code> DataFrame
-that contain data from the year 1540 and that contain page count values
-less than or equal to 8. How many rows did you end up with? What did
-your neighbor get?</p>
-<p><code>eebo_df[ (eebo_df["Date"] &lt;= 1540) &amp; (eebo_df["Page Count"] &lt;= 8) ]</code>
-Should be 2 values</p>
-</li>
-<li>
-<p>Use the <code>isin</code> function to find all books written by
-Robert Aylett and Robert Aytoun. How many are there?</p>
-<p><code>eebo_df[ eebo_df["Author"].isin(["Aylett, Robert, 1583-1655?", "Aytoun, Robert, Sir, 1570-1638."]) ]</code>
-7</p>
-</li>
-<li>
-<p>Write a query that selects all rows with Date NOT equal to 1500
-or 1600 in the eebo data.</p>
-<p><code>eebo_df[ ~eebo_df["Date"].isin([1500, 1600]) ]</code>
-147</p>
-</li>
-</ul>
-</div>
-<div class="section level3">
-<h3 id="masking-challenges">Masking Challenges<a class="anchor" aria-label="anchor" href="#masking-challenges"></a>
-</h3>
-<p>Since the data is quite ugly, the <code>contains</code> method will
-come in handy</p>
-<ul>
-<li>
-<p>Create a new DataFrame that only contains titles with status
-values that are not from London. Assign each status value in the new
-DataFrame to a new value of ‘x’. Determine the number of null values in
-the subset.</p>
-<p><code>x = eebo_df[(~eebo_df["Place"].str.contains("London", na=False)) &amp; (~pd.isnull(eebo_df["Status"]))]</code>
-No Status values are null ( <code>pd.isnull(x["Status"]).any()</code>
-)</p>
-</li>
-<li>
-<p>Create a new DataFrame that contains only observations that are
-of status free and where page count values are greater than 100.</p>
-<p><code>eebo_df[(eebo_df["Status"] == "Free") &amp; (eebo_df["Page Count"] &gt; 100)]</code>
-41 SInce every single record has a status of <code>Free</code>, this is
-a bit of a trivial question, but there we go</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="section level2">
-<h2 id="data-types-and-format">03-data-types-and-format<a class="anchor" aria-label="anchor" href="#data-types-and-format"></a>
-</h2>
-<div class="section level3">
-<h3 id="challenge---counting">Challenge - Counting<a class="anchor" aria-label="anchor" href="#challenge---counting"></a>
-</h3>
-<p>eebo_df.isnull()</p>
-</div>
-</div>
-<div class="section level2">
-<h2 id="merging-data">04-merging-data<a class="anchor" aria-label="anchor" href="#merging-data"></a>
-</h2>
-<div class="section level3">
-<h3 id="combine-data-challenge">Combine Data Challenge<a class="anchor" aria-label="anchor" href="#combine-data-challenge"></a>
-</h3>
-<ul>
-<li>In the data folder, there are two catalogue data files: 1635.csv and
-1640.csv. Read the data into python and combine the files to make one
-new data frame.</li>
-</ul>
-<div class="codewrapper sourceCode" id="cb5">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>csv_1 <span class="op">=</span> pd.read_csv(<span class="st">"1635.csv"</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>csv_2 <span class="op">=</span> pd.read_csv(<span class="st">"1640.csv"</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>combined <span class="op">=</span> pd.concat( [csv_1, csv_2], axis<span class="op">=</span><span class="dv">0</span>).reset_index(drop<span class="op">=</span><span class="va">True</span>)</span></code></pre>
-</div>
-</div>
-<div class="section level3">
-<h3 id="distributions-challenge">Distributions Challenge<a class="anchor" aria-label="anchor" href="#distributions-challenge"></a>
-</h3>
-<p>FIXME</p>
-</div>
-</div>
-<div class="section level2">
-<h2 id="loops-and-functions">05-loops-and-functions<a class="anchor" aria-label="anchor" href="#loops-and-functions"></a>
-</h2>
-<div class="section level3">
-<h3 id="basic-loop-challenges">Basic Loop Challenges<a class="anchor" aria-label="anchor" href="#basic-loop-challenges"></a>
-</h3>
-<ul>
-<li>
-<p>What happens if we do not include the <code>pass</code>
-statement?</p>
-<p><code>SyntaxError:</code></p>
-</li>
-<li><p>Rewrite the loop so that the animals are separated by commas, not
-new lines (Hint: You can concatenate strings using a plus sign. For
-example, <code>print(string1 + string2)</code> outputs
-‘string1string2’).</p></li>
-</ul>
-<div class="codewrapper sourceCode" id="cb6">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="cf">for</span> creature <span class="kw">in</span> animals:</span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>    <span class="bu">print</span>(creature<span class="op">+</span><span class="st">','</span>, end<span class="op">=</span><span class="st">''</span>)</span></code></pre>
-</div>
-<p>This loop also adds a comma after the last animal. A better,
-loop-free solution would be: <code>','.join(animals)</code></p>
-</div>
-<div class="section level3">
-<h3 id="looping-over-dataframe-challenges">Looping Over Dataframe Challenges<a class="anchor" aria-label="anchor" href="#looping-over-dataframe-challenges"></a>
-</h3>
-<ul>
-<li>Some of the surveys you saved are missing data (they have null
-values that show up as NaN - Not A Number - in the DataFrames and do not
-show up in the text files). Modify the for loop so that the entries with
-null values are not included in the yearly files.</li>
-</ul>
-<div class="codewrapper sourceCode" id="cb7">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>eebo_year <span class="op">=</span> eebo_df[eebo_df.year <span class="op">==</span> year].dropna()</span></code></pre>
-</div>
-<ul>
-<li>
-<p>What happens if there is no data for a year?</p>
-<p>Nothing really. Since we are explicitly looping over the years where
-there <em>are</em> data, this is a deliberately out-of-context question
-- but it’s useful to see whether people recognise that, or get
-confused.</p>
-</li>
-<li>
-<p>Instead of splitting out the data by years, a colleague wants to
-analyse each place separately. How would you write a unique csv file for
-each location?</p>
-<p>Similar to previous example, but use the <code>Place</code> column.
-<code>eebo_df['Place'].unique()</code>.</p>
-</li>
-</ul>
-</div>
-<div class="section level3">
-<h3 id="functions-challenges">Functions Challenges<a class="anchor" aria-label="anchor" href="#functions-challenges"></a>
-</h3>
-<ul>
-<li><p>Change the values of the arguments in the function and check its
-output.</p></li>
-<li><p>Try calling the function by giving it the wrong number of
-arguments (not 2), or not assigning the function call to a variable (no
-<code>product_of_inputs =</code>).</p></li>
-<li><p>Declare a variable inside the function and test to see where it
-exists (Hint: can you print it from outside the function?).</p></li>
-<li>
-<p>Explore what happens when a variable both inside and outside the
-function have the same name. What happens to the global variable when
-you change the value of the local variable?</p>
-<p>Show these in a debugging environment to make this more
-clear!</p>
-</li>
-</ul>
-</div>
-<div class="section level3">
-<h3 id="additional-functions-challenges">Additional Functions Challenges<a class="anchor" aria-label="anchor" href="#additional-functions-challenges"></a>
-</h3>
-<ul>
-<li>Add two arguments to the functions we wrote that take the path of
-the directory where the files will be written and the root of the file
-name. Create a new set of files with a different name in a different
-directory.</li>
-</ul>
-<div class="codewrapper sourceCode" id="cb8">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="kw">def</span> one_year_csv_writer(this_year, all_data, folder_to_save, root_name):</span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="co">    Writes a csv file for data from a given year.</span></span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co">    Parameters</span></span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="co">    ---------</span></span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co">    this_year : int</span></span>
-<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="co">        year for which data is extracted</span></span>
-<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="co">    all_data: pd.DataFrame</span></span>
-<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="co">        DataFrame with multi-year data </span></span>
-<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="co">    folder_to_save : str</span></span>
-<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a><span class="co">        folder to save the data files</span></span>
-<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="co">    root_name: str</span></span>
-<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a><span class="co">        root of the filenames to save the data</span></span>
-<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a></span>
-<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a>    <span class="co"># Select data for the year</span></span>
-<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a>    surveys_year <span class="op">=</span> all_data[all_data.year <span class="op">==</span> this_year]</span>
-<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a></span>
-<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a>    <span class="co"># Write the new DataFrame to a csv file</span></span>
-<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a>    filename <span class="op">=</span> os.path.join(folder_to_save, <span class="st">''</span>.join([root_name, <span class="bu">str</span>(this_year), <span class="st">'.csv'</span>]))</span>
-<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a>    surveys_year.to_csv(filename)</span></code></pre>
-</div>
-<p>Also adapt function <code>yearly_data_csv_writer</code> with the
-additional inputs.</p>
-</div>
-<div class="section level3">
-<h3 id="additional-functions-challenges-1">Additional Functions Challenges<a class="anchor" aria-label="anchor" href="#additional-functions-challenges-1"></a>
-</h3>
-<ul>
-<li>
-<p>How could you use the function
-<code>yearly_data_csv_writer</code> to create a csv file for only one
-year? (Hint: think about the syntax for <code>range</code>)</p>
-<p>Adapt the input arguments, e.g. 1978, 1979.</p>
-</li>
-</ul>
-</div>
-<div class="section level3">
-<h3 id="output-management-challenges">Output Management Challenges<a class="anchor" aria-label="anchor" href="#output-management-challenges"></a>
-</h3>
-<ul>
-<li>Make the functions return a list of the files they have written.
-There are many ways you can do this (and you should try them all!):
-<ul>
-<li>either of the functions can print to screen, just add
-<code>print("year " + str(this_year)+ " written to disk")</code>
-statement</li>
-<li>either can use a return statement to give back numbers or strings to
-their function call,</li>
-<li>or you can use some combination of the two.</li>
-<li>You could also try using the os library to list the contents of
-directories. <code>os.listdir</code>
-</li>
-</ul>
-</li>
-</ul>
-<p>Implementation inside the function:</p>
-<div class="codewrapper sourceCode" id="cb9">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>filenames <span class="op">=</span> []</span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="cf">for</span> year <span class="kw">in</span> <span class="bu">range</span>(start_year, end_year<span class="op">+</span><span class="dv">1</span>):</span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>    filenames.append(one_year_csv_writer(year, all_data, folder_to_save, root_name))</span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="cf">return</span> filenames</span></code></pre>
-</div>
-<ul>
-<li><p>Explore what happens when variables are declared inside each of
-the functions versus in the main (non-indented) body of your code. What
-is the scope of the variables (where are they visible)? What happens
-when they have the same name but are given different values?</p></li>
-<li>
-<p>What type of object corresponds to a variable declared as
-<code>None</code>? (Hint: create a variable set to <code>None</code> and
-use the function <code>type()</code>)</p>
-<p><code>NoneType</code></p>
-</li>
-<li><p>Compare the behavior of the function
-<code>yearly_data_arg_test</code> when the arguments have
-<code>None</code> as a default and when they do not have default
-values.</p></li>
-<li><p>What happens if you only include a value for
-<code>start_year</code> in the function call? Can you write the function
-call with only a value for <code>end_year</code>? (Hint: think about how
-the function must be assigning values to each of the arguments - this is
-related to the need to put the arguments without default values before
-those with default values in the function definition!)</p></li>
-</ul>
-<div class="codewrapper sourceCode" id="cb10">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>yearly_data_arg_test(surveys_df, end_year<span class="op">=</span><span class="dv">2001</span>)</span></code></pre>
-</div>
-<ul>
-<li>Rewrite the <code>one_year_csv_writer</code> and
-<code>yearly_data_csv_writer</code> functions to have keyword arguments
-with default values.</li>
-</ul>
-<div class="codewrapper sourceCode" id="cb11">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="kw">def</span> one_year_csv_writer(this_year, all_data, folder_to_save<span class="op">=</span><span class="st">'./'</span>, root_name<span class="op">=</span><span class="st">'survey'</span>):</span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a><span class="co">    Writes a csv file for data from a given year.</span></span>
-<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="co">    Parameters</span></span>
-<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a><span class="co">    ---------</span></span>
-<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a><span class="co">    this_year : int</span></span>
-<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a><span class="co">        year for which data is extracted</span></span>
-<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a><span class="co">    all_data: pd.DataFrame</span></span>
-<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a><span class="co">        DataFrame with multi-year data </span></span>
-<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a><span class="co">    folder_to_save : str</span></span>
-<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a><span class="co">        folder to save the data files</span></span>
-<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a><span class="co">    root_name: str</span></span>
-<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a><span class="co">        root of the filenames to save the data</span></span>
-<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a></span>
-<span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a>    <span class="co"># Select data for the year</span></span>
-<span id="cb11-18"><a href="#cb11-18" tabindex="-1"></a>    surveys_year <span class="op">=</span> all_data[all_data.year <span class="op">==</span> this_year]</span>
-<span id="cb11-19"><a href="#cb11-19" tabindex="-1"></a></span>
-<span id="cb11-20"><a href="#cb11-20" tabindex="-1"></a>    <span class="co"># Write the new DataFrame to a csv file</span></span>
-<span id="cb11-21"><a href="#cb11-21" tabindex="-1"></a>    filename <span class="op">=</span> os.path.join(folder_to_save, <span class="st">''</span>.join([root_name, <span class="bu">str</span>(this_year), <span class="st">'.csv'</span>]))</span>
-<span id="cb11-22"><a href="#cb11-22" tabindex="-1"></a>    surveys_year.to_csv(filename)</span></code></pre>
-</div>
-<ul>
-<li>Modify the functions so that they do not create yearly files if
-there is no data for a given year and display an alert to the user
-(Hint: use <code>for</code> loops and conditional statements to do this.
-For an extra challenge, use <code>try</code> statements!)</li>
-</ul>
-<div class="codewrapper sourceCode" id="cb12">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>    <span class="co"># Write the new DataFrame to a csv file</span></span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(surveys_year) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>        filename <span class="op">=</span> os.path.join(folder_to_save, <span class="st">''</span>.join([root_name, <span class="bu">str</span>(this_year), <span class="st">'.csv'</span>]))</span>
-<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>        surveys_year.to_csv(filename)</span>
-<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"No data for year "</span> <span class="op">+</span> <span class="bu">str</span>(this_year))</span></code></pre>
-</div>
-<ul>
-<li>The code that you have written so far to loop through the years is
-good, however, it is not necessarily reproducible with different
-datasets. For instance, what happens to the code if we have additional
-years of data in our CSV files? Using the tools that you learned in the
-previous activities, make a list of all years represented in the data.
-Then create a loop to process your data, that begins at the earliest
-year and ends at the latest year using that list.</li>
-</ul>
-<div class="codewrapper sourceCode" id="cb13">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="kw">def</span> yearly_data_csv_writer(all_data, yearcolumn<span class="op">=</span><span class="st">"year"</span>, </span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>                           folder_to_save<span class="op">=</span><span class="st">'./'</span>, root_name<span class="op">=</span><span class="st">'survey'</span>):</span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="co">    Writes separate csv files for each year of data.</span></span>
-<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a></span>
-<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a><span class="co">    all_data --- DataFrame with multi-year data</span></span>
-<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a><span class="co">    yearcolumn --- column name containing the year of the data</span></span>
-<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a><span class="co">    folder_to_save --- folder name to store files</span></span>
-<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a><span class="co">    root_name --- start of the file names stored</span></span>
-<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a>    years <span class="op">=</span> all_data[<span class="st">"year"</span>].unique()</span>
-<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a></span>
-<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a>    <span class="co"># "end_year" is the last year of data we want to pull, so we loop to end_year+1</span></span>
-<span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a>    filenames <span class="op">=</span> []</span>
-<span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a>    <span class="cf">for</span> year <span class="kw">in</span> years:</span>
-<span id="cb13-16"><a href="#cb13-16" tabindex="-1"></a>        filenames.append(one_year_csv_writer(year, all_data, folder_to_save, root_name))</span>
-<span id="cb13-17"><a href="#cb13-17" tabindex="-1"></a>    <span class="cf">return</span> filenames</span></code></pre>
-</div>
-</div>
-</div>
-</div>
+<p></p>
 
       <section id="aggregate-instructor-notes"></section>
 </div>
@@ -939,9 +395,9 @@ year and ends at the latest year using that list.</li>
   "creativeWorkStatus": "active",
   "url": "https://carpentries-incubator.github.io/python-humanities-lesson/instructor-notes.html",
   "identifier": "https://carpentries-incubator.github.io/python-humanities-lesson/instructor-notes.html",
-  "dateCreated": "2024-02-13",
-  "dateModified": "2024-04-23",
-  "datePublished": "2024-04-23"
+  "dateCreated": "2024-05-13",
+  "dateModified": "2024-05-13",
+  "datePublished": "2024-05-13"
 }
 
   </script><script>
