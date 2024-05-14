@@ -632,7 +632,7 @@ type?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: decimal">
 <li><p>As a tuple is immutable, it does not support item assignment.
@@ -741,7 +741,7 @@ changed.</p></li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>You should see the following output:
 <code>{1: 'one', 2: 'two', 3: 'three'}</code></p>
@@ -802,7 +802,7 @@ arguments and returns their sum can be defined as:</p>
 <code>return</code> keyword precedes returned value</li>
 </ul></section></section><section id="aio-starting-with-data"><p>Content from <a href="starting-with-data.html">Starting With Data</a></p>
 <hr>
-<p>Last updated on 2024-05-13 |
+<p>Last updated on 2024-05-14 |
         
         <a href="https://github.com/carpentries-incubator/python-humanities-lesson/edit/main/episodes/starting-with-data.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -867,35 +867,31 @@ in your terminal.</p>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># navigate to or start your terminal from the worskhop directory</span></span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="ex">$</span> jupyter lab</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="co"># you may see various status messages as it spins up jupyter server and launches your default browser</span></span></code></pre>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="co"># you may see various status messages as it spins up jupyter server </span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co"># and launches your default browser</span></span></code></pre>
 </div>
 <p>A quick aside that there are Python libraries like <a href="https://docs.python.org/3/library/os.html" class="external-link">OS Library</a> that can
 work with our directory structure, however, that is not our focus
 today.</p>
 </div>
 <div class="section level4">
-<h4 id="alexs-processing">Alex’s Processing<a class="anchor" aria-label="anchor" href="#alexs-processing"></a>
+<h4 id="alex-our-user-story">Alex: our user story<a class="anchor" aria-label="anchor" href="#alex-our-user-story"></a>
 </h4>
-<p>Alex is a researcher who is interested in exploring the collection of
+<p>Alex is a researcher interested in exploring the collection of
 fictional works at their university and assessing how representative it
 is in relation to the student body. Alex was able to find a pre-liminary
-assembled by a previous researcher from which they want to create some
-exploratory plots and intermediate datasets in order to determine next
-steps to expand on this line of inquiry.</p>
-<p>Alex coul do some of this work using spreadsheet systems but this can
-be time consuming to do and revise. It can lead to mistakes that are
-hard to detect.</p>
-<p>The next steps show how Python can be used to automate some of the
-processes.</p>
-<p>As a result of creating Python scripts, the data can be re-run in the
-future.</p>
+dataset assembled by a previous researcher from which they want to
+create some exploratory plots and intermediate datasets in order to
+determine next steps to expand on this line of inquiry.</p>
+<p>Alex could do some of this work using spreadsheet systems but this
+can be time consuming to do and lead to mistakes that are hard to
+detect.</p>
+<p>This workshop will show how Python can be used to automate some of
+the processes allowing them to be re-run in the future.</p>
 </div>
 <div class="section level4">
 <h4 id="our-data">Our Data<a class="anchor" aria-label="anchor" href="#our-data"></a>
 </h4>
-<p>For this lesson, we will be using the EEBO catalogue data, a subset
-of the data from EEBO/TCP <a href="https://eebo.chadwyck.com/home" class="external-link">Early
-English Books Online/Text Creation Partnership</a></p>
 <p>We will be using files from the data folder. This section will use
 the <code>all_works.csv</code> file that can be found in your data
 folder.</p>
@@ -959,6 +955,42 @@ work</td>
 </tr>
 </tbody>
 </table>
+<div id="semantics-of-dei" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="semantics-of-dei" class="callout-inner">
+<h3 class="callout-title">Semantics of DEI<a class="anchor" aria-label="anchor" href="#semantics-of-dei"></a>
+</h3>
+<div class="callout-content">
+<ul>
+<li>Diversity, Equity and Inclusion are not concrete terms that can be
+divorced from history and geography. Thus, it is incumbent on academic
+researchers to define what that means in their practice.<br>
+</li>
+<li>Arguably, any resource is potentially useful in the pursuit of DEI
+research if for no other reason as to provide contrast and foreground
+for other works, so designating something a DEI resource will always be
+a judgment call.<br>
+</li>
+<li>Here, though, the <em>is_dei</em> flag is applied to any works with
+subjects deemed outside those with a male, western European lineage.
+That determination is also a judgment call on multiple levels that you
+may disagree with, and that is okay. Not only might you disagree with
+what subjects do or do not share a male, western European lineage, but
+we are also at the mercy of the cataloger wrestling with their own
+biases while applying a limited scope of slowly evolving options.</li>
+<li>Our flag will never be perfect, so our goal should be good enough
+with the time and information we have.</li>
+<li>All datasets should be approached with a sceptical eye. When we are
+done here, you should not only know how to leverage datasets, but
+interogate and adjust them to adhere to different assumptions. Just be
+sure to make those adjustments and assumptions clear to those who follow
+after you.</li>
+</ul>
+</div>
+</div>
+</div>
 <p>If we open the <code>all_works.csv</code> data file using a text
 editor, the first few rows of our first file look like this:</p>
 <pre><code>title,subjects,mms_id,author,publication_date,publication_place,language_code,resource_type,acquisition_date,is_dei,subject_count,chekcouts
@@ -966,19 +998,24 @@ editor, the first few rows of our first file look like this:</p>
 """Baad bitches"" and sassy supermamas : Black power action films","['Blaxploitation films--United States--History and criticism', 'African American women heroes in motion pictures', 'African American women heroes in motion picture', 'Blaxploitation film', 'Blaxploitation Film']",991003607949702908,"Dunn, Stephane, 1967-",2008.0,Urbana,eng,Book - Physical,2011-12-13 03:51:20,True,5,1.0
 """Codependent lesbian space alien seeks same""","['Lesbians--Drama', 'Lesbians', 'Video recordings for the hearing impaired']",991013190057102908,"Olnek, Madeleine.; Space Aliens, LLC.",2011.0,"[New York, NY?]",eng,Projected medium - Physical,2016-11-10 07:56:09,True,3,1.0
 """Lactilla tends her fav'rite cow"" : ecocritical readings of animals and women in eighteenth-century British labouring-class women's poetry","['English poetry--Women authors--History and criticism', 'Working class writings, English--History and criticism', 'Ecofeminism in literature', 'English poetry--Women authors', 'Working class women in literature', 'Working class writings, English']",991003662979702908,"Milne, Anne.",2008.0,Lewisburg,eng,Book - Physical,2015-10-07 16:31:28,True,8,</code></pre>
-<hr>
 </div>
 <div class="section level3">
-<h3 id="about-libraries">About Libraries<a class="anchor" aria-label="anchor" href="#about-libraries"></a>
+<h3 id="why-software-libraries">Why software libraries<a class="anchor" aria-label="anchor" href="#why-software-libraries"></a>
 </h3>
+<p>Theoretically, you could use only built in python functions to
+interact directly with the text file, but you would be re-inventing the
+wheel. Better to do a little research and find someone who has already
+grappled with similar problems and stand on their shoulders instead.
+Programming often has a mechanism to facilitate this. In python, the are
+called libraries.</p>
 <p>A library in Python contains a set of tools (functions) that perform
-different actions on our data. Importing a library is like getting a set
-of particular tools out of a storage locker and setting them up on the
+different actions. Importing a library is like getting a set of
+particular tools out of a storage locker and setting them up on the
 bench for use in a project. Once a library is set up, its functions can
 be used or called to perform different tasks.</p>
 </div>
 <div class="section level3">
-<h3 id="pandas-in-python">Pandas in Python<a class="anchor" aria-label="anchor" href="#pandas-in-python"></a>
+<h3 id="why-pandas-in-python">Why Pandas in Python<a class="anchor" aria-label="anchor" href="#why-pandas-in-python"></a>
 </h3>
 <p>One of the best options for working with tabular data in Python is to
 use the <a href="https://pandas.pydata.org/" class="external-link">Python Data Analysis
@@ -987,6 +1024,10 @@ structures to sort our data, can produce high quality plots in
 conjunction with other libraries such as <a href="https://matplotlib.org/" class="external-link">matplotlib</a>, and integrates nicely
 with libraries that use <a href="https://www.numpy.org/" class="external-link">NumPy</a>
 (which is another common Python library) arrays.</p>
+</div>
+<div class="section level3">
+<h3 id="loading-a-library">Loading a library<a class="anchor" aria-label="anchor" href="#loading-a-library"></a>
+</h3>
 <p>Python doesn’t load all of the libraries available to it by default.
 We have to add an <code>import</code> statement to our code in order to
 use library functions required for our project. To import a library, we
@@ -996,7 +1037,7 @@ want to use. Note that the <code>import</code> command calls a library
 that has been installed previously in our system. If we use the
 <code>import</code> command to call for a library that does not exist in
 our local system, the command will throw and error when executed. In
-this case, you can use <code>pip</code> command in another termina
+this case, you can use <code>pip</code> command in another terminal
 window to install the missing libraries. <a href="https://github.com/resbaz/Intro_Python_Nov2017/blob/master/Python_Installation.md" class="external-link">See
 here for details</a> on how to do this.</p>
 <p>Moreover, if we want to give the library a nickname to shorten the
@@ -1023,15 +1064,13 @@ We can use Pandas’ <code>read_csv</code> function to pull either a local
 (a file in our machine) or a remote (one that is available for
 downloading from the web) file into a Pandas table or <a href="https://pandas.pydata.org/pandas-docs/stable/dsintro.html#dataframe" class="external-link">DataFrame</a>.</p>
 <p>In order to read data in, we need to know where the data is stored on
-our computer or its URL address if the file is available on the web. It
-is recommended to place the data files in the same directory as the
-Jupyter notebook file (ending in .ipynb) if working with local files</p>
+our computer or its URL address if the file is available on the web.</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># note that pd.read_csv is used because we imported pandas as pd</span></span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co"># note that this assumes that the data file is in the same location</span></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co"># as the Jupyter notebook</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co"># as the Jupyter notebook to simplify pathing</span></span>
 <span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>pd.read_csv(<span class="st">"all_works.csv"</span>)</span></code></pre>
 </div>
 <div class="section level3">
@@ -1089,26 +1128,14 @@ convenience feature of Jupyter.</p>
 <p>which prints contents like above</p>
 </div>
 <div class="section level3">
-<h3 id="manipulating-our-index-data">Manipulating Our Index Data<a class="anchor" aria-label="anchor" href="#manipulating-our-index-data"></a>
+<h3 id="exploring-our-data">Exploring our Data<a class="anchor" aria-label="anchor" href="#exploring-our-data"></a>
 </h3>
-<p>Now we can start manipulating our data. First, let’s check the data
-type of the data stored in <code>works_df</code> using the
-<code>type</code> method. <strong>The <code>type</code> method and
-<code>__class__</code> attribute</strong> tell us that
-<code>works_df</code> is
-<code>&lt;class 'pandas.core.frame.DataFrame'</code>.</p>
-<div class="codewrapper sourceCode" id="cb8">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="bu">type</span>(works_df)</span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="co"># this does the same thing as the above!</span></span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>works_df.__class__</span></code></pre>
-</div>
-<p>We can also run <code>works_df.dtypes</code> in a cell to view the
-data type for each column in our DataFrame. <code>int64</code>
-represents numeric integer values - <code>int64</code> cells can not
-store decimals. <code>object</code> represents strings (letters and
-numbers). <code>float64</code> represents numbers with decimals.</p>
+<p>We can use attributes and methods provided by the DataFrame object to
+summarize and access the data stored in it.</p>
+<p>Attributes are called by using the syntax
+<code>df_object.attribute</code>. For example, we can use the
+<em>dtypes</em> attribute of the DataFrame to return a Series object of
+the dataypes for each column in the DataFrame.</p>
 <pre><code><span><span class="va">works_df.dtypes</span></span></code></pre>
 <p>which returns output similar to:</p>
 <pre><code>title                object
@@ -1123,24 +1150,10 @@ acquisition_date     object
 is_dei                 bool
 checkouts             int64
 dtype: object</code></pre>
-<div class="section level4">
-<h4 id="useful-ways-to-view-dataframe-objects-in-python">Useful Ways to View DataFrame objects in Python<a class="anchor" aria-label="anchor" href="#useful-ways-to-view-dataframe-objects-in-python"></a>
-</h4>
-<p>We can use attributes and methods provided by the DataFrame object to
-summarize and access the data stored in it.</p>
-<p>To access an attribute, use the DataFrame object name followed by the
-attribute name <code>df_object.attribute</code>. For example, we can
-access the <a href="https://pandas.pydata.org/docs/reference/indexing.html" class="external-link">Index
-object</a> containing the column names of <code>works_df</code> by using
-its <code>columns</code> attribute</p>
-<div class="codewrapper sourceCode" id="cb11">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>works_df.columns</span></code></pre>
-</div>
-<p>As we will see later, we can use the contents of the Index object to
-extract (slice) specific records from our DataFrame based on their
-values.</p>
+<p><code>int64</code> represents numeric integer values -
+<code>int64</code> cells cannot store decimals. <code>object</code>
+represents strings (letters and numbers). <code>float64</code>
+represents numbers with decimals.</p>
 <p>Methods are called by using the syntax
 <code>df_object.method()</code>. Note the inclusion of open brackets at
 the end of the method. Python treats methods as
@@ -1151,8 +1164,10 @@ their default behaviour.</p>
 <p>As an example, <code>works_df.head()</code> gets the first few rows
 in the DataFrame <code>works_df</code> using <strong>the
 <code>head()</code> method</strong>. With a method, we can supply extra
-information within the open brackets to control its behaviour.</p>
-<p>Let’s look at the data using these.</p>
+information within the open brackets to control its behaviour,
+e.g. <code>works_df.head(25)</code>.</p>
+<p>Let’s try out a few of the common DataFrame methods and
+attributes.</p>
 <div id="challenge---dataframes" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -1175,6 +1190,7 @@ on tuples, here</a>.</p>
 <li><p><code>works_df.head()</code> Also, what does
 <code>works_df.head(15)</code> do?</p></li>
 <li><p><code>works_df.tail()</code></p></li>
+<li><p><code>works_df.info()</code></p></li>
 </ol>
 </div>
 </div>
@@ -1187,23 +1203,30 @@ on tuples, here</a>.</p>
 <div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: decimal">
-<li><p><code>works_df.columns</code></p></li>
-<li><p><code>works_df.head()</code>. Also, what does
-<code>works_df.head(15)</code> do?</p></li>
-</ol>
-<p>Show first <code>N</code> lines</p>
-<ol start="3" style="list-style-type: decimal">
-<li><code>works_df.tail()</code></li>
-</ol>
-<p>Show last <code>N</code> lines</p>
-<ol start="4" style="list-style-type: decimal">
-<li>
-<code>works_df.shape</code>. Take note of the output of the shape
-method. What format does it return the shape of the DataFrame in?</li>
+<li><p><code>works_df.columns</code> return list of column as a data
+type <em>pandas.core.indexes.base.Index</em></p></li>
+<li><p><code>works_df.shape</code>. Take note of the output of the shape
+method. What format does it return the shape of the DataFrame
+in?</p></li>
 </ol>
 <p><code>type(works_df.shape)</code> -&gt; <code>Tuple</code>, (rows,
 columns), i.e. standard row-first Python format</p>
-</div>
+<ol start="3" style="list-style-type: decimal">
+<li>
+<code>works_df.head()</code>. Also, what does
+<code>works_df.head(15)</code> do?</li>
+</ol>
+<p>Show first <code>N</code> lines</p>
+<ol start="4" style="list-style-type: decimal">
+<li><code>works_df.tail()</code></li>
+</ol>
+<p>Show last <code>N</code> lines</p>
+<ol start="5" style="list-style-type: decimal">
+<li>
+<code>works_df.info()</code> returns a table with wealth of
+information about number of colums, datatypes, missing values, memory
+usage.</li>
+</ol>
 </div>
 </div>
 </div>
@@ -1219,30 +1242,39 @@ dataset, or how many works were published in a given year. We can
 perform summary stats quickly using groups. But first we need to figure
 out what we want to group by.</p>
 <p>Let’s begin by exploring our data:</p>
-<div class="codewrapper sourceCode" id="cb12">
+<div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># Look at the column names</span></span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>works_df.columns.values</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># Look at the column names</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>works_df.columns.values</span></code></pre>
 </div>
 <p>which <strong>returns</strong>:</p>
 <pre><code>array(['title', 'subjects', 'mms_id', 'author', 'publication_date',
        'publication_place', 'language_code', 'resource_type',
        'acquisition_date', 'is_dei', 'checkouts'], dtype=object)</code></pre>
-<p>Let’s get a list of all the publication locations. The
-<code>pd.unique</code> function tells us all of the unique values in the
+<p>Let’s get a list of all the publication locations. There are often
+two approaches we can use. One methos calls <code>pd.unique</code>
+function directly off the dataframe and passes in the column of intrest.
+In the other, we can a method directly off the column
+<code>works_df['publication_place'].unique()</code>. The output is
+identical listing the unique values in the
 <code>publication_place</code> column.</p>
+<div class="codewrapper sourceCode" id="cb12">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>pd.unique(works_df[<span class="st">'publication_place'</span>])</span></code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb13">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>works_df[<span class="st">'publication_place'</span>].unique()</span></code></pre>
+</div>
+<p>either <strong>returns</strong>:</p>
 <div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>pd.unique(works_df[<span class="st">'publication_place'</span>])</span></code></pre>
-</div>
-<p>which <strong>returns</strong>:</p>
-<div class="codewrapper sourceCode" id="cb15">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>array([<span class="st">'Charlottesville'</span>, <span class="st">'Urbana'</span>, <span class="st">'[New York, NY?]'</span>, ...,</span>
-<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>       <span class="st">'Cambridge [UK] ; Medford'</span>, <span class="st">'Arles'</span>, <span class="st">'[London]:'</span>], dtype<span class="op">=</span><span class="bu">object</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>array([<span class="st">'Charlottesville'</span>, <span class="st">'Urbana'</span>, <span class="st">'[New York, NY?]'</span>, ...,</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>       <span class="st">'Cambridge [UK] ; Medford'</span>, <span class="st">'Arles'</span>, <span class="st">'[London]:'</span>], dtype<span class="op">=</span><span class="bu">object</span>)</span></code></pre>
 </div>
 <div id="challenge---statistics" class="callout challenge">
 <div class="callout-square">
@@ -1274,11 +1306,11 @@ data?</p></li>
 <code>places</code>. How many unique location are there in the
 data?</li>
 </ol>
-<div class="codewrapper sourceCode" id="cb16">
+<div class="codewrapper sourceCode" id="cb15">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a>years <span class="op">=</span> pd.unique(works_df[<span class="st">"publication_date"</span>])</span>
-<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a><span class="bu">len</span>(years)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>years <span class="op">=</span> pd.unique(works_df[<span class="st">"publication_date"</span>])</span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="bu">len</span>(years)</span></code></pre>
 </div>
 <ol start="2" style="list-style-type: decimal">
 <li>What is the difference between <code>len(years)</code> and
@@ -1300,35 +1332,35 @@ be useful even at the exploratory phase as it can help you understand
 the ranges of your data and detect possible outliers.</p>
 <p>We can calculate basic statistics for all records in a single column
 using the syntax below:</p>
+<div class="codewrapper sourceCode" id="cb16">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a>works_df[<span class="st">'checkouts'</span>].describe()</span></code></pre>
+</div>
+<p>gives <strong>output</strong></p>
 <div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>works_df[<span class="st">'checkouts'</span>].describe()</span></code></pre>
-</div>
-<p>gives <strong>output</strong></p>
-<div class="codewrapper sourceCode" id="cb18">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a>count    <span class="fl">14232.000000</span></span>
-<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>mean         <span class="fl">0.526349</span></span>
-<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a>std          <span class="fl">1.432189</span></span>
-<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a><span class="bu">min</span>          <span class="fl">0.000000</span></span>
-<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a><span class="dv">25</span><span class="op">%</span>          <span class="fl">0.000000</span></span>
-<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a><span class="dv">50</span><span class="op">%</span>          <span class="fl">0.000000</span></span>
-<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a><span class="dv">75</span><span class="op">%</span>          <span class="fl">1.000000</span></span>
-<span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a><span class="bu">max</span>         <span class="fl">43.000000</span></span>
-<span id="cb18-9"><a href="#cb18-9" tabindex="-1"></a>Name: checkouts, dtype: float64</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>count    <span class="fl">14232.000000</span></span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>mean         <span class="fl">0.526349</span></span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a>std          <span class="fl">1.432189</span></span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a><span class="bu">min</span>          <span class="fl">0.000000</span></span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a><span class="dv">25</span><span class="op">%</span>          <span class="fl">0.000000</span></span>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a><span class="dv">50</span><span class="op">%</span>          <span class="fl">0.000000</span></span>
+<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a><span class="dv">75</span><span class="op">%</span>          <span class="fl">1.000000</span></span>
+<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a><span class="bu">max</span>         <span class="fl">43.000000</span></span>
+<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a>Name: checkouts, dtype: float64</span></code></pre>
 </div>
 <p>We can also extract specific metrics for one or various columns if we
 wish:</p>
-<div class="codewrapper sourceCode" id="cb19">
+<div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>works_df[<span class="st">'checkouts'</span>].<span class="bu">min</span>()</span>
-<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>works_df[<span class="st">'checkouts'</span>].<span class="bu">max</span>()</span>
-<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a>works_df[<span class="st">'checkouts'</span>].mean()</span>
-<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a>works_df[<span class="st">'checkouts'</span>].std()</span>
-<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a>works_df[<span class="st">'checkouts'</span>].count()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a>works_df[<span class="st">'checkouts'</span>].<span class="bu">min</span>()</span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>works_df[<span class="st">'checkouts'</span>].<span class="bu">max</span>()</span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a>works_df[<span class="st">'checkouts'</span>].mean()</span>
+<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a>works_df[<span class="st">'checkouts'</span>].std()</span>
+<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a>works_df[<span class="st">'checkouts'</span>].count()</span></code></pre>
 </div>
 <p>But if we want to summarize by one or more variables, for example
 checkouts by language_code, we can use the <strong><code>.groupby</code>
@@ -1337,37 +1369,37 @@ object containing a subset of the original DataFrame. Once we’ve created
 it, we can quickly calculate summary statistics by a group of our
 choice. For example the following code will group our data by
 language_code.</p>
-<div class="codewrapper sourceCode" id="cb20">
+<div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="co"># Group data by status</span></span>
-<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>grouped_data <span class="op">=</span> works_df.groupby(<span class="st">'language_code'</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="co"># Group data by status</span></span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>grouped_data <span class="op">=</span> works_df.groupby(<span class="st">'language_code'</span>)</span></code></pre>
 </div>
 <p>If we execute the <strong>pandas function
 <code>describe</code></strong> on this new object we will obtain
 descriptive stats for all the numerical columns in <code>works_df</code>
 grouped by the different cities available in the
 <code>publication_place</code> column of the DataFrame.</p>
-<div class="codewrapper sourceCode" id="cb21">
+<div class="codewrapper sourceCode" id="cb20">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="co"># summary statistics for all numeric columns by place</span></span>
-<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>grouped_data.describe()</span>
-<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a><span class="co"># provide the mean for each numeric column by place</span></span>
-<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a>grouped_data.mean()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="co"># summary statistics for all numeric columns by place</span></span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>grouped_data.describe()</span>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a><span class="co"># provide the mean for each numeric column by place</span></span>
+<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a>grouped_data.mean()</span></code></pre>
 </div>
 <p><code>grouped_data.mean(numeric_only=True)</code>
 <strong>OUTPUT:</strong></p>
-<div class="codewrapper sourceCode" id="cb22">
+<div class="codewrapper sourceCode" id="cb21">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a>	mms_id	publication_date	is_dei	checkouts</span>
-<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>language_code				</span>
-<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a>ara	<span class="fl">9.910032e+17</span>	<span class="fl">2009.000000</span>	<span class="fl">0.400000</span>	<span class="fl">0.000000</span></span>
-<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a>bos	<span class="fl">9.910132e+17</span>	<span class="fl">2018.000000</span>	<span class="fl">0.500000</span>	<span class="fl">0.000000</span></span>
-<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a>cat	<span class="fl">9.910131e+17</span>	<span class="fl">2011.000000</span>	<span class="fl">0.500000</span>	<span class="fl">0.000000</span></span>
-<span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a>chi	<span class="fl">9.910073e+17</span>	<span class="fl">2011.400000</span>	<span class="fl">0.500000</span>	<span class="fl">0.700000</span></span>
-<span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a><span class="co"># Truncated for brevity</span></span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>	mms_id	publication_date	is_dei	checkouts</span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>language_code				</span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>ara	<span class="fl">9.910032e+17</span>	<span class="fl">2009.000000</span>	<span class="fl">0.400000</span>	<span class="fl">0.000000</span></span>
+<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a>bos	<span class="fl">9.910132e+17</span>	<span class="fl">2018.000000</span>	<span class="fl">0.500000</span>	<span class="fl">0.000000</span></span>
+<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a>cat	<span class="fl">9.910131e+17</span>	<span class="fl">2011.000000</span>	<span class="fl">0.500000</span>	<span class="fl">0.000000</span></span>
+<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a>chi	<span class="fl">9.910073e+17</span>	<span class="fl">2011.400000</span>	<span class="fl">0.500000</span>	<span class="fl">0.700000</span></span>
+<span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a><span class="co"># Truncated for brevity</span></span></code></pre>
 </div>
 <p>The <code>groupby</code> command is powerful in that it allows us to
 quickly generate summary stats.</p>
@@ -1389,12 +1421,12 @@ publication_place column?</li>
 <li>What happens when you group by two columns using the following
 syntax and then grab mean values:</li>
 </ol>
-<div class="codewrapper sourceCode" id="cb23">
+<div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a>grouped_data2 <span class="op">=</span> all_works_df.groupby([<span class="st">'resource_type'</span>, <span class="st">'language_code'</span>])</span>
-<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>mean_values_by_type_and_language <span class="op">=</span> grouped_data2.mean(numeric_only<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a>mean_values_by_type_and_language</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a>grouped_data2 <span class="op">=</span> all_works_df.groupby([<span class="st">'resource_type'</span>, <span class="st">'language_code'</span>])</span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>mean_values_by_type_and_language <span class="op">=</span> grouped_data2.mean(numeric_only<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a>mean_values_by_type_and_language</span></code></pre>
 </div>
 </div>
 </div>
@@ -1408,12 +1440,12 @@ syntax and then grab mean values:</li>
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li>
 </li></ol>
-<div class="codewrapper sourceCode" id="cb24">
+<div class="codewrapper sourceCode" id="cb23">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a>grouped_data <span class="op">=</span> all_works_df.groupby(<span class="st">'publication_place'</span>)</span>
-<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a>means_by_publication_place <span class="op">=</span> grouped_data.mean(numeric_only<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a>means_by_publication_place[<span class="st">'checkouts'</span>]</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a>grouped_data <span class="op">=</span> all_works_df.groupby(<span class="st">'publication_place'</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>means_by_publication_place <span class="op">=</span> grouped_data.mean(numeric_only<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a>means_by_publication_place[<span class="st">'checkouts'</span>]</span></code></pre>
 </div>
 <ol start="2" style="list-style-type: decimal">
 <li>We can see in the list that is <em>0.000000</em>.</li>
@@ -1422,11 +1454,11 @@ real analysis, you would likley want to clean this up before proceeding.
 We can browse the full list using code like the following to
 confirm:</li>
 </ol>
-<div class="codewrapper sourceCode" id="cb25">
+<div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="cf">for</span> place <span class="kw">in</span> <span class="bu">sorted</span>(all_works_df[<span class="st">'publication_place'</span>].unique()):</span>
-<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a>    <span class="bu">print</span>(place)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="cf">for</span> place <span class="kw">in</span> <span class="bu">sorted</span>(all_works_df[<span class="st">'publication_place'</span>].unique()):</span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a>    <span class="bu">print</span>(place)</span></code></pre>
 </div>
 <ol start="4" style="list-style-type: decimal">
 <li>This code will create a GroupBy object grouped by both resource_type
@@ -1445,24 +1477,24 @@ between these categories.</li>
 <p>Let’s next count the number of publications for each author(s). We
 can do this in a few ways, but we’ll use <code>groupby</code> combined
 with <strong>a <code>count()</code> method</strong>.</p>
-<div class="codewrapper sourceCode" id="cb26">
+<div class="codewrapper sourceCode" id="cb25">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="co"># count the number of texts by authors / groups of authors</span></span>
-<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a>author_counts <span class="op">=</span> works_df.groupby(<span class="st">'author'</span>)[<span class="st">'mms_id'</span>].count()</span>
-<span id="cb26-3"><a href="#cb26-3" tabindex="-1"></a>author_counts</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="co"># count the number of texts by authors / groups of authors</span></span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a>author_counts <span class="op">=</span> works_df.groupby(<span class="st">'author'</span>)[<span class="st">'mms_id'</span>].count()</span>
+<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a>author_counts</span></code></pre>
 </div>
 <p>Or, we can also count just the rows that have the a specifig author
 like “Abate, Michelle Ann, 1975-”:</p>
-<div class="codewrapper sourceCode" id="cb27">
+<div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a>author_counts <span class="op">=</span> works_df.groupby(<span class="st">'author'</span>)[<span class="st">'mms_id'</span>].count()[<span class="st">'Abate, Michelle Ann, 1975-'</span>]</span>
-<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a>author_counts</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a>author_counts <span class="op">=</span> works_df.groupby(<span class="st">'author'</span>)[<span class="st">'mms_id'</span>].count()[<span class="st">'Abate, Michelle Ann, 1975-'</span>]</span>
+<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a>author_counts</span></code></pre>
 </div>
 </div>
 <div class="section level3">
-<h3 id="basic-math-functions">Basic Math Functions<a class="anchor" aria-label="anchor" href="#basic-math-functions"></a>
+<h3 id="math-operations">Math Operations<a class="anchor" aria-label="anchor" href="#math-operations"></a>
 </h3>
 <p>If we wanted to, we could perform math on an entire numerical column
 of our data. To demonstrate this, let’s add another column that shows
@@ -1475,15 +1507,15 @@ what percentage of total checkouts for each work.</p>
 </h2>
 <hr class="half-width">
 <p>We can plot our summary stats using Pandas, too.</p>
-<div class="codewrapper sourceCode" id="cb29">
+<div class="codewrapper sourceCode" id="cb28">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="co"># group data</span></span>
-<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a>is_dei_count <span class="op">=</span> works_df.groupby(<span class="st">"is_dei"</span>)[<span class="st">"mms_id"</span>].count() </span>
-<span id="cb29-3"><a href="#cb29-3" tabindex="-1"></a><span class="co"># set equal to variable so we can set additional parameters</span></span>
-<span id="cb29-4"><a href="#cb29-4" tabindex="-1"></a>plot <span class="op">=</span> is_dei_count.plot(kind<span class="op">=</span><span class="st">"bar"</span>, title<span class="op">=</span><span class="st">"Checkout by DEI Status"</span>)</span>
-<span id="cb29-5"><a href="#cb29-5" tabindex="-1"></a><span class="co">#lablel the y-axis</span></span>
-<span id="cb29-6"><a href="#cb29-6" tabindex="-1"></a>plot.set_ylabel(<span class="st">"Checkouts"</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a><span class="co"># group data</span></span>
+<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a>is_dei_count <span class="op">=</span> works_df.groupby(<span class="st">"is_dei"</span>)[<span class="st">"mms_id"</span>].count() </span>
+<span id="cb28-3"><a href="#cb28-3" tabindex="-1"></a><span class="co"># set equal to variable so we can set additional parameters</span></span>
+<span id="cb28-4"><a href="#cb28-4" tabindex="-1"></a>plot <span class="op">=</span> is_dei_count.plot(kind<span class="op">=</span><span class="st">"bar"</span>, title<span class="op">=</span><span class="st">"Checkout by DEI Status"</span>)</span>
+<span id="cb28-5"><a href="#cb28-5" tabindex="-1"></a><span class="co">#lablel the y-axis</span></span>
+<span id="cb28-6"><a href="#cb28-6" tabindex="-1"></a>plot.set_ylabel(<span class="st">"Checkouts"</span>)</span></code></pre>
 </div>
 <p>What does this graph show? Let’s step through</p>
 <ul>
@@ -1554,12 +1586,12 @@ create a stacked plot.</p>
 <div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <p>First we group data by language_code and then by is_dei.</p>
-<div class="codewrapper sourceCode" id="cb33">
+<div class="codewrapper sourceCode" id="cb32">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a>grouping <span class="op">=</span> works_df.groupby([<span class="st">'language_code'</span>,<span class="st">'is_dei'</span>])</span>
-<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a>checkouts <span class="op">=</span> grouping[<span class="st">'checkouts'</span>].<span class="bu">sum</span>()</span>
-<span id="cb33-3"><a href="#cb33-3" tabindex="-1"></a>top_checkouts <span class="op">=</span> checkouts.sort_values(ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a>grouping <span class="op">=</span> works_df.groupby([<span class="st">'language_code'</span>,<span class="st">'is_dei'</span>])</span>
+<span id="cb32-2"><a href="#cb32-2" tabindex="-1"></a>checkouts <span class="op">=</span> grouping[<span class="st">'checkouts'</span>].<span class="bu">sum</span>()</span>
+<span id="cb32-3"><a href="#cb32-3" tabindex="-1"></a>top_checkouts <span class="op">=</span> checkouts.sort_values(ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)</span></code></pre>
 </div>
 <p>The last two lines above calculates the sum of checkouts, for each
 language_code further broken down be DEI boolean flag, as a table and
@@ -3004,7 +3036,7 @@ left join where gender if the left dataframe.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Solution to challenge</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3261,7 +3293,7 @@ with os library instead.</p></li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li>
 </li></ol>
@@ -3494,7 +3526,7 @@ they have the same name but are given different values?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li>
 </li></ol>
@@ -3671,7 +3703,7 @@ CSV files, to check for a directory to write to.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3">Show me the solution</h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
