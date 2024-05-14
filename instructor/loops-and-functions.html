@@ -304,7 +304,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Data workflows and automation</h1>
-        <p>Last updated on 2024-05-13 |
+        <p>Last updated on 2024-05-14 |
         
         <a href="https://github.com/carpentries-incubator/python-humanities-lesson/edit/main/episodes/loops-and-functions.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -535,7 +535,7 @@ with os library instead.</p></li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li>
 </li></ol><div class="codewrapper sourceCode" id="cb9">
@@ -762,7 +762,7 @@ they have the same name but are given different values?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li>
 </li></ol><div class="codewrapper sourceCode" id="cb17">
@@ -905,6 +905,70 @@ look something like this:</p>
 <p>Change the value of <code>a</code> to see how this function works.
 The statement <code>elif</code> means “else if”, and all of the
 conditional statements must end in a colon.</p>
+<div id="challenge---modifying-functions" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="challenge---modifying-functions" class="callout-inner">
+<h3 class="callout-title">Challenge - Modifying functions<a class="anchor" aria-label="anchor" href="#challenge---modifying-functions"></a>
+</h3>
+<div class="callout-content">
+<ol style="list-style-type: decimal"><li>The code below checks to see whether a directory exists and creates
+one if it doesn’t. Add some code to your function that writes out the
+CSV files, to check for a directory to write to.</li>
+</ol><div class="codewrapper sourceCode" id="cb21">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>  <span class="cf">if</span> <span class="st">'dir_name_here'</span> <span class="kw">in</span> os.listdir(<span class="st">'.'</span>):</span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>      <span class="bu">print</span>(<span class="st">'Processed directory exists'</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>  <span class="cf">else</span>:</span>
+<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a>      os.mkdir(<span class="st">'dir_name_here'</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a>      <span class="bu">print</span>(<span class="st">'Processed directory created'</span>)</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3">Show me the solution</h4>
+</button>
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb22">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a>      <span class="kw">def</span> one_year_csv_writer(this_year, all_data, folder_to_save, root_name):</span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>      <span class="co">"""</span></span>
+<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a><span class="co">      Writes a csv file for data from a given year.</span></span>
+<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a><span class="co">      Parameters</span></span>
+<span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a><span class="co">      ---------</span></span>
+<span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a><span class="co">      this_year : int</span></span>
+<span id="cb22-8"><a href="#cb22-8" tabindex="-1"></a><span class="co">          year for which data is extracted</span></span>
+<span id="cb22-9"><a href="#cb22-9" tabindex="-1"></a><span class="co">      all_data: pd.DataFrame</span></span>
+<span id="cb22-10"><a href="#cb22-10" tabindex="-1"></a><span class="co">          DataFrame with multi-year data </span></span>
+<span id="cb22-11"><a href="#cb22-11" tabindex="-1"></a><span class="co">      folder_to_save : str</span></span>
+<span id="cb22-12"><a href="#cb22-12" tabindex="-1"></a><span class="co">          folder to save the data files</span></span>
+<span id="cb22-13"><a href="#cb22-13" tabindex="-1"></a><span class="co">      root_name: str</span></span>
+<span id="cb22-14"><a href="#cb22-14" tabindex="-1"></a><span class="co">          root of the filenames to save the data</span></span>
+<span id="cb22-15"><a href="#cb22-15" tabindex="-1"></a><span class="co">      """</span></span>
+<span id="cb22-16"><a href="#cb22-16" tabindex="-1"></a>      <span class="cf">if</span> folder_to_save <span class="kw">in</span> os.listdir(<span class="st">'.'</span>):</span>
+<span id="cb22-17"><a href="#cb22-17" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'Output directory exists'</span>)</span>
+<span id="cb22-18"><a href="#cb22-18" tabindex="-1"></a>      <span class="cf">else</span>:</span>
+<span id="cb22-19"><a href="#cb22-19" tabindex="-1"></a>        os.mkdir(folder_to_save)</span>
+<span id="cb22-20"><a href="#cb22-20" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'folder_to_save, directory created'</span>)</span>
+<span id="cb22-21"><a href="#cb22-21" tabindex="-1"></a>      <span class="co"># Select data for the year</span></span>
+<span id="cb22-22"><a href="#cb22-22" tabindex="-1"></a>      texts_year <span class="op">=</span> all_data[all_data.year <span class="op">==</span> this_year]</span>
+<span id="cb22-23"><a href="#cb22-23" tabindex="-1"></a></span>
+<span id="cb22-24"><a href="#cb22-24" tabindex="-1"></a>      <span class="co"># Write the new DataFrame to a csv file</span></span>
+<span id="cb22-25"><a href="#cb22-25" tabindex="-1"></a>      filename <span class="op">=</span> os.path.join(folder_to_save, <span class="st">''</span>.join([root_name, <span class="bu">str</span>(this_year), <span class="st">'.csv'</span>]))</span>
+<span id="cb22-26"><a href="#cb22-26" tabindex="-1"></a>      texts_year.to_csv(filename)</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="../instructor/merging-data.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
@@ -962,8 +1026,8 @@ conditional statements must end in a colon.</p>
   "creativeWorkStatus": "active",
   "url": "https://carpentries-incubator.github.io/python-humanities-lesson/instructor/loops-and-functions.html",
   "identifier": "https://carpentries-incubator.github.io/python-humanities-lesson/instructor/loops-and-functions.html",
-  "dateCreated": "2024-05-13",
-  "dateModified": "2024-05-13",
+  "dateCreated": "2024-05-14",
+  "dateModified": "2024-05-14",
   "datePublished": "2024-05-14"
 }
 
