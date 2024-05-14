@@ -463,20 +463,34 @@ author_counts = works_df.groupby('author')['mms_id'].count()['Abate, Michelle An
 author_counts
 ```
 
+How does the code work?  `works_df.groupby('author')['mms_id'].count()` actually returns a series where
+*author* is the index.  We then filter by that specific index.
+
+::::::::: callout
+
+#### Just because you can doesn't mean you should
+Many of our works have groups of authors, and they are all contained in a single cell.  This makes
+some questions easier to ask and some harder. It is actually non-trivial to get a count of all of 
+"Abate, Michelle Ann, 1975-" works since she may be listed among other author groups.  Thus grouping 
+by author and filtering on this key given the current data configuration may not be telling us what we thought it was.  Thus it is important to know your data well and format it and reformat it to meet your analysis 
+needs.   You need to stay vigilant and check your understanding. Python won't stop you from doing a poor analysis very efficiently.   
+
+::::::::::::::::::::
 
 ### Math Operations
 
-If we wanted to, we could perform math on an entire numerical column of our data. To demonstrate this, let's add another column that shows what percentage of total checkouts for each work.
+If we wanted to, we could perform math on an entire numerical column of our data. To demonstrate this, let's add another column that shows the percentage of total checkouts for each work.
 
-```
+```python
 all_checkouts = works_df.checkouts.sum()
+# because "checkout_percentage" is not in our columns index, pandas add is as a new column.
 works_df["checkout_percentage"] = (works_df.checkouts / all_checkouts) * 100
 works_df.checkout_percentage
 ```
 
 ## Quick \& Easy Plotting Data Using Pandas
 
-We can plot our summary stats using Pandas, too.
+We will looks at plotting more in depth later, but we can rapidly plot our summary stats using Pandas.
 
 ``` python
 # group data
@@ -490,13 +504,13 @@ plot.set_ylabel("Checkouts")
 
 What does this graph show? Let's step through
 
-- `works_df.groupby("is_dei")` : This groups the works by the resource type.
+- `works_df.groupby("is_dei")` : This groups the works by the boolean flag.
 - `works_df.groupby("is_dei")["mms_id"]` : This chooses a single column to count,
   rather than counting all columns since we only want one number to plot. You could effectively pick any column.
-- `works_df.groupby("is_dei")["mms_id"].count()` : this counts the instances, i.e. how many works per given resource type?
+- `works_df.groupby("is_dei")["mms_id"].count()` : this counts the instances, i.e. how many works per given boolean value?
 
 
-- `plot = is_dei_count.plot(kind="bar",logy=True)` : this plots a bar chart with the resource type on x axis and count on the y axis.
+- `plot = is_dei_count.plot(kind="bar",logy=True)` : this plots a bar chart with the boolean flag on x axis and count on the y axis.
 - `plot.set_ylabel("Checkouts")` : this labels the y-axis
 
 
@@ -557,7 +571,7 @@ top_checkouts = checkouts.sort_values(ascending=False).head(10)
 
  The last two lines above calculates the sum of checkouts, for each language_code further broken down be DEI boolean flag, as a table and keeps only the top 10 most checked out items.
 
- ```
+```output
 language_code  is_dei
 is_dei	False	True
 language_code		
@@ -567,11 +581,12 @@ fre	70.0	62.0
 per	27.0	26.0
 ita	21.0	NaN
 jpn	NaN	20.0
- ```
+```
  
  After that, we use the `.unstack()` function on our grouped data to figure
  out the total contribution of DEI verse non-DEI for each language_code, and then plot the
  data. 
+
  ```python
  plot = top_checkouts.unstack.plot(kind="bar", stacked=True, title="DEI Checkouts By Language", figsize=(10,5),logy=True)
  plot.set_ylabel("Checkouts")
