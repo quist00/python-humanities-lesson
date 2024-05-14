@@ -9,7 +9,7 @@ permalink: /setup/
 
 The sample data used in this lesson is from the fiction holdings of an academic library along with available information about the ethnicity and gender identity for available years.
 
-You can download these [example files][dataset] as a compressed zip file. You should save it to a memorable location, and then unzip the data within. If you are not already comfortable with file paththing, we recommend you store the data folder on your desktop to closely match the examples provided. On the other hand, if you are already comfortable with pathing file pathing, you are free to store it at your discretion.
+You can download these [example files][dataset] as a compressed zip file. You should save it to a memorable location, and then unzip the data within. If you are not already comfortable with file paththing, we recommend you store the data folder on your desktop to closely match the examples provided. On the other hand, if you are already comfortable with file pathing, you are free to store it at your discretion.
     
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::

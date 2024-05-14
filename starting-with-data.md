@@ -46,28 +46,24 @@ navigate to the workshop directory in your terminal.
 ```bash
 # navigate to or start your terminal from the worskhop directory
 $ jupyter lab
-# you may see various status messages as it spins up jupyter server and launches your default browser
+# you may see various status messages as it spins up jupyter server 
+# and launches your default browser
 ```
 
 A quick aside that there are Python libraries like [OS
 Library](https://docs.python.org/3/library/os.html) that can work with our
 directory structure, however, that is not our focus today.
 
-#### Alex's Processing
+#### Alex: our user story
 
-Alex is a researcher who is interested in exploring the collection of fictional works at their university and assessing how representative it is in relation to the student body. Alex was able to find a pre-liminary assembled by a previous researcher from which they want to create some exploratory plots and intermediate datasets in order to determine next steps to expand on this line of inquiry.
+Alex is a researcher interested in exploring the collection of fictional works at their university and assessing how representative it is in relation to the student body. Alex was able to find a pre-liminary dataset assembled by a previous researcher from which they want to create some exploratory plots and intermediate datasets in order to determine next steps to expand on this line of inquiry.
 
-Alex coul do some of this work using spreadsheet systems but this can be time consuming to do  and revise. It can lead to mistakes that are hard to detect.
+Alex could do some of this work using spreadsheet systems but this can be time consuming to do and lead to mistakes that are hard to detect.
 
-The next steps show how Python can be used to automate some of the processes.
-
-As a result of creating Python scripts, the data can be re-run in the future.
+This workshop will show how Python can be used to automate some of the processes allowing them to 
+be re-run in the future.
 
 #### Our Data
-
-For this lesson, we will be using the EEBO catalogue data, a subset of the data
-from EEBO/TCP
-[Early English Books Online/Text Creation Partnership](https://eebo.chadwyck.com/home)
 
 We will be using files from the data folder.
 This section will use the `all_works.csv` file that can be found in your data folder.
@@ -88,6 +84,17 @@ This section will use the `all_works.csv` file that can be found in your data fo
 | is_dei            | Boolean for whether work meets broadest definition of a DEI work  | 
 | checkouts         | Count of number of times                                          | 
 
+::::::::::: callout
+
+#### Semantics of DEI
+- Diversity, Equity and Inclusion are not concrete terms that can be divorced from history and geography. Thus, it is incumbent on academic researchers to define what that means in their practice.  
+- Arguably, any resource is potentially useful in the pursuit of DEI research if for no other reason as to provide contrast and foreground for other works, so designating something a DEI resource will always be a judgment call.  
+- Here, though, the *is_dei* flag is applied to any works with subjects deemed outside those with a male, western European lineage. That determination is also a judgment call on multiple levels that you may disagree with, and that is okay. Not only might you disagree with what subjects do or do not share a male, western European lineage, but we are also at the mercy of the cataloger wrestling with their own biases while applying a limited scope of slowly evolving options.
+- Our flag will never be perfect, so our goal should be good enough with the time and information we have. 
+- All datasets should be approached with a sceptical eye. When we are done here, you should not only know how to leverage datasets, but interogate and adjust them to adhere to different assumptions. Just be sure to make those adjustments and assumptions clear to those who follow after you.
+
+:::::::::::::::::::::
+
 If we open the `all_works.csv` data file using a text editor, the first few rows of our first file look like this:
 
 ```
@@ -98,16 +105,17 @@ title,subjects,mms_id,author,publication_date,publication_place,language_code,re
 """Lactilla tends her fav'rite cow"" : ecocritical readings of animals and women in eighteenth-century British labouring-class women's poetry","['English poetry--Women authors--History and criticism', 'Working class writings, English--History and criticism', 'Ecofeminism in literature', 'English poetry--Women authors', 'Working class women in literature', 'Working class writings, English']",991003662979702908,"Milne, Anne.",2008.0,Lewisburg,eng,Book - Physical,2015-10-07 16:31:28,True,8,
 ```
 
-***
+### Why software libraries
 
-### About Libraries
+Theoretically, you could use only built in python functions to interact directly with the text file, but
+you would be re-inventing the wheel.  Better to do a little research and find someone who has already grappled with similar problems and stand on their shoulders instead.  Programming often has a mechanism to facilitate this.  In python, the are called libraries.
 
 A library in Python contains a set of tools (functions) that perform different
-actions on our data. Importing a library is like getting a set of particular tools
+actions. Importing a library is like getting a set of particular tools
 out of a storage locker and setting them up on the bench for use in a project.
 Once a library is set up, its functions can be used or called to perform different tasks.
 
-### Pandas in Python
+### Why Pandas in Python
 
 One of the best options for working with tabular data in Python is to use the
 [Python Data Analysis Library](https://pandas.pydata.org/) (a.k.a. Pandas Library). The
@@ -115,9 +123,11 @@ Pandas library provides structures to sort our data, can produce high quality pl
 [matplotlib](https://matplotlib.org/), and integrates nicely with libraries
 that use [NumPy](https://www.numpy.org/) (which is another common Python library) arrays.
 
+### Loading a library
+
 Python doesn't load all of the libraries available to it by default. We have to
 add an `import` statement to our code in order to use library functions required for our project. To import
-a library, we use the syntax `import libraryName`, where `libraryName` represents the name of the specific library we want to use. Note that the `import` command calls a library that has been installed previously in our system. If we use the `import` command to call for a library that does not exist in our local system, the command will throw and error when executed. In this case, you can use `pip` command in another termina window to install the missing libraries. [See here for details](https://github.com/resbaz/Intro_Python_Nov2017/blob/master/Python_Installation.md) on how to do this.
+a library, we use the syntax `import libraryName`, where `libraryName` represents the name of the specific library we want to use. Note that the `import` command calls a library that has been installed previously in our system. If we use the `import` command to call for a library that does not exist in our local system, the command will throw and error when executed. In this case, you can use `pip` command in another terminal window to install the missing libraries. [See here for details](https://github.com/resbaz/Intro_Python_Nov2017/blob/master/Python_Installation.md) on how to do this.
 
 Moreover, if we want to give the
 library a nickname to shorten the command, we can add `as nickNameHere`.  An
@@ -140,12 +150,11 @@ We can use Pandas' `read_csv` function to pull either a local (a file in our mac
 [DataFrame](https://pandas.pydata.org/pandas-docs/stable/dsintro.html#dataframe).
 
 In order to read data in, we need to know where the data is stored on our computer or its URL address if the file is available on the web.
-It is recommended to place the data files in the same directory as the Jupyter notebook file (ending in .ipynb) if working with local files
 
 ```python
 # note that pd.read_csv is used because we imported pandas as pd
 # note that this assumes that the data file is in the same location
-# as the Jupyter notebook
+# as the Jupyter notebook to simplify pathing
 pd.read_csv("all_works.csv")
 ```
 
@@ -200,22 +209,12 @@ works_df
 
 which prints contents like above
 
-### Manipulating Our Index Data
+### Exploring our Data
 
-Now we can start manipulating our data. First, let's check the data type of the
-data stored in `works_df` using the `type` method. **The `type` method and
-`__class__` attribute** tell us that `works_df` is `<class 'pandas.core.frame.DataFrame'`.
+We can use attributes and methods provided by the DataFrame object to summarize and access the data stored in it.
 
-```python
-type(works_df)
-# this does the same thing as the above!
-works_df.__class__
-```
-
-We can also run `works_df.dtypes` in a cell to view the data type for each
-column in our DataFrame. `int64` represents numeric integer values - `int64` cells
-can not store decimals. `object` represents strings (letters and numbers). `float64`
-represents numbers with decimals.
+Attributes are called by using the syntax `df_object.attribute`. For example, we can use the *dtypes* attribute
+of the DataFrame to return a Series object of the dataypes for each column in the DataFrame.
 
 ```
 works_df.dtypes
@@ -238,27 +237,17 @@ checkouts             int64
 dtype: object
 ```
 
-
-#### Useful Ways to View DataFrame objects in Python
-
-We can use attributes and methods provided by the DataFrame object to summarize and access the data stored in it.
-
-To access an attribute, use the DataFrame object name followed by the attribute
-name `df_object.attribute`. For example, we can access the [Index object](https://pandas.pydata.org/docs/reference/indexing.html) containing the column names of `works_df` by using its `columns` attribute
-
-```python
-works_df.columns
-```
-
-As we will see later, we can use the contents of the Index object to extract (slice) specific records from our DataFrame based on their values.
+`int64` represents numeric integer values - `int64` cells
+cannot store decimals. `object` represents strings (letters and numbers). `float64`
+represents numbers with decimals.
 
 Methods are called by using the syntax `df_object.method()`. Note the inclusion of open brackets at the end of the method. Python treats methods as **functions** associated with a dataframe rather than just a property of the object as with attributes. Similarly to functions, methods can include optional parameters inside the brackets to change their default behaviour.
 
 As an example, `works_df.head()` gets the first few rows in the DataFrame
 `works_df` using **the `head()` method**. With a method, we can supply extra
-information within the open brackets to control its behaviour.
+information within the open brackets to control its behaviour, e.g. `works_df.head(25)`.
 
-Let's look at the data using these.
+Let's try out a few of the common DataFrame methods and attributes.
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
@@ -277,22 +266,28 @@ what they return.
 3. `works_df.head()` Also, what does `works_df.head(15)` do?
 
 4. `works_df.tail()`
+
+5. `works_df.info()`
   
 ::::::: solution
 
-1. `works_df.columns`
+1. `works_df.columns` return list of column as a data type *pandas.core.indexes.base.Index*
 
-2. `works_df.head()`. Also, what does `works_df.head(15)` do?
+2. `works_df.shape`. Take note of the output of the shape method. What format does it return the shape of the DataFrame in?
+  
+  `type(works_df.shape)` -> `Tuple`, (rows, columns), i.e. standard row-first Python format
+
+3. `works_df.head()`. Also, what does `works_df.head(15)` do?
   
   Show first `N` lines
 
-3. `works_df.tail()`
+4. `works_df.tail()`
   
   Show last `N` lines
 
-4. `works_df.shape`. Take note of the output of the shape method. What format does it return the shape of the DataFrame in?
-  
-  `type(works_df.shape)` -> `Tuple`, (rows, columns), i.e. standard row-first Python format
+5. `works_df.info()` returns a table with wealth of information about number of colums, datatypes, missing
+    values, memory usage.
+
 
 ::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -319,14 +314,15 @@ array(['title', 'subjects', 'mms_id', 'author', 'publication_date',
        'acquisition_date', 'is_dei', 'checkouts'], dtype=object)
 ```
 
-Let's get a list of all the publication locations. The `pd.unique` function tells us all of
-the unique values in the `publication_place` column.
+Let's get a list of all the publication locations. There are often two approaches we can use. One methos calls `pd.unique` function directly off the dataframe and passes in the column of intrest. In the other, we can a method directly off the column `works_df['publication_place'].unique()`. The output is identical listing the unique values in the `publication_place` column.
 
 ```python
 pd.unique(works_df['publication_place'])
 ```
-
-which **returns**:
+```python
+works_df['publication_place'].unique()
+```
+either **returns**:
 
 ```python
 array(['Charlottesville', 'Urbana', '[New York, NY?]', ...,
@@ -348,10 +344,11 @@ array(['Charlottesville', 'Urbana', '[New York, NY?]', ...,
   ```python
   years = pd.unique(works_df["publication_date"])
   len(years)
-```
+  ```
+
 2. What is the difference between `len(years)` and `works_df["publication_date"].nunique()`?
 
-Both do result in the same output, making it alternative ways of getting the unique values. `nunique` combines the count and unique value extraction.
+  Both do result in the same output, making it alternative ways of getting the unique values. `nunique` combines the count and unique value extraction.
 
 
 :::::::::::::::::::::::::
@@ -485,7 +482,7 @@ author_counts
 ```
 
 
-### Basic Math Functions
+### Math Operations
 
 If we wanted to, we could perform math on an entire numerical column of our data. To demonstrate this, let's add another column that shows what percentage of total checkouts for each work.
 
