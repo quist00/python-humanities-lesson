@@ -197,6 +197,18 @@ the number of the space in the grid that particular plot is occupying:
  "Source code" link and copy and paste into a new cell in ipython notebook or
  save as a text file with a `.py` extension and run in the command line).
 
+:::::::: solution
+```python
+plt.figure(figsize=(10, 6))
+plt.hist(works_df['checkouts'], bins=len(works_df['checkouts'].unique()), log=True, edgecolor='black')
+plt.title('Histogram of Checkouts (Logarithmic Y-axis)')
+plt.xlabel('Checkouts')
+plt.ylabel('Frequency (log scale)')
+plt.grid(True)
+plt.show()
+```
+::::::::::::
+
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Plotting with bokeh
