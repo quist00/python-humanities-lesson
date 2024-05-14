@@ -27,14 +27,4 @@ everything *before* working through this lesson.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-::::::::::::::::::::::::::::::::::::::::::  prereq
-
-## For Instructors
-
-If you are teaching this lesson in a workshop, please see the
-[Instructor notes](instructors/instructor-notes.md).
-
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
-
 
