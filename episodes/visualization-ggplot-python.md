@@ -207,6 +207,8 @@ plt.ylabel('Frequency (log scale)')
 plt.grid(True)
 plt.show()
 ```
+::::::::::::
+
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Plotting with bokeh

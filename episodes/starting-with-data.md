@@ -492,7 +492,7 @@ What does this graph show? Let's step through
 
 - `works_df.groupby("is_dei")` : This groups the works by the resource type.
 - `works_df.groupby("is_dei")["mms_id"]` : This chooses a single column to count,
-  rather than counting all columns since we only want one number to plot. You could effectively pick an column.
+  rather than counting all columns since we only want one number to plot. You could effectively pick any column.
 - `works_df.groupby("is_dei")["mms_id"].count()` : this counts the instances, i.e. how many works per given resource type?
 
 
