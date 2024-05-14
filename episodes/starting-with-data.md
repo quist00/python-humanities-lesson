@@ -292,70 +292,7 @@ what they return.
 ::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-### Calculating Statistics From Data In A Pandas DataFrame
-
-We've read our data into Python. Next, let's perform some quick summary
-statistics to learn more about the data that we're working with. We might want
-to know how many different authors are included in our dataset, or how many works were published in a given year. We can perform summary stats quickly using groups. But
-first we need to figure out what we want to group by.
-
-Let's begin by exploring our data:
-
-```python
-# Look at the column names
-works_df.columns.values
-```
-
-which **returns**:
-
-```
-array(['title', 'subjects', 'mms_id', 'author', 'publication_date',
-       'publication_place', 'language_code', 'resource_type',
-       'acquisition_date', 'is_dei', 'checkouts'], dtype=object)
-```
-
-Let's get a list of all the publication locations. There are often two approaches we can use. One methos calls `pd.unique` function directly off the dataframe and passes in the column of intrest. In the other, we can a method directly off the column `works_df['publication_place'].unique()`. The output is identical listing the unique values in the `publication_place` column.
-
-```python
-pd.unique(works_df['publication_place'])
-```
-```python
-works_df['publication_place'].unique()
-```
-either **returns**:
-
-```python
-array(['Charlottesville', 'Urbana', '[New York, NY?]', ...,
-       'Cambridge [UK] ; Medford', 'Arles', '[London]:'], dtype=object)
-```
-
-:::::::::::::::::::::::::::::::::::::::  challenge
-
-### Challenge - Statistics
-
-1. Create a list of unique publicaton years found in the data. Call it
-  `years`. How many unique years are there in the data?
-
-2. What is the difference between `len(years)` and `works_df['publication_date'].nunique()`?
-  
-
-:::::::: solution
-1. Create a list of unique locations found in the index data. Call it `places`. How many unique location are there in the data?
-  ```python
-  years = pd.unique(works_df["publication_date"])
-  len(years)
-  ```
-
-2. What is the difference between `len(years)` and `works_df["publication_date"].nunique()`?
-
-  Both do result in the same output, making it alternative ways of getting the unique values. `nunique` combines the count and unique value extraction.
-
-
-:::::::::::::::::::::::::
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
-
-## Summary Statistics \& Groups in Pandas
+### Summary Statistics \& Groups in Pandas
 
 We often want to calculate summary statistics for our data.  This can be useful even at the exploratory phase as it can help you understand the ranges of your data and detect possible outliers.
 
@@ -422,7 +359,50 @@ chi	9.910073e+17	2011.400000	0.500000	0.700000
 ```
 
 The `groupby` command is powerful in that it allows us to quickly generate
-summary stats.
+summary stats, but how do you know what columns will make good group by candidates.
+
+Let's use the publication locations as an example by finding out how many unique values are in that column.
+DataFrames and Series object often share methods allowing for two different approaches.  One method calls `pd.unique` function directly off the dataframe and passes in the column of intrest.
+In the other, we can a method directly off the column `works_df['publication_place'].unique()`. The output is identical listing the unique values in the `publication_place` column.
+
+```python
+pd.unique(works_df['publication_place'])
+```
+```python
+works_df['publication_place'].unique()
+```
+either **returns**:
+
+```python
+array(['Charlottesville', 'Urbana', '[New York, NY?]', ...,
+       'Cambridge [UK] ; Medford', 'Arles', '[London]:'], dtype=object)
+```
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+### Challenge - Statistics
+
+1. Create a list of unique publicaton years found in the data. Call it
+  `years`. How many unique years are there in the data?
+
+2. What is the difference between `len(years)` and `works_df['publication_date'].nunique()`?
+  
+
+:::::::: solution
+1. Create a list of unique locations found in the index data. Call it `places`. How many unique location are there in the data?
+  ```python
+  years = pd.unique(works_df["publication_date"])
+  len(years)
+  ```
+
+2. What is the difference between `len(years)` and `works_df["publication_date"].nunique()`?
+
+  Both do result in the same output, making it alternative ways of getting the unique values. `nunique` combines the count and unique value extraction.
+
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
@@ -462,6 +442,8 @@ for place in sorted(all_works_df['publication_place'].unique()):
 :::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
 
 ### Quickly Creating Summary Counts in Pandas
 
