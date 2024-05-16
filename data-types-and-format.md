@@ -77,24 +77,10 @@ is in the table below:
 ### Checking the format of our data
 
 Now that we're armed with a basic understanding of numeric and text data
-types, let's explore the format of our survey data. We'll be working with the
-same `all_works.csv` dataset that we've used in previous lessons.
+types, let's explore the format of our survey data. 
 
-```python
-# note that pd.read_csv is used because we imported pandas as pd
-works_df = pd.read_csv("all_works.csv")
-```
-
-Remember that we can check the type of an object like this:
-
-```python
-type(works_df)
-```
-
-**OUTPUT:** `pandas.core.frame.DataFrame`
-
-Next, let's look at the structure of our surveys data. In pandas, we can check
-the type of one column in a DataFrame using the syntax
+We alreayd learned that `DataFrame.dtypes` will return info on all the columns,
+but we can also check the type of one column in a DataFrame using the syntax
 `dataFrameName[column_name].dtype`:
 
 ```python
@@ -116,35 +102,10 @@ The type `int64` tells us that python is storing each value within this column
 as a 64 bit integer. We can use the `dat.dtypes` command to view the data type
 for each column in a DataFrame (all at once).
 
-```python
-works_df.dtypes
-```
-
-which **returns**:
-
-```
-title                object
-subjects             object
-mms_id                int64
-author               object
-publication_date      int64
-publication_place    object
-language_code        object
-resource_type        object
-acquisition_date     object
-is_dei                 bool
-checkouts             int64
-dtype: object
-```
-
-Note that most of the columns in our works data are of type `object`. This means
-that they are strings. But the publication_date column is a integer value
-which means it contains whole numbers.
 
 ### Working With Integers and Floats
 
-So we've learned that computers store numbers in one of two ways: as integers or
-as floating-point numbers (or floats). Integers are the numbers we usually count
+Integers are the numbers we usually count
 with. Floats have fractional parts (decimal places).  Let's next consider how
 the data type can impact mathematical operations on our data. Addition,
 subtraction, division and multiplication work on floats and integers as we'd expect.
@@ -185,12 +146,11 @@ float(b)
 7.0
 ```
 
-## Working With Our Data
+## Pandas and type conversion
 
 Getting back to our data, we can modify the format of values within it.
 Pandas interpreted the `mms_id` field as and integer, but it is often more
-appropriate to treat id fields as strings to prevent the dropping of leading zeros
-or to prevent inadvertent math opertions.
+appropriate to treat id fields as strings, so let's do that now.
 
 ```python
 # convert the record_id field from an integer to a string
@@ -200,7 +160,31 @@ works_df['mms_id'].dtype
 
 **OUTPUT:** `dtype('O')`
 
-### Missing Data Values - NaN
+While we only demonstrated this with *str* others like *int*, *float*, etc., but not all conversions
+will succeed and some may succeed but discard information, so you should always check on the results of
+any conversions.
+
+## Missing Data Values - NaN
+
+Our *all_works.csv* file was carefully constructed to have no missing values in the form of `null` or `NaN`, so 
+we will be importing a variant of that file that contains missing values. 
+
+```python
+
+null_df = pd.read_csv('null.csv')
+pd.isnull(null_df)
+```
+
+A snippet of the output is below:
+
+```python
+	title	subjects	mms_id	author
+0	False	False	False	False	
+1	False	False	False	False
+2	False	False	False	False
+3	False	False	False	False
+4	False	False	False	False	
+```
 
 *NaN* (**N**ot **a** **N**umber) values are undefined values that cannot be 
 represented mathematically. Pandas, for example, will read an empty cell in
@@ -228,9 +212,11 @@ NaN. However it is good practice to get in the habit of intentionally marking
 cells that have no data, with a no data value! That way there are no questions
 in the future when you (or someone else) explores your data.
 
-#### Where Are the NaN's?
+### Where Are the NaN's?
 
-Two options for finding our more about the *NaN* values in our dataframe are as follows: 
+#### Finding Columns
+
+Two options for finding what columns contain *NaN* values are as follows: 
 
 ```python
 # this method provides several columns of information including one that is a count of the not null values in
@@ -254,7 +240,7 @@ Data columns (total 11 columns):
  7   resource_type      14196 non-null  object 
  8   acquisition_date   14196 non-null  object 
  9   is_dei             14196 non-null  object 
- 10  checkouts          14232 non-null  float64
+ 10  checkouts          14196 non-null  float64
 dtypes: float64(3), object(8)
 memory usage: 1.2+ MB
 ```
@@ -276,9 +262,37 @@ language_code          36
 resource_type          36
 acquisition_date       36
 is_dei                 36
-checkouts               0
+checkouts              36
 dtype: int64
 ```
+
+#### Finding the actual null entries
+
+ We can use the `isnull` method to do this.
+The `isnull` method will compare each cell with a null value. If an element
+has a null value, it will be assigned a value of  `True` in the output object.
+
+To select the rows where there are null values, we can use
+the mask as an index to subset our data as follows:
+
+```python
+# To select just the rows with NaN values, we can use the 'any()' method
+null_df[pd.isnull(null_df).any(axis=1)]
+```
+
+We can run `isnull` on a particular column too. What does the code below do?
+
+```python
+# what does this do?
+empty_authors = null_df[null_df['author'].isnull()]
+print(empty_authors)
+```
+
+Let's take a minute to look at the statement above. We are using the Boolean
+object `null_df['author'].isnull()` to filter `null_df`. We are
+asking Python to select rows that have a `NaN` value of author. While we obtained 
+the booleans using a method of the author column, we could have done it using 
+`pd.isnull(null_df['author'])` instead if we preferred.
 
 #### Dealing with the NaN's?
 Assuming we determine that missing checkouts indeed should be zero, we
@@ -320,7 +334,7 @@ of any conclusions drawn from it.
 
 
 
-### Recap
+## Recap
 
 What we've learned:
 
