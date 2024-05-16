@@ -35,8 +35,6 @@ bottom_concat = works_df.tail().reset_index()
 left_concat_df = works_df.iloc[:,0:3]
 right_concat_df = works_df.iloc[:,3:]
 left_merge_df = works_df[['mms_id','title']]
-right_merge_df = works_df[['mms_id','author']]
-left_merge_df = works_df[['mms_id','title']]
 right_merge_df = works_df[['mms_id','author']].sample(frac=.8,random_state=42).drop_duplicates()
 
 ```
@@ -90,7 +88,7 @@ that you can open it! If you want, try to bring it back into python to make sure
 it imports properly.
 
 ```python
-# for kicks read our output back into python and make sure all looks good
+# read our output back into python and make sure all looks good
 new_output = pd.read_csv('out.csv')
 new_output
 ```
@@ -141,10 +139,7 @@ two DataFrames based on a join key and returns a new DataFrame that contains
 DataFrames.
 
 Inner joins yield a DataFrame that contains only rows where the value being
-joins exists in BOTH tables. An example of an inner join, adapted from [this
-page](https://blog.codinghorror.com/a-visual-explanation-of-sql-joins/) is below:
-
-![](https://blog.codinghorror.com/content/fig/uploads/2007/10/6a0120a85dcdae970b012877702708970c-pi.png){alt='Inner join -- courtesy of codinghorror.com'}
+joins exists in BOTH tables. 
 
 The pandas function for performing joins is called `merge` and an Inner join is
 the default option:
@@ -246,14 +241,13 @@ The pandas `merge` function supports two other join types:
   discarded.
 - Full (outer) join: Invoked by passing `how='outer'` as an argument. This join
   type returns the all pairwise combinations of rows from both DataFrames; i.e.,
-  the result DataFrame will `NaN` where data is missing in one of the dataframes.
-  This join type is very rarely used.
+  the result DataFrame will `NaN` where data is missing in one of the dataframes. This join type is very rarely used.
+  
+### Making Composite Keys
+Sometimes a data file might not have an obvious key in a single column, but we may be able to generate a
+suitable key by combining two or more columns into what is known as a *composite* key.
 
- ### Making Composite Keys
- Sometimes a data file might not have an obvious key in a single column, but we may be able to generate a
- suitable key by combining two or more columns into what is known as a *composite* key.
-
- Let's see an example of this by importing the *ethnicity.csv* and *gender.csv*, and then examining one of them.  
+Let's see an example of this by importing the *ethnicity.csv* and *gender.csv*, and then examining one of them.  
 
 ```python
 ethicity_df = pd.read_csv('ethnicity.csv')
@@ -261,7 +255,7 @@ gender_df = pd.read_csv('gender.csv')
 print(gender_df.head())
 print(ethicity_df.head())
 ```
-They both have *term* and *year* columns that contain duplication.  However, we could combine these colums into a composite key that would be unique for each dataframe. We will also strip away any potentialleading
+They both have *term* and *year* columns that contain duplication.  However, we could combine these colums into a composite key that would be unique for each dataframe. We will also strip away any potential leading
  or trailing whitespace as a precaution.
 
 
@@ -281,14 +275,12 @@ print(gender_ethnicity_df.shape)
 gender_ethnicity_df
 ```
 
-## Final Challenges
-
 :::::::::::::::::::::::::::::::::::::::  challenge
 
-### Challenge - Joins
+## Challenge - Joins
 
 Create a new DataFrame by joining the contents of the `gender.csv` and
-`ethnicity.csv` tables. Make it a left join where gender if the left dataframe.
+`ethnicity.csv` tables. Make it a left join where gender is the left dataframe.
 
  Calculate the:
 
@@ -308,8 +300,8 @@ merged = pd.merge(
 # Part 1: Number of ethnicity records that were dropped
 ethnicity_df.shape[0] - merged.shape[0]
 # Part 2: Number of rows where ethnicity data is NaN
-merged.isnull().sum() # this will find all colums with null values
-# you can then use those ethnicity columns to filter the dataframe and take the first value of shape
+merged.isnull().sum() # this will find all columns with null values and effectively count them
+# you can *or* the columns with *nulls* to filter the dataframe and take the first value of shape
 merged[merged.intl.isnull()| merged.pacific_islander.isnull()].shape[0]
 
 ```

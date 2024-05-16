@@ -87,7 +87,7 @@ order. This is useful when we need to reorganize our data.
 (error) will be raised.
 
 ```python
-# select the author and EEBO columns from the DataFrame
+# select the title and checkouts columns from the DataFrame
 works_df[['title', 'checkouts']]
 
 # what happens when you flip the order?
@@ -263,7 +263,7 @@ works_df = pd.read_csv("all_works.csv")
 We can select specific ranges of our data in both the row and column directions
 using either label or integer-based indexing. Columns can be selected either
 by their name, or by the index of their location in the dataframe. Rows can only
-be selected by their index.
+be selected by their index, but the index is not necessarily an integer as it is by default.
 
 - `loc` is primarily *label* based indexing. *Integers* may be used but
   they are interpreted as a *label*.
@@ -346,23 +346,56 @@ selects the element that is 3 rows down and 7 columns over in the DataFrame.
   - `works_df[:4]`
   - `works_df[:-1]`
 
-*Suggestion*: You can also select every Nth row: `eebworks_dfo_df[1:10:2]`. So, how to interpret `works_df[::-1]`?
+*Suggestion*: You can also select every Nth row: `works_df[1:10:2]`. So, how to interpret `works_df[::-1]`?
 
 - What is the difference between `works_df.iloc[0:4, 1:4]` and `works_df.loc[0:4, 1:4]`?
-  
-  Check the position, or the name. The second is like it would be in a dictionary, asking for the key-names. Column names 1:4 do not exist, resulting in an error. Check also the difference between `works_df.loc[0:4]` and `works_df.iloc[0:4]`
 
+:::::: solution
+
+  Checks the position, or the name. The second is like it would be in a dictionary, asking for the key-names. Column names 1:4 do not exist, resulting in an error. Check also the difference between `works_df.loc[0:4]` and `works_df.iloc[0:4]`
+
+::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Subsetting Data using Criteria
 
-We can also select a subset of our data using criteria. For example, we can
-select all rows where subjects includes the work "Diversity."
+A **mask** can be useful to locate where a particular subset of values exist or
+don't exist. To understand masks,
+we also need to understand `BOOLEAN` objects in Python.
+
+Boolean values include `True` or `False`. For example,
+
+```python
+# set x to 5
+x = 5
+
+# what does the code below return?
+x > 5
+
+# how about this?
+x == 5
+```
+
+When we ask Python what the value of `x > 5` is, we get `False`. This is
+because the condition,`x` is not greater than 5, is not met since `x` is equal
+to 5.
+
+To create a boolean mask:
+
+- Set the True / False criteria (e.g. `values > 5 = True`)
+- Python will then assess each value in the object to determine whether the
+  value meets the criteria (True) or not (False).
+- Python creates an output object that is the same shape as the original
+  object, but with a `True` or `False` value for each index location.
+
+
+Pandas provides multiple ways to to generate boolean sets of boolean criteria to
+use for filtering.  For example, we can select all rows where subjects includes the
+ work "Diversity" by using the *contains* method in the *str* namespace.
 
 ```python
 works_df.loc[works_df["subjects"].str.contains("Diversity", na=False)]
 ```
-Try it out for yourself.
 
 Or we can select all rows with a checkouts greater than 0:
 
@@ -370,7 +403,8 @@ Or we can select all rows with a checkouts greater than 0:
 works_df[works_df["checkouts"] > 0]
 ```
 
-We can define sets of criteria too:
+We can define sets of criteria too using *&* or *|*. Parenthesis are required to help
+with order of computation:
 
 ```python
 works_df[(works_df.publication_date >= 2010) & (works_df.publication_date <= 2015)]
@@ -443,115 +477,6 @@ Experiment with selecting various subsets of the "works" data.
 
 ::::::::::::::
 
-::::::::::::::::::::::::::::::::::::::::::::::::::
-
-## Using masks to identify a specific condition
-
-A **mask** can be useful to locate where a particular subset of values exist or
-don't exist - for example,  NaN, or "Not a Number" values. To understand masks,
-we also need to understand `BOOLEAN` objects in Python.
-
-Boolean values include `True` or `False`. For example,
-
-```python
-# set x to 5
-x = 5
-
-# what does the code below return?
-x > 5
-
-# how about this?
-x == 5
-```
-
-When we ask Python what the value of `x > 5` is, we get `False`. This is
-because the condition,`x` is not greater than 5, is not met since `x` is equal
-to 5.
-
-To create a boolean mask:
-
-- Set the True / False criteria (e.g. `values > 5 = True`)
-- Python will then assess each value in the object to determine whether the
-  value meets the criteria (True) or not (False).
-- Python creates an output object that is the same shape as the original
-  object, but with a `True` or `False` value for each index location.
-
-Let's try this out. Let's identify all locations in the survey data that have
-null (missing or NaN) data values. We can use the `isnull` method to do this.
-The `isnull` method will compare each cell with a null value. If an element
-has a null value, it will be assigned a value of  `True` in the output object.
-
-Our data was carefully constructed to have no missing values in the form of `null` or `NaN`. Thus you won't get anything back if we use the works_df to attempt this. Let's create a copy called `null_df` and add some bogus entries to demonstrate this since real world data is often messy or might use such NaN or Null values on purpose. 
-
-```python
-# import numpy so we can access np.nan
-import numpy as np
-# make a true copy
-null_df = works_df.copy()
-
-# set all columns for all records where subject contains the word "Diversity" equal to NaN
-null_df.loc[null_df["subjects"].str.contains("Diversity", na=False)] = np.nan
-# set only the author column to NaN for records where publication_date is bewteen 2010 and 2015
-null_df.loc[((null_df.publication_date >= 2010) & (null_df.publication_date <= 2015)), ["author"]] = np.nan
-```
-```python
-pd.isnull(null_df)
-```
-
-A snippet of the output is below:
-
-```python
-	title	subjects	mms_id	author
-0	False	False	False	False	
-1	False	False	False	False
-2	False	False	False	False
-3	False	False	False	False
-4	False	False	False	False	
-```
-
-To select the rows where there are null values, we can use
-the mask as an index to subset our data as follows:
-
-```python
-# To select just the rows with NaN values, we can use the 'any()' method
-null_df[pd.isnull(null_df).any(axis=1)]
-```
-
-We can run `isnull` on a particular column too. What does the code below do?
-
-```python
-# what does this do?
-empty_authors = null_df[null_df['author'].isnull()]
-print(empty_authors)
-```
-
-Let's take a minute to look at the statement above. We are using the Boolean
-object `null_df['author'].isnull()` as an index to `null_df`. We are
-asking Python to select rows that have a `NaN` value of author. While we obtained 
-the booleans using a method of the author column, we could have done it using 
-`pd.isnull(null_df['author'])` instead if we preferred.
-
-:::::::::::::::::::::::::::::::::::::::  challenge
-
-## Challenge - Putting it all together
-
-1. Create a new DataFrame that only contains titles with publication_place that
-  are **not equal** to New York. 
-
-2. Create a new DataFrame that contains only works that were published in "New York, N.Y."
-  and where checkouts are greater than 0.
-
-:::::::::: solution
-1.
-```python
-works_df[works_df['publication_place']!='New York']
-```
-2.
-```python
-new_york_df = works_df[(works_df['publication_place']=='New York, N.Y.') & (works_df.checkouts > 0)]
-new_york_df
-```
-:::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
