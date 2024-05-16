@@ -165,13 +165,29 @@ the number of the space in the grid that particular plot is occupying:
 
 1. Create a histogram of checkouts.
 
-2. Matplotlib can make many other types of plots in much the same way that it makes
+2. Run the following code:
+```python
+ethnicity_df = pd.read_csv('ethnicity.csv')
+ethnicity_df.loc[ethnicity_df.intl.isnull(),['intl']]= ethnicity_df.intl.min()
+ethnicity_df.intl = ethnicity_df.intl.astype('int')
+
+plot_df = ethnicity_df[ethnicity_df.term == 'Fall']
+plot_df.set_index('year',inplace=True)
+plot_df = plot_df.sort_index()
+plot_df
+plot_df[['amind', 'black', 'hispanic', 'asian','pacific_islander', 'multi', 'white', 'unknown', 'intl']].plot()
+```
+Use a *for* loop to recreate that plot using matplotlib. Make sure you have a title, legend, and label your axis.
+**Hint:** You can reuse plot_df.
+
+3. Matplotlib can make many other types of plots in much the same way that it makes
  2 dimensional line plots. Look through the examples in
  [http://matplotlib.org/users/screenshots.html](https://matplotlib.org/users/screenshots.html) and try a few of them (click on the
  "Source code" link and copy and paste into a new cell in ipython notebook or
  save as a text file with a `.py` extension and run in the command line).
 
 :::::::: solution
+1.
 ```python
 plt.figure(figsize=(10, 6))
 plt.hist(works_df['checkouts'], bins=len(works_df['checkouts'].unique()), log=True, edgecolor='black')
@@ -180,6 +196,19 @@ plt.xlabel('Checkouts')
 plt.ylabel('Frequency (log scale)')
 plt.grid(True)
 plt.show()
+```
+2.
+```python
+cols = ['amind', 'black', 'hispanic', 'asian',
+       'pacific_islander', 'multi', 'white', 'unknown', 'intl']
+styles = ['r-', 'b--', '-.', ':', 'r--', 'b-', 'g-', 'g--', 'r-.']
+for ethnicity in enumerate(cols):
+    plt.plot(plot_df.index,plot_df[ethnicity[1]],styles[ethnicity[0]],label = ethnicity[1],alpha=.5)
+
+plt.legend()
+plt.ylabel('Number of Students')
+plt.xlabel('Year')
+plt.title('Students by Ethnicity')
 ```
 ::::::::::::
 
