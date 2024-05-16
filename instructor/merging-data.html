@@ -201,7 +201,6 @@
       <div class="accordion-body">
         <ul><li><a href="#concatenating-dataframes">Concatenating DataFrames</a></li>
 <li><a href="#joining-dataframes">Joining DataFrames</a></li>
-<li><a href="#final-challenges">Final Challenges</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
         
@@ -302,7 +301,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Combining DataFrames with pandas</h1>
-        <p>Last updated on 2024-05-13 |
+        <p>Last updated on 2024-05-16 |
         
         <a href="https://github.com/carpentries-incubator/python-humanities-lesson/edit/main/episodes/merging-data.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -359,9 +358,7 @@ multiple files.</p>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>left_concat_df <span class="op">=</span> works_df.iloc[:,<span class="dv">0</span>:<span class="dv">3</span>]</span>
 <span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>right_concat_df <span class="op">=</span> works_df.iloc[:,<span class="dv">3</span>:]</span>
 <span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>left_merge_df <span class="op">=</span> works_df[[<span class="st">'mms_id'</span>,<span class="st">'title'</span>]]</span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>right_merge_df <span class="op">=</span> works_df[[<span class="st">'mms_id'</span>,<span class="st">'author'</span>]]</span>
-<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>left_merge_df <span class="op">=</span> works_df[[<span class="st">'mms_id'</span>,<span class="st">'title'</span>]]</span>
-<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>right_merge_df <span class="op">=</span> works_df[[<span class="st">'mms_id'</span>,<span class="st">'author'</span>]].sample(frac<span class="op">=</span><span class="fl">.8</span>,random_state<span class="op">=</span><span class="dv">42</span>).drop_duplicates()</span></code></pre>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>right_merge_df <span class="op">=</span> works_df[[<span class="st">'mms_id'</span>,<span class="st">'author'</span>]].sample(frac<span class="op">=</span><span class="fl">.8</span>,random_state<span class="op">=</span><span class="dv">42</span>).drop_duplicates()</span></code></pre>
 </div>
 <section id="concatenating-dataframes"><h2 class="section-heading">Concatenating DataFrames<a class="anchor" aria-label="anchor" href="#concatenating-dataframes"></a>
 </h2>
@@ -420,7 +417,7 @@ into python to make sure it imports properly.</p>
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># for kicks read our output back into python and make sure all looks good</span></span>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># read our output back into python and make sure all looks good</span></span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>new_output <span class="op">=</span> pd.read_csv(<span class="st">'out.csv'</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>new_output</span></code></pre>
 </div>
@@ -473,10 +470,8 @@ inner join combines two DataFrames based on a join key and returns a new
 DataFrame that contains <strong>only</strong> those rows that have
 matching values in <em>both</em> of the original DataFrames.</p>
 <p>Inner joins yield a DataFrame that contains only rows where the value
-being joins exists in BOTH tables. An example of an inner join, adapted
-from <a href="https://blog.codinghorror.com/a-visual-explanation-of-sql-joins/" class="external-link">this
-page</a> is below:</p>
-<figure><img src="https://blog.codinghorror.com/content/fig/uploads/2007/10/6a0120a85dcdae970b012877702708970c-pi.png" alt="Inner join -- courtesy of codinghorror.com" class="figure mx-auto d-block"></figure><p>The pandas function for performing joins is called <code>merge</code>
+being joins exists in BOTH tables.</p>
+<p>The pandas function for performing joins is called <code>merge</code>
 and an Inner join is the default option:</p>
 <div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -582,10 +577,12 @@ argument. This join type returns the all pairwise combinations of rows
 from both DataFrames; i.e., the result DataFrame will <code>NaN</code>
 where data is missing in one of the dataframes. This join type is very
 rarely used.</li>
-</ul><p>### Making Composite Keys Sometimes a data file might not have an
-obvious key in a single column, but we may be able to generate a
-suitable key by combining two or more columns into what is known as a
-<em>composite</em> key.</p>
+</ul></div>
+<div class="section level3">
+<h3 id="making-composite-keys">Making Composite Keys<a class="anchor" aria-label="anchor" href="#making-composite-keys"></a></h3>
+<p>Sometimes a data file might not have an obvious key in a single
+column, but we may be able to generate a suitable key by combining two
+or more columns into what is known as a <em>composite</em> key.</p>
 <p>Let’s see an example of this by importing the <em>ethnicity.csv</em>
 and <em>gender.csv</em>, and then examining one of them.</p>
 <div class="codewrapper sourceCode" id="cb9">
@@ -599,7 +596,7 @@ and <em>gender.csv</em>, and then examining one of them.</p>
 <p>They both have <em>term</em> and <em>year</em> columns that contain
 duplication. However, we could combine these colums into a composite key
 that would be unique for each dataframe. We will also strip away any
-potentialleading or trailing whitespace as a precaution.</p>
+potential leading or trailing whitespace as a precaution.</p>
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -620,10 +617,7 @@ join.</p>
 <span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="bu">print</span>(gender_ethnicity_df.shape)</span>
 <span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>gender_ethnicity_df</span></code></pre>
 </div>
-</div>
-</section><section id="final-challenges"><h2 class="section-heading">Final Challenges<a class="anchor" aria-label="anchor" href="#final-challenges"></a>
-</h2>
-<hr class="half-width"><div id="challenge---joins" class="callout challenge">
+<div id="challenge---joins" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
@@ -633,7 +627,7 @@ join.</p>
 <div class="callout-content">
 <p>Create a new DataFrame by joining the contents of the
 <code>gender.csv</code> and <code>ethnicity.csv</code> tables. Make it a
-left join where gender if the left dataframe.</p>
+left join where gender is the left dataframe.</p>
 <p>Calculate the:</p>
 <ol style="list-style-type: decimal"><li>Number of ethnicity records that were dropped</li>
 <li>Number of rows where ethnicity data is NaN</li>
@@ -645,7 +639,7 @@ left join where gender if the left dataframe.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Solution to challenge</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -658,9 +652,10 @@ left join where gender if the left dataframe.</p>
 <span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a><span class="co"># Part 1: Number of ethnicity records that were dropped</span></span>
 <span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a>ethnicity_df.shape[<span class="dv">0</span>] <span class="op">-</span> merged.shape[<span class="dv">0</span>]</span>
 <span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a><span class="co"># Part 2: Number of rows where ethnicity data is NaN</span></span>
-<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a>merged.isnull().<span class="bu">sum</span>() <span class="co"># this will find all colums with null values</span></span>
-<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a><span class="co"># you can then use those ethnicity columns to filter the dataframe and take the first value of shape</span></span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a>merged.isnull().<span class="bu">sum</span>() <span class="co"># this will find all columns with null values and effectively count them</span></span>
+<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a><span class="co"># you can *or* the columns with *nulls* to filter the dataframe and take the first value of shape</span></span>
 <span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a>merged[merged.intl.isnull()<span class="op">|</span> merged.pacific_islander.isnull()].shape[<span class="dv">0</span>]</span></code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -723,9 +718,9 @@ left join where gender if the left dataframe.</p>
   "creativeWorkStatus": "active",
   "url": "https://carpentries-incubator.github.io/python-humanities-lesson/instructor/merging-data.html",
   "identifier": "https://carpentries-incubator.github.io/python-humanities-lesson/instructor/merging-data.html",
-  "dateCreated": "2024-05-14",
-  "dateModified": "2024-05-13",
-  "datePublished": "2024-05-14"
+  "dateCreated": "2024-05-16",
+  "dateModified": "2024-05-16",
+  "datePublished": "2024-05-16"
 }
 
   </script><script>

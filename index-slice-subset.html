@@ -189,7 +189,6 @@
 <li><a href="#copying-objects-vs-referencing-objects-in-python">Copying Objects vs Referencing Objects in Python</a></li>
 <li><a href="#slicing-subsets-of-rows-and-columns-in-python">Slicing Subsets of Rows and Columns in Python</a></li>
 <li><a href="#subsetting-data-using-criteria">Subsetting Data using Criteria</a></li>
-<li><a href="#using-masks-to-identify-a-specific-condition">Using masks to identify a specific condition</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
         
@@ -308,7 +307,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Indexing, Slicing and Subsetting DataFrames in Python</h1>
-        <p>Last updated on 2024-05-13 |
+        <p>Last updated on 2024-05-16 |
         
         <a href="https://github.com/carpentries-incubator/python-humanities-lesson/edit/main/episodes/index-slice-subset.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -415,7 +414,7 @@ DataFrame, an exception (error) will be raised.</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># select the author and EEBO columns from the DataFrame</span></span>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># select the title and checkouts columns from the DataFrame</span></span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>works_df[[<span class="st">'title'</span>, <span class="st">'checkouts'</span>]]</span>
 <span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a></span>
 <span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co"># what happens when you flip the order?</span></span>
@@ -474,7 +473,7 @@ Why is that?</p></li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <ul><li>
 <p>What value does the code below return? <code>a[0]</code></p>
@@ -602,7 +601,8 @@ from the original data CSV file.</p>
 <hr class="half-width"><p>We can select specific ranges of our data in both the row and column
 directions using either label or integer-based indexing. Columns can be
 selected either by their name, or by the index of their location in the
-dataframe. Rows can only be selected by their index.</p>
+dataframe. Rows can only be selected by their index, but the index is
+not necessarily an integer as it is by default.</p>
 <ul><li>
 <code>loc</code> is primarily <em>label</em> based indexing.
 <em>Integers</em> may be used but they are interpreted as a
@@ -670,9 +670,9 @@ location within the DataFrame and <code>iloc</code> indexing:</p>
 <p>Remember that Python indexing begins at 0. So, the index location [2,
 6] selects the element that is 3 rows down and 7 columns over in the
 DataFrame.</p>
-<div id="challenge---range" class="callout discussion">
+<div id="challenge---range" class="callout challenge">
 <div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
+<i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="challenge---range" class="callout-inner">
 <h3 class="callout-title">Challenge - Range<a class="anchor" aria-label="anchor" href="#challenge---range"></a>
@@ -684,42 +684,80 @@ back? Does it match what you actually get back?</li>
 <li><code>works_df[:4]</code></li>
 <li><code>works_df[:-1]</code></li>
 </ul><p><em>Suggestion</em>: You can also select every Nth row:
-<code>eebworks_dfo_df[1:10:2]</code>. So, how to interpret
+<code>works_df[1:10:2]</code>. So, how to interpret
 <code>works_df[::-1]</code>?</p>
-<ul><li>
-<p>What is the difference between
-<code>works_df.iloc[0:4, 1:4]</code> and
-<code>works_df.loc[0:4, 1:4]</code>?</p>
-<p>Check the position, or the name. The second is like it would be in a
+<ul><li>What is the difference between <code>works_df.iloc[0:4, 1:4]</code>
+and <code>works_df.loc[0:4, 1:4]</code>?</li>
+</ul></div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div class="accordion-body">
+<p>Checks the position, or the name. The second is like it would be in a
 dictionary, asking for the key-names. Column names 1:4 do not exist,
 resulting in an error. Check also the difference between
-<code>works_df.loc[0:4]</code> and
-<code>works_df.iloc[0:4]</code></p>
-</li>
-</ul></div>
+<code>works_df.loc[0:4]</code> and <code>works_df.iloc[0:4]</code></p>
+</div>
+</div>
 </div>
 </div>
 </section><section id="subsetting-data-using-criteria"><h2 class="section-heading">Subsetting Data using Criteria<a class="anchor" aria-label="anchor" href="#subsetting-data-using-criteria"></a>
 </h2>
-<hr class="half-width"><p>We can also select a subset of our data using criteria. For example,
-we can select all rows where subjects includes the work “Diversity.”</p>
+<hr class="half-width"><p>A <strong>mask</strong> can be useful to locate where a particular
+subset of values exist or don’t exist. To understand masks, we also need
+to understand <code>BOOLEAN</code> objects in Python.</p>
+<p>Boolean values include <code>True</code> or <code>False</code>. For
+example,</p>
 <div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a>works_df.loc[works_df[<span class="st">"subjects"</span>].<span class="bu">str</span>.contains(<span class="st">"Diversity"</span>, na<span class="op">=</span><span class="va">False</span>)]</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="co"># set x to 5</span></span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a><span class="co"># what does the code below return?</span></span>
+<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a>x <span class="op">&gt;</span> <span class="dv">5</span></span>
+<span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a><span class="co"># how about this?</span></span>
+<span id="cb22-8"><a href="#cb22-8" tabindex="-1"></a>x <span class="op">==</span> <span class="dv">5</span></span></code></pre>
 </div>
-<p>Try it out for yourself.</p>
-<p>Or we can select all rows with a checkouts greater than 0:</p>
+<p>When we ask Python what the value of <code>x &gt; 5</code> is, we get
+<code>False</code>. This is because the condition,<code>x</code> is not
+greater than 5, is not met since <code>x</code> is equal to 5.</p>
+<p>To create a boolean mask:</p>
+<ul><li>Set the True / False criteria
+(e.g. <code>values &gt; 5 = True</code>)</li>
+<li>Python will then assess each value in the object to determine
+whether the value meets the criteria (True) or not (False).</li>
+<li>Python creates an output object that is the same shape as the
+original object, but with a <code>True</code> or <code>False</code>
+value for each index location.</li>
+</ul><p>Pandas provides multiple ways to to generate boolean sets of boolean
+criteria to use for filtering. For example, we can select all rows where
+subjects includes the work “Diversity” by using the <em>contains</em>
+method in the <em>str</em> namespace.</p>
 <div class="codewrapper sourceCode" id="cb23">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a>works_df[works_df[<span class="st">"checkouts"</span>] <span class="op">&gt;</span> <span class="dv">0</span>]</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a>works_df.loc[works_df[<span class="st">"subjects"</span>].<span class="bu">str</span>.contains(<span class="st">"Diversity"</span>, na<span class="op">=</span><span class="va">False</span>)]</span></code></pre>
 </div>
-<p>We can define sets of criteria too:</p>
+<p>Or we can select all rows with a checkouts greater than 0:</p>
 <div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a>works_df[(works_df.publication_date <span class="op">&gt;=</span> <span class="dv">2010</span>) <span class="op">&amp;</span> (works_df.publication_date <span class="op">&lt;=</span> <span class="dv">2015</span>)]</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a>works_df[works_df[<span class="st">"checkouts"</span>] <span class="op">&gt;</span> <span class="dv">0</span>]</span></code></pre>
+</div>
+<p>We can define sets of criteria too using <em>&amp;</em> or
+<em>|</em>. Parenthesis are required to help with order of
+computation:</p>
+<div class="codewrapper sourceCode" id="cb25">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a>works_df[(works_df.publication_date <span class="op">&gt;=</span> <span class="dv">2010</span>) <span class="op">&amp;</span> (works_df.publication_date <span class="op">&lt;=</span> <span class="dv">2015</span>)]</span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="python-syntax-cheat-sheet">Python Syntax Cheat Sheet<a class="anchor" aria-label="anchor" href="#python-syntax-cheat-sheet"></a></h3>
@@ -752,12 +790,12 @@ DataFrame based upon a list of values as follows. Notice how the
 indexing relies on a reference to the dataframe <em>being indexed</em>.
 Think about the <em>order</em> in which the computer must evaluate these
 statements.</p></li>
-</ol><div class="codewrapper sourceCode" id="cb25">
+</ol><div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a>works_df[</span>
-<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a>        works_df[<span class="st">'publication_date'</span>].isin([listGoesHere])</span>
-<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a>        ]</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a>works_df[</span>
+<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a>        works_df[<span class="st">'publication_date'</span>].isin([listGoesHere])</span>
+<span id="cb26-3"><a href="#cb26-3" tabindex="-1"></a>        ]</span></code></pre>
 </div>
 <p>Use the <code>isin</code> function to find all books published in
 either 2010 or 2015. How many are there?</p>
@@ -770,172 +808,36 @@ publication_date NOT equal to 2010 or 2015 in the works data.</p></li>
 </ol></div>
 </div>
 </div>
-<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
-  <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
-</button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
-<div class="accordion-body">
-<ol style="list-style-type: decimal"><li><div class="codewrapper sourceCode" id="cb26">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a>works_df[(works_df.publication_date <span class="op">&lt;</span> <span class="dv">2010</span>) <span class="op">&amp;</span> (works_df.checkouts <span class="op">&lt;</span> <span class="dv">5</span>)]</span></code></pre>
-</div></li>
-<li><div class="codewrapper sourceCode" id="cb27">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a>works_df[works_df[<span class="st">'publication_date'</span>].isin([<span class="dv">2010</span>,<span class="dv">2015</span>])]</span></code></pre>
-</div></li>
-<li>
-</li>
-</ol><div class="codewrapper sourceCode" id="cb28">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a>works_df[works_df[<span class="st">'checkouts'</span>]<span class="op">&gt;=</span><span class="dv">1</span>]</span></code></pre>
-</div>
-<ol start="4" style="list-style-type: decimal"><li>
-</li></ol><div class="codewrapper sourceCode" id="cb29">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a>works_df[<span class="op">~</span>works_df[<span class="st">'publication_date'</span>].isin([<span class="dv">2010</span>,<span class="dv">2015</span>])]</span></code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section><section id="using-masks-to-identify-a-specific-condition"><h2 class="section-heading">Using masks to identify a specific condition<a class="anchor" aria-label="anchor" href="#using-masks-to-identify-a-specific-condition"></a>
-</h2>
-<hr class="half-width"><p>A <strong>mask</strong> can be useful to locate where a particular
-subset of values exist or don’t exist - for example, NaN, or “Not a
-Number” values. To understand masks, we also need to understand
-<code>BOOLEAN</code> objects in Python.</p>
-<p>Boolean values include <code>True</code> or <code>False</code>. For
-example,</p>
-<div class="codewrapper sourceCode" id="cb30">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a><span class="co"># set x to 5</span></span>
-<span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb30-3"><a href="#cb30-3" tabindex="-1"></a></span>
-<span id="cb30-4"><a href="#cb30-4" tabindex="-1"></a><span class="co"># what does the code below return?</span></span>
-<span id="cb30-5"><a href="#cb30-5" tabindex="-1"></a>x <span class="op">&gt;</span> <span class="dv">5</span></span>
-<span id="cb30-6"><a href="#cb30-6" tabindex="-1"></a></span>
-<span id="cb30-7"><a href="#cb30-7" tabindex="-1"></a><span class="co"># how about this?</span></span>
-<span id="cb30-8"><a href="#cb30-8" tabindex="-1"></a>x <span class="op">==</span> <span class="dv">5</span></span></code></pre>
-</div>
-<p>When we ask Python what the value of <code>x &gt; 5</code> is, we get
-<code>False</code>. This is because the condition,<code>x</code> is not
-greater than 5, is not met since <code>x</code> is equal to 5.</p>
-<p>To create a boolean mask:</p>
-<ul><li>Set the True / False criteria
-(e.g. <code>values &gt; 5 = True</code>)</li>
-<li>Python will then assess each value in the object to determine
-whether the value meets the criteria (True) or not (False).</li>
-<li>Python creates an output object that is the same shape as the
-original object, but with a <code>True</code> or <code>False</code>
-value for each index location.</li>
-</ul><p>Let’s try this out. Let’s identify all locations in the survey data
-that have null (missing or NaN) data values. We can use the
-<code>isnull</code> method to do this. The <code>isnull</code> method
-will compare each cell with a null value. If an element has a null
-value, it will be assigned a value of <code>True</code> in the output
-object.</p>
-<p>Our data was carefully constructed to have no missing values in the
-form of <code>null</code> or <code>NaN</code>. Thus you won’t get
-anything back if we use the works_df to attempt this. Let’s create a
-copy called <code>null_df</code> and add some bogus entries to
-demonstrate this since real world data is often messy or might use such
-NaN or Null values on purpose.</p>
-<div class="codewrapper sourceCode" id="cb31">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a><span class="co"># import numpy so we can access np.nan</span></span>
-<span id="cb31-2"><a href="#cb31-2" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb31-3"><a href="#cb31-3" tabindex="-1"></a><span class="co"># make a true copy</span></span>
-<span id="cb31-4"><a href="#cb31-4" tabindex="-1"></a>null_df <span class="op">=</span> works_df.copy()</span>
-<span id="cb31-5"><a href="#cb31-5" tabindex="-1"></a></span>
-<span id="cb31-6"><a href="#cb31-6" tabindex="-1"></a><span class="co"># set all columns for all records where subject contains the word "Diversity" equal to NaN</span></span>
-<span id="cb31-7"><a href="#cb31-7" tabindex="-1"></a>null_df.loc[null_df[<span class="st">"subjects"</span>].<span class="bu">str</span>.contains(<span class="st">"Diversity"</span>, na<span class="op">=</span><span class="va">False</span>)] <span class="op">=</span> np.nan</span>
-<span id="cb31-8"><a href="#cb31-8" tabindex="-1"></a><span class="co"># set only the author column to NaN for records where publication_date is bewteen 2010 and 2015</span></span>
-<span id="cb31-9"><a href="#cb31-9" tabindex="-1"></a>null_df.loc[((null_df.publication_date <span class="op">&gt;=</span> <span class="dv">2010</span>) <span class="op">&amp;</span> (null_df.publication_date <span class="op">&lt;=</span> <span class="dv">2015</span>)), [<span class="st">"author"</span>]] <span class="op">=</span> np.nan</span></code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb32">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a>pd.isnull(null_df)</span></code></pre>
-</div>
-<p>A snippet of the output is below:</p>
-<div class="codewrapper sourceCode" id="cb33">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a>	title	subjects	mms_id	author</span>
-<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a><span class="dv">0</span>	<span class="va">False</span>	<span class="va">False</span>	<span class="va">False</span>	<span class="va">False</span>	</span>
-<span id="cb33-3"><a href="#cb33-3" tabindex="-1"></a><span class="dv">1</span>	<span class="va">False</span>	<span class="va">False</span>	<span class="va">False</span>	<span class="va">False</span></span>
-<span id="cb33-4"><a href="#cb33-4" tabindex="-1"></a><span class="dv">2</span>	<span class="va">False</span>	<span class="va">False</span>	<span class="va">False</span>	<span class="va">False</span></span>
-<span id="cb33-5"><a href="#cb33-5" tabindex="-1"></a><span class="dv">3</span>	<span class="va">False</span>	<span class="va">False</span>	<span class="va">False</span>	<span class="va">False</span></span>
-<span id="cb33-6"><a href="#cb33-6" tabindex="-1"></a><span class="dv">4</span>	<span class="va">False</span>	<span class="va">False</span>	<span class="va">False</span>	<span class="va">False</span>	</span></code></pre>
-</div>
-<p>To select the rows where there are null values, we can use the mask
-as an index to subset our data as follows:</p>
-<div class="codewrapper sourceCode" id="cb34">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a><span class="co"># To select just the rows with NaN values, we can use the 'any()' method</span></span>
-<span id="cb34-2"><a href="#cb34-2" tabindex="-1"></a>null_df[pd.isnull(null_df).<span class="bu">any</span>(axis<span class="op">=</span><span class="dv">1</span>)]</span></code></pre>
-</div>
-<p>We can run <code>isnull</code> on a particular column too. What does
-the code below do?</p>
-<div class="codewrapper sourceCode" id="cb35">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a><span class="co"># what does this do?</span></span>
-<span id="cb35-2"><a href="#cb35-2" tabindex="-1"></a>empty_authors <span class="op">=</span> null_df[null_df[<span class="st">'author'</span>].isnull()]</span>
-<span id="cb35-3"><a href="#cb35-3" tabindex="-1"></a><span class="bu">print</span>(empty_authors)</span></code></pre>
-</div>
-<p>Let’s take a minute to look at the statement above. We are using the
-Boolean object <code>null_df['author'].isnull()</code> as an index to
-<code>null_df</code>. We are asking Python to select rows that have a
-<code>NaN</code> value of author. While we obtained the booleans using a
-method of the author column, we could have done it using
-<code>pd.isnull(null_df['author'])</code> instead if we preferred.</p>
-<div id="challenge---putting-it-all-together" class="callout challenge">
-<div class="callout-square">
-<i class="callout-icon" data-feather="zap"></i>
-</div>
-<div id="challenge---putting-it-all-together" class="callout-inner">
-<h3 class="callout-title">Challenge - Putting it all together<a class="anchor" aria-label="anchor" href="#challenge---putting-it-all-together"></a>
-</h3>
-<div class="callout-content">
-<ol style="list-style-type: decimal"><li><p>Create a new DataFrame that only contains titles with
-publication_place that are <strong>not equal</strong> to New
-York.</p></li>
-<li><p>Create a new DataFrame that contains only works that were
-published in “New York, N.Y.” and where checkouts are greater than
-0.</p></li>
-</ol></div>
-</div>
-</div>
 <div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3">Show me the solution</h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
-<ol style="list-style-type: decimal"><li>
-</li></ol><div class="codewrapper sourceCode" id="cb36">
+<ol style="list-style-type: decimal"><li><div class="codewrapper sourceCode" id="cb27">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a>works_df[works_df[<span class="st">'publication_place'</span>]<span class="op">!=</span><span class="st">'New York'</span>]</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a>works_df[(works_df.publication_date <span class="op">&lt;</span> <span class="dv">2010</span>) <span class="op">&amp;</span> (works_df.checkouts <span class="op">&lt;</span> <span class="dv">5</span>)]</span></code></pre>
+</div></li>
+<li><div class="codewrapper sourceCode" id="cb28">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a>works_df[works_df[<span class="st">'publication_date'</span>].isin([<span class="dv">2010</span>,<span class="dv">2015</span>])]</span></code></pre>
+</div></li>
+<li>
+</li>
+</ol><div class="codewrapper sourceCode" id="cb29">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a>works_df[works_df[<span class="st">'checkouts'</span>]<span class="op">&gt;=</span><span class="dv">1</span>]</span></code></pre>
 </div>
-<ol start="2" style="list-style-type: decimal"><li>
-</li></ol><div class="codewrapper sourceCode" id="cb37">
+<ol start="4" style="list-style-type: decimal"><li>
+</li></ol><div class="codewrapper sourceCode" id="cb30">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" tabindex="-1"></a>new_york_df <span class="op">=</span> works_df[(works_df[<span class="st">'publication_place'</span>]<span class="op">==</span><span class="st">'New York, N.Y.'</span>) <span class="op">&amp;</span> (works_df.checkouts <span class="op">&gt;</span> <span class="dv">0</span>)]</span>
-<span id="cb37-2"><a href="#cb37-2" tabindex="-1"></a>new_york_df</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a>works_df[<span class="op">~</span>works_df[<span class="st">'publication_date'</span>].isin([<span class="dv">2010</span>,<span class="dv">2015</span>])]</span></code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -998,9 +900,9 @@ published in “New York, N.Y.” and where checkouts are greater than
   "creativeWorkStatus": "active",
   "url": "https://carpentries-incubator.github.io/python-humanities-lesson/index-slice-subset.html",
   "identifier": "https://carpentries-incubator.github.io/python-humanities-lesson/index-slice-subset.html",
-  "dateCreated": "2024-05-14",
-  "dateModified": "2024-05-13",
-  "datePublished": "2024-05-14"
+  "dateCreated": "2024-05-16",
+  "dateModified": "2024-05-16",
+  "datePublished": "2024-05-16"
 }
 
   </script><script>
