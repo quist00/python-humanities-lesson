@@ -35,8 +35,7 @@ year, for example). Loops lighten our work load by performing repeated tasks
 without our direct involvement and make it less likely that we'll introduce
 errors by making mistakes while processing each file by hand.
 
-Let's write a simple for loop that simulates what a kid might see during a
-visit to the zoo:
+Let's write a simple for loop:
 
 ```python
 >>> animals = ['lion', 'tiger', 'bear']
@@ -56,8 +55,18 @@ body of the loop must be indented.
 In this example, `creature` is the loop variable that takes the value of the next
 entry in `animals` every time the loop goes around. We can call the loop variable
 anything we like. After the loop finishes, the loop variable will still exist
-and will have the value of the last entry in the collection:
+and will have the value of the last entry in the collection.
 
+It is often handy to have the index for each item in the collection as well. We can get
+a tuple with both by using `enumerate`
+
+```python
+>>> for creature in enumerate(animals):
+...    print(creature[0],creature[1])
+0 lion
+1 tiger
+2 bear
+```
 
 ## Automating data processing using For Loops
 
