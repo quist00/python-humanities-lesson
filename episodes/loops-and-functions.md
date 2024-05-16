@@ -39,17 +39,15 @@ Let's write a simple for loop that simulates what a kid might see during a
 visit to the zoo:
 
 ```python
->>> animals = ['lion', 'tiger', 'crocodile', 'vulture', 'hippo']
+>>> animals = ['lion', 'tiger', 'bear']
 >>> print(animals)
-['lion', 'tiger', 'crocodile', 'vulture', 'hippo']
+['lion', 'tiger', 'bear']
 
 >>> for creature in animals:
 ...    print(creature)
 lion
 tiger
-crocodile
-vulture
-hippo
+bear
 ```
 
 The line defining the loop must start with `for` and end with a colon, and the
@@ -510,7 +508,7 @@ def yearly_data_csv_writer(all_data, start_year=1948, end_year=2024):
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## If Loops
+## If in Loops
 
 The body of our function used a conditional *if* loop to
 check that values of `year` are in the dataframe. *If* loops execute the body of

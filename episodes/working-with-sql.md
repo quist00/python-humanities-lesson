@@ -91,14 +91,6 @@ print(df.head())
 
 con.close()
 ```
-
-## Storing data: CSV vs SQLite
-
-Storing your data in an SQLite database can provide substantial performance
-improvements when reading/writing compared to CSV. The difference in performance
-becomes more noticable as the size of the dataset grows (see for example [these
-benchmarks][these benchmarks]).
-
 :::::::::::::::::::::::::::::::::::::::  challenge
 
 ## Challenge - SQL
@@ -107,6 +99,13 @@ benchmarks][these benchmarks]).
   includes book's Title, Author, and mms_id. How many records are returned?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
+## Storing data: CSV vs SQLite
+
+Storing your data in an SQLite database can provide substantial performance
+improvements when reading/writing compared to CSV. The difference in performance
+becomes more noticable as the size of the dataset grows (see for example [these
+benchmarks][these benchmarks]).
 
 ## Storing data: Create new tables using Pandas
 
