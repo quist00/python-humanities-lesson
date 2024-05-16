@@ -212,7 +212,7 @@
 <li><a href="#automating-data-processing-using-for-loops">Automating data processing using For Loops</a></li>
 <li><a href="#writing-unique-filenames">Writing Unique Filenames</a></li>
 <li><a href="#building-reusable-and-modular-code-with-functions">Building reusable and modular code with functions</a></li>
-<li><a href="#if-loops">If Loops</a></li>
+<li><a href="#if-in-loops">If in Loops</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
         
@@ -304,7 +304,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Data workflows and automation</h1>
-        <p>Last updated on 2024-05-14 |
+        <p>Last updated on 2024-05-16 |
         
         <a href="https://github.com/carpentries-incubator/python-humanities-lesson/edit/main/episodes/loops-and-functions.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -363,17 +363,15 @@ during a visit to the zoo:</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> animals <span class="op">=</span> [<span class="st">'lion'</span>, <span class="st">'tiger'</span>, <span class="st">'crocodile'</span>, <span class="st">'vulture'</span>, <span class="st">'hippo'</span>]</span>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> animals <span class="op">=</span> [<span class="st">'lion'</span>, <span class="st">'tiger'</span>, <span class="st">'bear'</span>]</span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">print</span>(animals)</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>[<span class="st">'lion'</span>, <span class="st">'tiger'</span>, <span class="st">'crocodile'</span>, <span class="st">'vulture'</span>, <span class="st">'hippo'</span>]</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>[<span class="st">'lion'</span>, <span class="st">'tiger'</span>, <span class="st">'bear'</span>]</span>
 <span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a></span>
 <span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="cf">for</span> creature <span class="kw">in</span> animals:</span>
 <span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>...    <span class="bu">print</span>(creature)</span>
 <span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>lion</span>
 <span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>tiger</span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>crocodile</span>
-<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>vulture</span>
-<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>hippo</span></code></pre>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>bear</span></code></pre>
 </div>
 <p>The line defining the loop must start with <code>for</code> and end
 with a colon, and the body of the loop must be indented.</p>
@@ -874,7 +872,7 @@ values in the function definition!)</li>
 </ol></div>
 </div>
 </div>
-</section><section id="if-loops"><h2 class="section-heading">If Loops<a class="anchor" aria-label="anchor" href="#if-loops"></a>
+</section><section id="if-in-loops"><h2 class="section-heading">If in Loops<a class="anchor" aria-label="anchor" href="#if-in-loops"></a>
 </h2>
 <hr class="half-width"><p>The body of our function used a conditional <em>if</em> loop to check
 that values of <code>year</code> are in the dataframe. <em>If</em> loops
@@ -1027,7 +1025,7 @@ CSV files, to check for a directory to write to.</li>
   "url": "https://carpentries-incubator.github.io/python-humanities-lesson/instructor/loops-and-functions.html",
   "identifier": "https://carpentries-incubator.github.io/python-humanities-lesson/instructor/loops-and-functions.html",
   "dateCreated": "2024-05-16",
-  "dateModified": "2024-05-14",
+  "dateModified": "2024-05-16",
   "datePublished": "2024-05-16"
 }
 

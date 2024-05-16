@@ -218,10 +218,7 @@
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
         <ul><li><a href="#plotting-with-matplotlib">Plotting with Matplotlib</a></li>
-<li><a href="#plotting-with-bokeh">Plotting with bokeh</a></li>
-<li><a href="#building-your-plots">Building your plots</a></li>
-<li><a href="#plotting-time-series-data">Plotting time series data</a></li>
-<li><a href="#customization">Customization</a></li>
+<li><a href="#plotting-with-other-libraries.">Plotting with other libraries.</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
         
@@ -304,7 +301,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Plotting</h1>
-        <p>Last updated on 2024-05-14 |
+        <p>Last updated on 2024-05-16 |
         
         <a href="https://github.com/carpentries-incubator/python-humanities-lesson/edit/main/episodes/visualization-ggplot-python.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -335,15 +332,8 @@
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
 <ul><li>Create plot objects</li>
-<li>Set universal plot settings</li>
-<li>Modify an existing plot object</li>
 <li>Change the aesthetics of a plot such as colour</li>
 <li>Edit the axis labels</li>
-<li>Build complex plots using a step-by-step approach</li>
-<li>Create scatter plots, box plots, and time series plots</li>
-<li>Use the <code>facet_wrap</code> and <code>facet_grid</code> commands
-to create a collection of plots splitting the data by a factor
-variable</li>
 <li>Create customized plot styles to meet their needs</li>
 </ul></div>
 </div>
@@ -352,24 +342,17 @@ variable</li>
 </div>
 <div class="section level5">
 <h5 id="disclaimer">Disclaimer<a class="anchor" aria-label="anchor" href="#disclaimer"></a></h5>
-<p>Pandas has powerful built-in plotting capabilities based off of
-<code>matplotlib</code>, but more flexibility is available to us if
-access <code>matplotlib</code> directly. We will explore that here
-first, but there are other libraries like <code>seaborn</code> and
-<code>bokeh</code> that can simplify the steps required and /or add
-additional functionality. We will make some plots with the <a href="https://docs.bokeh.org/en/latest/" class="external-link"><code>bokeh</code></a> package
-to exemplify the differences. The most important take away, though, is
-that you have plotting options and that you should not let some
-differences in syntax dissuade you from finding the right fit for your
-needs.</p>
 </div>
 <section id="plotting-with-matplotlib"><h2 class="section-heading">Plotting with Matplotlib<a class="anchor" aria-label="anchor" href="#plotting-with-matplotlib"></a>
 </h2>
 <hr class="half-width"><p>Matplotlib is a Python library that can be used to visualize data.
-The toolbox <code>matplotlib.pyplot</code> is a collection of functions
-that make matplotlib work like MATLAB. In most cases, this is all that
-you will need to use, but there are many other useful tools in
-matplotlib that you should explore.</p>
+Pandas has powerful built-in plotting capabilities based off of
+<code>matplotlib</code>, but more flexibility is available to us if
+access <code>matplotlib</code> directly. The toolbox
+<code>matplotlib.pyplot</code> is a collection of functions that make
+matplotlib work like MATLAB. In most cases, this is all that you will
+need to use, but there are many other useful tools in matplotlib that
+you should explore.</p>
 <p>We will cover a few basic commands for formatting plots in this
 lesson. A great resource for help styling your figures is the matplotlib
 gallery (<a href="https://matplotlib.org/gallery.html" class="external-link">http://matplotlib.org/gallery.html</a>),
@@ -392,7 +375,7 @@ DataFrames - we are just using a list as an example!):</p>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>    list_numbers <span class="op">=</span> [<span class="fl">1.5</span>, <span class="dv">4</span>, <span class="fl">2.2</span>, <span class="fl">5.7</span>]</span>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>    list_numbers <span class="op">=</span> [<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>]</span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>    plt.plot(list_numbers)</span>
 <span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>    plt.show()</span></code></pre>
 </div>
@@ -409,7 +392,7 @@ will follow the list in order:</p>
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>    plt.plot(list_numbers,[<span class="fl">6.8</span>, <span class="fl">4.3</span>, <span class="fl">3.2</span>, <span class="fl">8.1</span>])</span>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>    plt.plot(list_numbers,[<span class="dv">200</span>, <span class="dv">400</span>, <span class="dv">800</span>, <span class="dv">1600</span>])</span>
 <span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>    plt.show()</span></code></pre>
 </div>
 <p>A third, optional argument in <code>plot()</code> is a string of
@@ -421,7 +404,7 @@ through the matplotlib gallery for more examples.</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>    plt.plot(list_numbers,[<span class="fl">6.8</span>, <span class="fl">4.3</span>, <span class="fl">3.2</span>, <span class="fl">8.1</span>], <span class="st">'ro-.'</span>)</span>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>    plt.plot(list_numbers,[<span class="dv">200</span>, <span class="dv">400</span>, <span class="dv">800</span>, <span class="dv">1600</span>], <span class="st">'ro-.'</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>    plt.axis([<span class="dv">0</span>,<span class="dv">6</span>,<span class="dv">0</span>,<span class="dv">10</span>])</span>
 <span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>    plt.show()</span></code></pre>
 </div>
@@ -430,100 +413,82 @@ a list of <code>[xmin, xmax, ymin, ymax]</code> values (the square
 brackets are needed because the argument for the function
 <code>axis()</code> is one list of values, not four separate
 numbers!).</p>
-<p>A single figure can include multiple lines, and they can be plotted
-using the same <code>plt.plot()</code> command by adding more pairs of x
-values and y values (and optionally line styles) The functions
-<code>xlabel()</code> and <code>ylabel()</code> will label the axes, and
-<code>title()</code> will write a title above the figure:</p>
+<p>A single figure can include multiple lines. We can include a legend
+by adding the optional keyword argument <code>label=''</code> in
+<code>plot()</code> and then call <code>plt.legend()</code>. The
+functions <code>xlabel()</code> and <code>ylabel()</code> will label the
+axes, and <code>title()</code> will write a title above the figure:</p>
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>    <span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>    <span class="co"># create a numpy array between 0 and 10, with values evenly spaced every 0.5</span></span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>    t <span class="op">=</span> np.arange(<span class="fl">0.</span>, <span class="fl">10.</span>, <span class="fl">0.5</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>    <span class="co"># red dashes with no symbols, blue squares with a solid line, and green triangles with a dotted line</span></span>
-<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>    plt.plot(t, t, <span class="st">'r--'</span>, t, t<span class="op">**</span><span class="dv">2</span>, <span class="st">'bs-'</span>, t, t<span class="op">**</span><span class="dv">3</span>, <span class="st">'g^:'</span>)</span>
-<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>    plt.xlabel(<span class="st">'This is the x axis'</span>)</span>
-<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>    plt.ylabel(<span class="st">'This is the y axis'</span>)</span>
-<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>    plt.title(<span class="st">'This is the figure title'</span>)</span>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># convert acquistion to datetime data type</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>works_df.acquisition_date <span class="op">=</span> pd.to_datetime(works_df[<span class="st">'acquisition_date'</span>])</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co"># subset on flag</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>dei <span class="op">=</span> works_df[works_df[<span class="st">'is_dei'</span>] <span class="op">==</span> <span class="va">True</span>]</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>non_dei <span class="op">=</span> works_df[works_df[<span class="st">'is_dei'</span>] <span class="op">==</span> <span class="va">False</span>]</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="co"># Group by acquisition year (or another suitable period)</span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>acquisition_dei <span class="op">=</span> dei.resample(<span class="st">'Y'</span>, on<span class="op">=</span><span class="st">'acquisition_date'</span>).size()</span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>acquisition_non_dei <span class="op">=</span> non_dei.resample(<span class="st">'Y'</span>, on<span class="op">=</span><span class="st">'acquisition_date'</span>).size()</span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>works <span class="op">=</span> works_df.resample(<span class="st">'Y'</span>, on<span class="op">=</span><span class="st">'acquisition_date'</span>).size()</span>
 <span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a></span>
-<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>    plt.show()</span></code></pre>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a><span class="co"># Plotting</span></span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>plt.plot(acquisition_dei.index, acquisition_dei.values,<span class="st">"r--"</span>,label<span class="op">=</span><span class="st">"DEI"</span>)</span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>plt.plot(acquisition_non_dei.index, acquisition_non_dei.values,<span class="st">"g^"</span>,label<span class="op">=</span><span class="st">"non-DEI"</span>)</span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a>plt.plot(works.index, works.values,<span class="st">"bo-"</span>,label<span class="op">=</span><span class="st">"Combined"</span>,alpha<span class="op">=</span><span class="fl">.25</span>)</span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a>plt.title(<span class="st">'Number of Acquisitions Over Time'</span>)</span>
+<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a>plt.xlabel(<span class="st">'Year'</span>)</span>
+<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a>plt.ylabel(<span class="st">'Number of Acquisitions'</span>)</span>
+<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a>plt.legend()</span>
+<span id="cb5-22"><a href="#cb5-22" tabindex="-1"></a>plt.show()</span></code></pre>
 </div>
-<p>We can include a legend by adding the optional keyword argument
-<code>label=''</code> in <code>plot()</code>. Caution: We cannot add
-labels to multiple lines that are plotted simultaneously by the
-<code>plt.plot()</code> command like we did above because Python won’t
-know to which line to assign the value of the argument label. Multiple
-lines can also be plotted in the same figure by calling the
-<code>plot()</code> function several times:</p>
-<div class="codewrapper sourceCode" id="cb6">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>    <span class="co"># red dashes with no symbols, blue squares with a solid line, and green triangles with a dotted line</span></span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>    plt.plot(t, t, <span class="st">'r--'</span>, label<span class="op">=</span><span class="st">'linear'</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>    plt.plot(t, t<span class="op">**</span><span class="dv">2</span>, <span class="st">'bs-'</span>, label<span class="op">=</span><span class="st">'square'</span>)</span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>    plt.plot(t, t<span class="op">**</span><span class="dv">3</span>, <span class="st">'g^:'</span>, label<span class="op">=</span><span class="st">'cubic'</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>    plt.legend(loc<span class="op">=</span><span class="st">'upper left'</span>, shadow<span class="op">=</span><span class="va">True</span>, fontsize<span class="op">=</span><span class="st">'x-large'</span>)</span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>    plt.xlabel(<span class="st">'This is the x axis'</span>)</span>
-<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>    plt.ylabel(<span class="st">'This is the y axis'</span>)</span>
-<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>    plt.title(<span class="st">'This is the figure title'</span>)</span>
-<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>    plt.show()</span></code></pre>
-</div>
-<p>The function <code>legend()</code> adds a legend to the figure, and
-the optional keyword arguments change its style. By default [typing just
-<code>plt.legend()</code>], the legend is on the upper right corner and
-has no shadow.</p>
 <p>Like MATLAB, pyplot is stateful; it keeps track of the current figure
 and plotting area, and any plotting functions are directed to those
 axes. To make more than one figure, we use the command
 <code>plt.figure()</code> with an increasing figure number inside the
 parentheses:</p>
-<div class="codewrapper sourceCode" id="cb7">
+<div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>    <span class="co"># this is the first figure</span></span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>    plt.figure(<span class="dv">1</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>    plt.plot(t, t, <span class="st">'r--'</span>, label<span class="op">=</span><span class="st">'linear'</span>)</span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>    plt.legend(loc<span class="op">=</span><span class="st">'upper left'</span>, shadow<span class="op">=</span><span class="va">True</span>, fontsize<span class="op">=</span><span class="st">'x-large'</span>)</span>
-<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>    plt.title(<span class="st">'This is figure 1'</span>)</span>
-<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>    plt.show()</span>
-<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a></span>
-<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>    <span class="co"># this is a second figure</span></span>
-<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>    plt.figure(<span class="dv">2</span>)</span>
-<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>    plt.plot(t, t<span class="op">**</span><span class="dv">2</span>, <span class="st">'bs-'</span>, label<span class="op">=</span><span class="st">'square'</span>)</span>
-<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a></span>
-<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a>    plt.legend(loc<span class="op">=</span><span class="st">'upper left'</span>, shadow<span class="op">=</span><span class="va">True</span>, fontsize<span class="op">=</span><span class="st">'x-large'</span>)</span>
-<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a>    plt.title(<span class="st">'This is figure 2'</span>)</span>
-<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a></span>
-<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a>    plt.show()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>    <span class="co"># this is the first figure</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>    plt.figure(<span class="dv">1</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>    plt.plot(acquisition_dei.index, acquisition_dei.values,<span class="st">"r--"</span>,label<span class="op">=</span><span class="st">"DEI"</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>    plt.legend(loc<span class="op">=</span><span class="st">'upper left'</span>, shadow<span class="op">=</span><span class="va">True</span>, fontsize<span class="op">=</span><span class="st">'x-large'</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>    plt.title(<span class="st">'This is figure 1'</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>    plt.show()</span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>    <span class="co"># this is a second figure</span></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>    plt.figure(<span class="dv">2</span>)</span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>    plt.plot(acquisition_non_dei.index, acquisition_non_dei.values,<span class="st">"g^"</span>,label<span class="op">=</span><span class="st">"non-DEI"</span>)</span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a>    plt.legend(loc<span class="op">=</span><span class="st">'lower right'</span>, shadow<span class="op">=</span><span class="va">True</span>, fontsize<span class="op">=</span><span class="st">'x-large'</span>)</span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a>    plt.title(<span class="st">'This is figure 2'</span>)</span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a>    plt.show()</span></code></pre>
 </div>
 <p>A single figure can also include multiple plots in a grid pattern.
 The <code>subplot()</code> command specifies the number of rows, the
 number of columns, and the number of the space in the grid that
 particular plot is occupying:</p>
-<div class="codewrapper sourceCode" id="cb8">
+<div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>    plt.figure(<span class="dv">1</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>    plt.subplot(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">1</span>) <span class="co"># two row, two columns, position 1</span></span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>    plt.plot(t, t, <span class="st">'r--'</span>, label<span class="op">=</span><span class="st">'linear'</span>)</span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>    plt.subplot(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>) <span class="co"># two row, two columns, position 2</span></span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>    plt.plot(t, t<span class="op">**</span><span class="dv">2</span>, <span class="st">'bs-'</span>, label<span class="op">=</span><span class="st">'square'</span>)</span>
-<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a></span>
-<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>    plt.subplot(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>) <span class="co"># two row, two columns, position 3</span></span>
-<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>    plt.plot(t, t<span class="op">**</span><span class="dv">3</span>, <span class="st">'g^:'</span>, label<span class="op">=</span><span class="st">'cubic'</span>)</span>
-<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a></span>
-<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>    plt.show()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>    plt.figure(<span class="dv">1</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>    plt.subplot(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">1</span>) <span class="co"># two row, two columns, position 1</span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>    plt.plot(works.index, works.values,<span class="st">"bo-"</span>,label<span class="op">=</span><span class="st">"Combined"</span>,alpha<span class="op">=</span><span class="fl">.25</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>    plt.subplot(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>) <span class="co"># two row, two columns, position 2</span></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>    plt.plot(acquisition_dei.index, acquisition_dei.values,<span class="st">"r--"</span>,label<span class="op">=</span><span class="st">"DEI"</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>    plt.subplot(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>) <span class="co"># two row, two columns, position 3</span></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>    plt.plot(acquisition_non_dei.index, acquisition_non_dei.values,<span class="st">"g^"</span>,label<span class="op">=</span><span class="st">"non-DEI"</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>    plt.show()</span></code></pre>
 </div>
 <div id="make-other-types-of-plots" class="callout challenge">
 <div class="callout-square">
@@ -548,134 +513,32 @@ paste into a new cell in ipython notebook or save as a text file with a
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb9">
+<div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>plt.hist(works_df[<span class="st">'checkouts'</span>], bins<span class="op">=</span><span class="bu">len</span>(works_df[<span class="st">'checkouts'</span>].unique()), log<span class="op">=</span><span class="va">True</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>plt.title(<span class="st">'Histogram of Checkouts (Logarithmic Y-axis)'</span>)</span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>plt.xlabel(<span class="st">'Checkouts'</span>)</span>
-<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>plt.ylabel(<span class="st">'Frequency (log scale)'</span>)</span>
-<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>plt.show()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>plt.hist(works_df[<span class="st">'checkouts'</span>], bins<span class="op">=</span><span class="bu">len</span>(works_df[<span class="st">'checkouts'</span>].unique()), log<span class="op">=</span><span class="va">True</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>plt.title(<span class="st">'Histogram of Checkouts (Logarithmic Y-axis)'</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>plt.xlabel(<span class="st">'Checkouts'</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>plt.ylabel(<span class="st">'Frequency (log scale)'</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>plt.show()</span></code></pre>
 </div>
 </div>
 </div>
 </div>
 </div>
 </div>
-</section><section id="plotting-with-bokeh"><h2 class="section-heading">Plotting with bokeh<a class="anchor" aria-label="anchor" href="#plotting-with-bokeh"></a>
+</section><section id="plotting-with-other-libraries."><h2 class="section-heading">Plotting with other libraries.<a class="anchor" aria-label="anchor" href="#plotting-with-other-libraries."></a>
 </h2>
-<hr class="half-width"><p>We will make the same plot using the <code>bokeh</code> package.</p>
-<p><code>bokeh</code> is a plotting package that makes it simple to
-create complex plots from data in a dataframe. It uses default settings,
-which help creating publication quality plots with a minimal amount of
-settings and tweaking.</p>
-<p>bokeh graphics are built step by step by adding new elements.</p>
-<p>To build a bokeh plot we need to:</p>
-<ul><li><p>bind the plot to a specific data frame using the
-<code>data</code> argument</p></li>
-<li><p>define figure (<code>figure</code>), by selecting the variables
-to be plotted and the variables to define the presentation such as
-plotting size, title etc.,</p></li>
-</ul><p>We also set some notebook settings with a “output_notebook()”
-statement to get interactive and exportable plots</p>
-<div class="codewrapper sourceCode" id="cb10">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="im">from</span> bokeh.plotting <span class="im">import</span> figure, output_file, show</span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="im">from</span> bokeh.io <span class="im">import</span> output_notebook</span></code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb11">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>works_plot_df <span class="op">=</span> pd.read_csv( <span class="st">'all_works.csv'</span>, index_col<span class="op">=</span><span class="st">'mms_id'</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>output_notebook()</span>
-<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>p <span class="op">=</span> figure(width<span class="op">=</span><span class="dv">400</span>, height<span class="op">=</span><span class="dv">400</span>)</span></code></pre>
-</div>
-<figure><img src="../fig/figure01.png" alt="png" class="figure mx-auto d-block"></figure><p>We can add simple points to create a scatter plot using circle.</p>
-<div class="codewrapper sourceCode" id="cb12">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>list_dates <span class="op">=</span> works_plot_df[<span class="st">'publication_date'</span>]</span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>list_numbers <span class="op">=</span> works_plot_df[<span class="st">'checkouts'</span>]</span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>p.circle(list_dates, list_numbers)</span>
-<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>show(p)</span></code></pre>
-</div>
-<figure><img src="../fig/figure02.png" alt="png" class="figure mx-auto d-block"></figure></section><section id="building-your-plots"><h2 class="section-heading">Building your plots<a class="anchor" aria-label="anchor" href="#building-your-plots"></a>
-</h2>
-<hr class="half-width"><p>We can add extra arguments into circle’s argument.</p>
-<p>For comparison, we create a new figure and then add the alpha
-argument to circle to change the opacity of the points.</p>
-<div class="codewrapper sourceCode" id="cb13">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>p1 <span class="op">=</span> figure(width<span class="op">=</span><span class="dv">400</span>, height<span class="op">=</span><span class="dv">400</span>)</span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>p1.circle(list_dates, list_numbers, alpha<span class="op">=</span><span class="fl">0.1</span>)</span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>show(p1)</span></code></pre>
-</div>
-<figure><img src="../fig/figure03.png" alt="png" class="figure mx-auto d-block"></figure><p>We can also add colors for all the points.</p>
-<div class="codewrapper sourceCode" id="cb14">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>p2 <span class="op">=</span> figure(width<span class="op">=</span><span class="dv">400</span>, height<span class="op">=</span><span class="dv">400</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>p2.circle(list_dates, list_numbers, color<span class="op">=</span><span class="st">"blue"</span>, alpha<span class="op">=</span><span class="fl">0.1</span>)</span>
-<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>show(p2)</span></code></pre>
-</div>
-<figure><img src="../fig/figure04.png" alt="png" class="figure mx-auto d-block"></figure></section><section id="plotting-time-series-data"><h2 class="section-heading">Plotting time series data<a class="anchor" aria-label="anchor" href="#plotting-time-series-data"></a>
-</h2>
-<hr class="half-width"><p>Let’s plot the number of items per each publication year since 2008.
-To do that we need to group data first and count records within each
-group.</p>
-<div class="codewrapper sourceCode" id="cb15">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>yearly <span class="op">=</span> works_plot_df[works_plot_df[<span class="st">'publication_date'</span>] <span class="op">&gt;=</span> <span class="dv">2008</span>][[<span class="st">'publication_date'</span>,<span class="st">'publication_place'</span>,<span class="st">'checkouts'</span>]].groupby([<span class="st">'publication_date'</span>,<span class="st">'publication_place'</span>]).count().reset_index()</span>
-<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>p3 <span class="op">=</span> figure(width<span class="op">=</span><span class="dv">800</span>, height<span class="op">=</span><span class="dv">250</span>)</span>
-<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a>p3.line(yearly[<span class="st">'publication_date'</span>], yearly[<span class="st">'checkouts'</span>], color<span class="op">=</span><span class="st">'navy'</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
-<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a></span>
-<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>show(p3)</span></code></pre>
-</div>
-</section><section id="customization"><h2 class="section-heading">Customization<a class="anchor" aria-label="anchor" href="#customization"></a>
-</h2>
-<hr class="half-width"><p>Now, let’s look at how to add a titles to a figure:</p>
-<div class="codewrapper sourceCode" id="cb16">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="im">from</span> bokeh.models <span class="im">import</span> ColumnDataSource, Range1d, LabelSet, Label</span>
-<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>p4 <span class="op">=</span> figure(title<span class="op">=</span><span class="st">"Publications by Year"</span>, width<span class="op">=</span><span class="dv">400</span>, height<span class="op">=</span><span class="dv">400</span>)</span>
-<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a></span>
-<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a>p4.circle(list_dates, list_numbers)</span>
-<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a></span>
-<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a>p4.xaxis[<span class="dv">0</span>].axis_label <span class="op">=</span> <span class="st">'Year'</span></span>
-<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a>p4.yaxis[<span class="dv">0</span>].axis_label <span class="op">=</span> <span class="st">'Publications Count'</span></span>
-<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a>p4.xaxis[<span class="dv">0</span>].axis_label_text_font_size <span class="op">=</span> <span class="st">"20pt"</span></span>
-<span id="cb16-10"><a href="#cb16-10" tabindex="-1"></a>p4.yaxis[<span class="dv">0</span>].axis_label_text_font_size <span class="op">=</span> <span class="st">"20pt"</span></span>
-<span id="cb16-11"><a href="#cb16-11" tabindex="-1"></a>show(p4)</span></code></pre>
-</div>
-<figure><img src="../fig/figure06.png" alt="png" class="figure mx-auto d-block"></figure><p>With all of this information in hand, please take another five
-minutes to either improve one of the plots generated in this exercise or
-create a beautiful graph of your own.</p>
-<p>Here are some ideas:</p>
-<ul><li>Can you find a way to change its labels?</li>
-<li>Use a different color palette.</li>
-</ul><p>After creating your plot, you can save it to a file as a png
-file:</p>
-<div class="codewrapper sourceCode" id="cb17">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="im">from</span> bokeh.io <span class="im">import</span> export_png</span>
-<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a>export_png(p4, filename<span class="op">=</span><span class="st">"plot.png"</span>)</span></code></pre>
-</div>
+<hr class="half-width"><p><code>matplotlib</code> is not your only option. There are many other
+libraries that can simplify the steps required or add additional
+functionality with <code>seaborn</code> and <code>bokeh</code> being
+just two examples. There is no way to cover them all here, but be aware
+that you have options and that you should not let differences in syntax
+dissuade you from exploring to finding the right fit for your needs.</p>
 </section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="../instructor/loops-and-functions.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
@@ -734,7 +597,7 @@ file:</p>
   "url": "https://carpentries-incubator.github.io/python-humanities-lesson/instructor/visualization-ggplot-python.html",
   "identifier": "https://carpentries-incubator.github.io/python-humanities-lesson/instructor/visualization-ggplot-python.html",
   "dateCreated": "2024-05-16",
-  "dateModified": "2024-05-14",
+  "dateModified": "2024-05-16",
   "datePublished": "2024-05-16"
 }
 
