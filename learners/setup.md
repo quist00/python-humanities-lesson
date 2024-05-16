@@ -69,7 +69,7 @@ From the terminal, type:
 
 ```
 conda install -y numpy pandas matplotlib
-conda install -y -c conda-forge bokeh juptyerlab
+conda install -y -c conda-forge juptyerlab
 ```
 
 ## Launch a JupyterLab
