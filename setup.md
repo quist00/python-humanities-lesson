@@ -48,7 +48,6 @@ Skip this step if you used the Anaconda installer recommended above. Miniconda i
 - [Jupyter Lab](https://jupyter.org/)
 - [Numpy](https://www.numpy.org/)
 - [Matplotlib](https://matplotlib.org/)
-- [Bokeh](https://bokeh.org/)
 
 #### Download and install Miniconda
 
