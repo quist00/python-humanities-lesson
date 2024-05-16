@@ -68,7 +68,7 @@ df.rename(columns={"A": "Column1", "B": "Column2"}, inplace=True)
 
 ## Challenge - Lots of plots
 
-Make a variety of line plots from your data. Add axis labels, titles, and legends to your figures. Make at least one figure with multiple plots using the function `subplot()`.
+Make a variety of plots from your data. Add axis labels, titles, and legends to your figures. Make at least one figure with multiple plots using the function `subplot()`.
 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
