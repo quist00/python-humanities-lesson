@@ -358,8 +358,7 @@ with one file per year, for example). Loops lighten our work load by
 performing repeated tasks without our direct involvement and make it
 less likely that we’ll introduce errors by making mistakes while
 processing each file by hand.</p>
-<p>Let’s write a simple for loop that simulates what a kid might see
-during a visit to the zoo:</p>
+<p>Let’s write a simple for loop:</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -379,7 +378,19 @@ with a colon, and the body of the loop must be indented.</p>
 takes the value of the next entry in <code>animals</code> every time the
 loop goes around. We can call the loop variable anything we like. After
 the loop finishes, the loop variable will still exist and will have the
-value of the last entry in the collection:</p>
+value of the last entry in the collection.</p>
+<p>It is often handy to have the index for each item in the collection
+as well. We can get a tuple with both by using
+<code>enumerate</code></p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="cf">for</span> creature <span class="kw">in</span> <span class="bu">enumerate</span>(animals):</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>...    <span class="bu">print</span>(creature[<span class="dv">0</span>],creature[<span class="dv">1</span>])</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="dv">0</span> lion</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="dv">1</span> tiger</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="dv">2</span> bear</span></code></pre>
+</div>
 </section><section id="automating-data-processing-using-for-loops"><h2 class="section-heading">Automating data processing using For Loops<a class="anchor" aria-label="anchor" href="#automating-data-processing-using-for-loops"></a>
 </h2>
 <hr class="half-width"><p>Suppose that we were working with a much larger set of books. It
@@ -388,28 +399,28 @@ publication.</p>
 <p>Let’s start by making a new directory inside our current working
 folder. Python has a built-in library called <code>os</code> for this
 sort of operating-system dependent behaviour.</p>
-<div class="codewrapper sourceCode" id="cb2">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>os.mkdir(<span class="st">'yearly_files'</span>)</span></code></pre>
-</div>
-<p>We can check that the folder was created by listing the contents of
-the current directory:</p>
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>os.listdir()</span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>[<span class="st">'gender.csv'</span>,</span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a> <span class="st">'.DS_Store'</span>,</span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a> <span class="st">'ethnicity.csv'</span>,</span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a> <span class="st">'Untitled.ipynb'</span>,</span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a> <span class="st">'yearly_files'</span>,</span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a> <span class="st">'out.csv'</span>,</span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a> <span class="st">'all_works.csv'</span>,</span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a> <span class="st">'.virtual_documents'</span>,</span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a> <span class="st">'.ipynb_checkpoints'</span>]</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>os.mkdir(<span class="st">'yearly_files'</span>)</span></code></pre>
+</div>
+<p>We can check that the folder was created by listing the contents of
+the current directory:</p>
+<div class="codewrapper sourceCode" id="cb4">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>os.listdir()</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>[<span class="st">'gender.csv'</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a> <span class="st">'.DS_Store'</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a> <span class="st">'ethnicity.csv'</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a> <span class="st">'Untitled.ipynb'</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a> <span class="st">'yearly_files'</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a> <span class="st">'out.csv'</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a> <span class="st">'all_works.csv'</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a> <span class="st">'.virtual_documents'</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a> <span class="st">'.ipynb_checkpoints'</span>]</span></code></pre>
 </div>
 <p>In previous lessons, we saw how to use the library pandas to load
 data into memory as a DataFrame, how to select a subset of the data
@@ -417,22 +428,22 @@ using some criteria, and how to write the DataFrame into a csv file.
 Let’s write a script that performs those three steps in sequence to
 write out records for the year <em>1948</em> from <em>all_works.csv</em>
 as a seperate csv in the <code>yearly_files</code> directory</p>
-<div class="codewrapper sourceCode" id="cb4">
+<div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co"># Load the data into a DataFrame</span></span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>all_works_df <span class="op">=</span> pd.read_csv(<span class="st">'all_works.csv'</span>)</span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co"># Select only data for 1948</span></span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>df_1948 <span class="op">=</span> all_works_df[all_works_df.publication_date <span class="op">==</span> <span class="dv">1948</span>]</span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co"># Write the new DataFrame to a csv file</span></span>
-<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>df_1948.to_csv(<span class="st">'yearly_files/1948Publications.csv'</span>)</span>
-<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="co"># Then check that that file now exists:</span></span>
-<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a>os.listdir(<span class="st">"yearly_files"</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co"># Load the data into a DataFrame</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>all_works_df <span class="op">=</span> pd.read_csv(<span class="st">'all_works.csv'</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co"># Select only data for 1948</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>df_1948 <span class="op">=</span> all_works_df[all_works_df.publication_date <span class="op">==</span> <span class="dv">1948</span>]</span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="co"># Write the new DataFrame to a csv file</span></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>df_1948.to_csv(<span class="st">'yearly_files/1948Publications.csv'</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="co"># Then check that that file now exists:</span></span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>os.listdir(<span class="st">"yearly_files"</span>)</span></code></pre>
 </div>
 <p>To create yearly data files, we could repeat the last two commands
 over and over, once for each year of data. Repeating code is neither
@@ -447,42 +458,42 @@ loop is behaving as we expect.</p>
 <p>We have seen that we can loop over a list of items, so we need a list
 of years to loop over. We can get the unique years in our DataFrame
 with:</p>
-<div class="codewrapper sourceCode" id="cb5">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>all_works_df[<span class="st">'publication_year'</span>].unique()</span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>array([<span class="dv">2009</span>, <span class="dv">2008</span>, <span class="dv">2011</span>, <span class="dv">2018</span>, <span class="dv">2021</span>, <span class="dv">2014</span>, <span class="dv">2010</span>, <span class="dv">2019</span>, <span class="dv">2020</span>, <span class="dv">2017</span>, <span class="dv">2022</span>,</span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>       <span class="dv">2013</span>, <span class="dv">2012</span>, <span class="dv">2015</span>, <span class="dv">2007</span>, <span class="dv">2016</span>, <span class="dv">2023</span>, <span class="dv">2006</span>, <span class="dv">2003</span>, <span class="dv">2001</span>, <span class="dv">2005</span>, <span class="dv">1948</span>,</span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>       <span class="dv">1994</span>, <span class="dv">1998</span>, <span class="dv">1990</span>, <span class="dv">1999</span>, <span class="dv">1992</span>, <span class="dv">1973</span>, <span class="dv">1949</span>, <span class="dv">2024</span>, <span class="dv">1981</span>])</span></code></pre>
-</div>
-<p>We can start builing our for loop as follows, and test out our naming
-convention is working before writing any actual files to disk.</p>
 <div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="cf">for</span> year <span class="kw">in</span> <span class="bu">sorted</span>(all_works_df[<span class="st">'publication_date'</span>].unique()):</span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>    filename <span class="op">=</span> <span class="st">'yearly_files/</span><span class="sc">{}</span><span class="st">Publications.csv'</span>.<span class="bu">format</span>(year)</span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>    <span class="bu">print</span>(filename)</span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>yearly_files<span class="op">/</span><span class="dv">1948</span><span class="er">Publications</span>.csv</span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>yearly_files<span class="op">/</span><span class="dv">1949</span><span class="er">Publications</span>.csv</span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>yearly_files<span class="op">/</span><span class="dv">1973</span><span class="er">Publications</span>.csv</span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>yearly_files<span class="op">/</span><span class="dv">1981</span><span class="er">Publications</span>.csv</span>
-<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>yearly_files<span class="op">/</span><span class="dv">1990</span><span class="er">Publications</span>.csv</span>
-<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>yearly_files<span class="op">/</span><span class="dv">1992</span><span class="er">Publications</span>.csv</span>
-<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>etc.</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>all_works_df[<span class="st">'publication_year'</span>].unique()</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>array([<span class="dv">2009</span>, <span class="dv">2008</span>, <span class="dv">2011</span>, <span class="dv">2018</span>, <span class="dv">2021</span>, <span class="dv">2014</span>, <span class="dv">2010</span>, <span class="dv">2019</span>, <span class="dv">2020</span>, <span class="dv">2017</span>, <span class="dv">2022</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>       <span class="dv">2013</span>, <span class="dv">2012</span>, <span class="dv">2015</span>, <span class="dv">2007</span>, <span class="dv">2016</span>, <span class="dv">2023</span>, <span class="dv">2006</span>, <span class="dv">2003</span>, <span class="dv">2001</span>, <span class="dv">2005</span>, <span class="dv">1948</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>       <span class="dv">1994</span>, <span class="dv">1998</span>, <span class="dv">1990</span>, <span class="dv">1999</span>, <span class="dv">1992</span>, <span class="dv">1973</span>, <span class="dv">1949</span>, <span class="dv">2024</span>, <span class="dv">1981</span>])</span></code></pre>
 </div>
-<p>We can now add the rest of the steps we need to create separate text
-files:</p>
+<p>We can start builing our for loop as follows, and test out our naming
+convention is working before writing any actual files to disk.</p>
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a></span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="cf">for</span> year <span class="kw">in</span> <span class="bu">sorted</span>(all_works_df[<span class="st">'publication_date'</span>].unique()):</span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>    filename <span class="op">=</span> <span class="st">'yearly_files/</span><span class="sc">{}</span><span class="st">Publications.csv'</span>.<span class="bu">format</span>(year)</span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>    <span class="co"># Select data for the year</span></span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>    publish_year <span class="op">=</span> all_works_df[all_works_df.publication_date <span class="op">==</span> year]</span>
-<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>    publish_year.to_csv(filename)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="cf">for</span> year <span class="kw">in</span> <span class="bu">sorted</span>(all_works_df[<span class="st">'publication_date'</span>].unique()):</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>    filename <span class="op">=</span> <span class="st">'yearly_files/</span><span class="sc">{}</span><span class="st">Publications.csv'</span>.<span class="bu">format</span>(year)</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>    <span class="bu">print</span>(filename)</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>yearly_files<span class="op">/</span><span class="dv">1948</span><span class="er">Publications</span>.csv</span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>yearly_files<span class="op">/</span><span class="dv">1949</span><span class="er">Publications</span>.csv</span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>yearly_files<span class="op">/</span><span class="dv">1973</span><span class="er">Publications</span>.csv</span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>yearly_files<span class="op">/</span><span class="dv">1981</span><span class="er">Publications</span>.csv</span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>yearly_files<span class="op">/</span><span class="dv">1990</span><span class="er">Publications</span>.csv</span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>yearly_files<span class="op">/</span><span class="dv">1992</span><span class="er">Publications</span>.csv</span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>etc.</span></code></pre>
+</div>
+<p>We can now add the rest of the steps we need to create separate text
+files:</p>
+<div class="codewrapper sourceCode" id="cb8">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="cf">for</span> year <span class="kw">in</span> <span class="bu">sorted</span>(all_works_df[<span class="st">'publication_date'</span>].unique()):</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>    filename <span class="op">=</span> <span class="st">'yearly_files/</span><span class="sc">{}</span><span class="st">Publications.csv'</span>.<span class="bu">format</span>(year)</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>    <span class="co"># Select data for the year</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>    publish_year <span class="op">=</span> all_works_df[all_works_df.publication_date <span class="op">==</span> year]</span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>    publish_year.to_csv(filename)</span></code></pre>
 </div>
 <p>Look inside the <code>yearly_files</code> directory and check a
 couple of the files you just created to confirm that everything worked
@@ -536,15 +547,15 @@ with os library instead.</p></li>
 <div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li>
-</li></ol><div class="codewrapper sourceCode" id="cb9">
+</li></ol><div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="im">import</span> glob</span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>files <span class="op">=</span> <span class="bu">sorted</span>(glob.glob(<span class="st">'yearly_files/*Publication*.csv'</span>))</span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="cf">for</span> f <span class="kw">in</span> files:</span>
-<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>    df <span class="op">=</span> pd.read_csv(f)</span>
-<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>    <span class="bu">print</span>(f[<span class="dv">13</span>:<span class="dv">17</span>],df.shape[<span class="dv">0</span>])</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="im">import</span> glob</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>files <span class="op">=</span> <span class="bu">sorted</span>(glob.glob(<span class="st">'yearly_files/*Publication*.csv'</span>))</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="cf">for</span> f <span class="kw">in</span> files:</span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>    df <span class="op">=</span> pd.read_csv(f)</span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>    <span class="bu">print</span>(f[<span class="dv">13</span>:<span class="dv">17</span>],df.shape[<span class="dv">0</span>])</span></code></pre>
 </div>
 </div>
 </div>
@@ -572,22 +583,22 @@ collection of functions. We will only use functions that are housed
 within the same code that uses them, but it’s also easy to write
 functions that can be used by different programs.</p>
 <p>Functions are declared following this general structure:</p>
-<div class="codewrapper sourceCode" id="cb10">
+<div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a></span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="kw">def</span> this_is_the_function_name(input_argument1, input_argument2):</span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>    <span class="co"># The body of the function is indented</span></span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>    <span class="co">"""This is the docstring of the function. Wrapped in triple-quotes,</span></span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="co">    it can span across multiple lines. This is what is shown if you ask</span></span>
-<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="co">    for help about the function like this: help(this_is_the_function_name)</span></span>
-<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>    </span>
-<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a>    <span class="co"># This function prints the two arguments to screen</span></span>
-<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'The function arguments are:'</span>, input_argument1, input_argument2, <span class="st">'(this is done inside the function!)'</span>)</span>
-<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a></span>
-<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a>    <span class="co"># And returns their product</span></span>
-<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a>    <span class="cf">return</span> input_argument1 <span class="op">*</span> input_argument2</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="kw">def</span> this_is_the_function_name(input_argument1, input_argument2):</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>    <span class="co"># The body of the function is indented</span></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>    <span class="co">"""This is the docstring of the function. Wrapped in triple-quotes,</span></span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="co">    it can span across multiple lines. This is what is shown if you ask</span></span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a><span class="co">    for help about the function like this: help(this_is_the_function_name)</span></span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a>    </span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a>    <span class="co"># This function prints the two arguments to screen</span></span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'The function arguments are:'</span>, input_argument1, input_argument2, <span class="st">'(this is done inside the function!)'</span>)</span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a>    <span class="co"># And returns their product</span></span>
+<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a>    <span class="cf">return</span> input_argument1 <span class="op">*</span> input_argument2</span></code></pre>
 </div>
 <p>The function declaration starts with the word <code>def</code>,
 followed by the function name and any arguments in parenthesis, and ends
@@ -595,14 +606,14 @@ in a colon. The body of the function is indented just like loops are. If
 the function returns something when it is called, it includes a return
 statement at the end.</p>
 <p>This is how we call the function:</p>
-<div class="codewrapper sourceCode" id="cb11">
+<div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>product_of_inputs <span class="op">=</span> this_is_the_function_name(<span class="dv">2</span>,<span class="dv">5</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>The function arguments are: <span class="dv">2</span> <span class="dv">5</span> (this <span class="kw">is</span> done inside the function<span class="op">!</span>)</span>
-<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Their product is:'</span>, product_of_inputs, <span class="st">'(this is done outside the function!)'</span>)</span>
-<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>Their product <span class="kw">is</span>: <span class="dv">10</span> (this <span class="kw">is</span> done outside the function<span class="op">!</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>product_of_inputs <span class="op">=</span> this_is_the_function_name(<span class="dv">2</span>,<span class="dv">5</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>The function arguments are: <span class="dv">2</span> <span class="dv">5</span> (this <span class="kw">is</span> done inside the function<span class="op">!</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Their product is:'</span>, product_of_inputs, <span class="st">'(this is done outside the function!)'</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>Their product <span class="kw">is</span>: <span class="dv">10</span> (this <span class="kw">is</span> done outside the function<span class="op">!</span>)</span></code></pre>
 </div>
 <div id="challenge---functions" class="callout discussion">
 <div class="callout-square">
@@ -630,31 +641,31 @@ function. There are many different “chunks” of this code that we can
 turn into functions, and we can even create functions that call other
 functions inside them. Let’s first write a function that separates data
 for just one year and saves that data to a file:</p>
-<div class="codewrapper sourceCode" id="cb12">
+<div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="kw">def</span> one_year_csv_writer(this_year, all_data):</span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a><span class="co">    Writes a csv file for data from a given year.</span></span>
-<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="co">    </span></span>
-<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="co">    Parameters</span></span>
-<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a><span class="co">    ----------</span></span>
-<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="co">    this_year: int</span></span>
-<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a><span class="co">        year for which data is extracted</span></span>
-<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a><span class="co">    all_data: pandas Dataframe</span></span>
-<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a><span class="co">        DataFrame with multi-year data</span></span>
-<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a><span class="co">    </span></span>
-<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a><span class="co">    Returns</span></span>
-<span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a><span class="co">    -------</span></span>
-<span id="cb12-14"><a href="#cb12-14" tabindex="-1"></a><span class="co">    None</span></span>
-<span id="cb12-15"><a href="#cb12-15" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb12-16"><a href="#cb12-16" tabindex="-1"></a></span>
-<span id="cb12-17"><a href="#cb12-17" tabindex="-1"></a>    <span class="co"># Select data for the year</span></span>
-<span id="cb12-18"><a href="#cb12-18" tabindex="-1"></a>    texts_year <span class="op">=</span> all_data[all_data.publication_date <span class="op">==</span> this_year]</span>
-<span id="cb12-19"><a href="#cb12-19" tabindex="-1"></a></span>
-<span id="cb12-20"><a href="#cb12-20" tabindex="-1"></a>    <span class="co"># Write the new DataFrame to a csv file</span></span>
-<span id="cb12-21"><a href="#cb12-21" tabindex="-1"></a>    filename <span class="op">=</span> <span class="st">'yearly_files/function_works'</span> <span class="op">+</span> <span class="bu">str</span>(this_year) <span class="op">+</span> <span class="st">'.csv'</span></span>
-<span id="cb12-22"><a href="#cb12-22" tabindex="-1"></a>    texts_year.to_csv(filename)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="kw">def</span> one_year_csv_writer(this_year, all_data):</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="co">    Writes a csv file for data from a given year.</span></span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a><span class="co">    Parameters</span></span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a><span class="co">    ----------</span></span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a><span class="co">    this_year: int</span></span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a><span class="co">        year for which data is extracted</span></span>
+<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a><span class="co">    all_data: pandas Dataframe</span></span>
+<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a><span class="co">        DataFrame with multi-year data</span></span>
+<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a><span class="co">    Returns</span></span>
+<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a><span class="co">    -------</span></span>
+<span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a><span class="co">    None</span></span>
+<span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb13-16"><a href="#cb13-16" tabindex="-1"></a></span>
+<span id="cb13-17"><a href="#cb13-17" tabindex="-1"></a>    <span class="co"># Select data for the year</span></span>
+<span id="cb13-18"><a href="#cb13-18" tabindex="-1"></a>    texts_year <span class="op">=</span> all_data[all_data.publication_date <span class="op">==</span> this_year]</span>
+<span id="cb13-19"><a href="#cb13-19" tabindex="-1"></a></span>
+<span id="cb13-20"><a href="#cb13-20" tabindex="-1"></a>    <span class="co"># Write the new DataFrame to a csv file</span></span>
+<span id="cb13-21"><a href="#cb13-21" tabindex="-1"></a>    filename <span class="op">=</span> <span class="st">'yearly_files/function_works'</span> <span class="op">+</span> <span class="bu">str</span>(this_year) <span class="op">+</span> <span class="st">'.csv'</span></span>
+<span id="cb13-22"><a href="#cb13-22" tabindex="-1"></a>    texts_year.to_csv(filename)</span></code></pre>
 </div>
 <p>The text between the two sets of triple quotes is called a docstring
 and contains the documentation for the function. It does nothing when
@@ -662,15 +673,15 @@ the function is running and is therefore not necessary, but it is good
 practice to include docstrings as a reminder of what the code does.
 Docstrings in functions also become part of their ‘official’
 documentation:</p>
-<div class="codewrapper sourceCode" id="cb13">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>one_year_csv_writer?</span></code></pre>
-</div>
 <div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>one_year_csv_writer(<span class="dv">2023</span>,all_works_df)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>one_year_csv_writer?</span></code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb15">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>one_year_csv_writer(<span class="dv">2023</span>,all_works_df)</span></code></pre>
 </div>
 <p>We changed the root of the name of the csv file so we can distinguish
 it from the one we wrote before. Check the <code>yearly_files</code>
@@ -680,31 +691,31 @@ without having to request them one by one. Let’s write another function
 that replaces the entire <em>for</em> loop by simply looping through a
 sequence of years and repeatedly calling the function we just wrote,
 <code>one_year_csv_writer</code>:</p>
-<div class="codewrapper sourceCode" id="cb15">
+<div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="kw">def</span> yearly_data_csv_writer(start_year, end_year, all_data):</span>
-<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a><span class="co">    Writes separate csv files for each year of data.</span></span>
-<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a></span>
-<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a><span class="co">    Parameters</span></span>
-<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a><span class="co">    ----------</span></span>
-<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a><span class="co">    start_year: int</span></span>
-<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a><span class="co">        the first year of data we want</span></span>
-<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a><span class="co">    end_year: int</span></span>
-<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a><span class="co">        the last year of data we want</span></span>
-<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a><span class="co">    all_data: pandas Dataframe</span></span>
-<span id="cb15-12"><a href="#cb15-12" tabindex="-1"></a><span class="co">        DataFrame with multi-year data</span></span>
-<span id="cb15-13"><a href="#cb15-13" tabindex="-1"></a></span>
-<span id="cb15-14"><a href="#cb15-14" tabindex="-1"></a><span class="co">    Returns</span></span>
-<span id="cb15-15"><a href="#cb15-15" tabindex="-1"></a><span class="co">    -------</span></span>
-<span id="cb15-16"><a href="#cb15-16" tabindex="-1"></a><span class="co">    None</span></span>
-<span id="cb15-17"><a href="#cb15-17" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb15-18"><a href="#cb15-18" tabindex="-1"></a>    years <span class="op">=</span> all_data.publication_date.unique()</span>
-<span id="cb15-19"><a href="#cb15-19" tabindex="-1"></a>    <span class="co"># "end_year" is the last year of data we want to pull, so we loop to end_year+1</span></span>
-<span id="cb15-20"><a href="#cb15-20" tabindex="-1"></a>    <span class="cf">for</span> year <span class="kw">in</span> <span class="bu">range</span>(start_year, end_year<span class="op">+</span><span class="dv">1</span>):</span>
-<span id="cb15-21"><a href="#cb15-21" tabindex="-1"></a>      <span class="cf">if</span> year <span class="kw">in</span> years:</span>
-<span id="cb15-22"><a href="#cb15-22" tabindex="-1"></a>        one_year_csv_writer(<span class="bu">str</span>(year), all_data)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="kw">def</span> yearly_data_csv_writer(start_year, end_year, all_data):</span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a><span class="co">    Writes separate csv files for each year of data.</span></span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a><span class="co">    Parameters</span></span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a><span class="co">    ----------</span></span>
+<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a><span class="co">    start_year: int</span></span>
+<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a><span class="co">        the first year of data we want</span></span>
+<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a><span class="co">    end_year: int</span></span>
+<span id="cb16-10"><a href="#cb16-10" tabindex="-1"></a><span class="co">        the last year of data we want</span></span>
+<span id="cb16-11"><a href="#cb16-11" tabindex="-1"></a><span class="co">    all_data: pandas Dataframe</span></span>
+<span id="cb16-12"><a href="#cb16-12" tabindex="-1"></a><span class="co">        DataFrame with multi-year data</span></span>
+<span id="cb16-13"><a href="#cb16-13" tabindex="-1"></a></span>
+<span id="cb16-14"><a href="#cb16-14" tabindex="-1"></a><span class="co">    Returns</span></span>
+<span id="cb16-15"><a href="#cb16-15" tabindex="-1"></a><span class="co">    -------</span></span>
+<span id="cb16-16"><a href="#cb16-16" tabindex="-1"></a><span class="co">    None</span></span>
+<span id="cb16-17"><a href="#cb16-17" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb16-18"><a href="#cb16-18" tabindex="-1"></a>    years <span class="op">=</span> all_data.publication_date.unique()</span>
+<span id="cb16-19"><a href="#cb16-19" tabindex="-1"></a>    <span class="co"># "end_year" is the last year of data we want to pull, so we loop to end_year+1</span></span>
+<span id="cb16-20"><a href="#cb16-20" tabindex="-1"></a>    <span class="cf">for</span> year <span class="kw">in</span> <span class="bu">range</span>(start_year, end_year<span class="op">+</span><span class="dv">1</span>):</span>
+<span id="cb16-21"><a href="#cb16-21" tabindex="-1"></a>      <span class="cf">if</span> year <span class="kw">in</span> years:</span>
+<span id="cb16-22"><a href="#cb16-22" tabindex="-1"></a>        one_year_csv_writer(<span class="bu">str</span>(year), all_data)</span></code></pre>
 </div>
 <p>Because people will naturally expect that the end year for the files
 is the last year with data, the for loop inside the function ends at
@@ -714,11 +725,11 @@ file into yearly files. Because we can specify the first and last year
 for which we want files, we can even use this function to create files
 for a subset of the years available. This is how we call this
 function:</p>
-<div class="codewrapper sourceCode" id="cb16">
+<div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="co"># Create csv files</span></span>
-<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>yearly_data_csv_writer(<span class="dv">2008</span>, <span class="dv">2023</span>, all_works_df)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="co"># Create csv files</span></span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>yearly_data_csv_writer(<span class="dv">2008</span>, <span class="dv">2023</span>, all_works_df)</span></code></pre>
 </div>
 <p>BEWARE! If you are using IPython Notebooks and you modify a function,
 you MUST re-run that cell in order for the changed function to be
@@ -763,57 +774,57 @@ they have the same name but are given different values?</li>
 <div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li>
-</li></ol><div class="codewrapper sourceCode" id="cb17">
+</li></ol><div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="kw">def</span> one_year_csv_writer(this_year, all_data, folder_to_save, root_name):</span>
-<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a><span class="co">    Writes a csv file for data from a given year.</span></span>
-<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a></span>
-<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a><span class="co">    Parameters</span></span>
-<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a><span class="co">    ---------</span></span>
-<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a><span class="co">    this_year : int</span></span>
-<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a><span class="co">        year for which data is extracted</span></span>
-<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a><span class="co">    all_data: pd.DataFrame</span></span>
-<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a><span class="co">        DataFrame with multi-year data </span></span>
-<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a><span class="co">    folder_to_save : str</span></span>
-<span id="cb17-12"><a href="#cb17-12" tabindex="-1"></a><span class="co">        folder to save the data files</span></span>
-<span id="cb17-13"><a href="#cb17-13" tabindex="-1"></a><span class="co">    root_name: str</span></span>
-<span id="cb17-14"><a href="#cb17-14" tabindex="-1"></a><span class="co">        root of the filenames to save the data</span></span>
-<span id="cb17-15"><a href="#cb17-15" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb17-16"><a href="#cb17-16" tabindex="-1"></a></span>
-<span id="cb17-17"><a href="#cb17-17" tabindex="-1"></a>    <span class="co"># Select data for the year</span></span>
-<span id="cb17-18"><a href="#cb17-18" tabindex="-1"></a>    texts_year <span class="op">=</span> all_data[all_data.year <span class="op">==</span> this_year]</span>
-<span id="cb17-19"><a href="#cb17-19" tabindex="-1"></a></span>
-<span id="cb17-20"><a href="#cb17-20" tabindex="-1"></a>    <span class="co"># Write the new DataFrame to a csv file</span></span>
-<span id="cb17-21"><a href="#cb17-21" tabindex="-1"></a>    filename <span class="op">=</span> os.path.join(folder_to_save, <span class="st">''</span>.join([root_name, <span class="bu">str</span>(this_year), <span class="st">'.csv'</span>]))</span>
-<span id="cb17-22"><a href="#cb17-22" tabindex="-1"></a>    texts_year.to_csv(filename)</span>
-<span id="cb17-23"><a href="#cb17-23" tabindex="-1"></a></span>
-<span id="cb17-24"><a href="#cb17-24" tabindex="-1"></a><span class="kw">def</span> yearly_data_csv_writer(start_year, end_year, all_data, folder_to_save, root_name):</span>
-<span id="cb17-25"><a href="#cb17-25" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb17-26"><a href="#cb17-26" tabindex="-1"></a><span class="co">    Writes separate csv files for each year of data.</span></span>
-<span id="cb17-27"><a href="#cb17-27" tabindex="-1"></a></span>
-<span id="cb17-28"><a href="#cb17-28" tabindex="-1"></a><span class="co">    Parameters</span></span>
-<span id="cb17-29"><a href="#cb17-29" tabindex="-1"></a><span class="co">    ----------</span></span>
-<span id="cb17-30"><a href="#cb17-30" tabindex="-1"></a><span class="co">    start_year: int</span></span>
-<span id="cb17-31"><a href="#cb17-31" tabindex="-1"></a><span class="co">        the first year of data we want</span></span>
-<span id="cb17-32"><a href="#cb17-32" tabindex="-1"></a><span class="co">    end_year: int</span></span>
-<span id="cb17-33"><a href="#cb17-33" tabindex="-1"></a><span class="co">        the last year of data we want</span></span>
-<span id="cb17-34"><a href="#cb17-34" tabindex="-1"></a><span class="co">    all_data: pandas Dataframe</span></span>
-<span id="cb17-35"><a href="#cb17-35" tabindex="-1"></a><span class="co">        DataFrame with multi-year data</span></span>
-<span id="cb17-36"><a href="#cb17-36" tabindex="-1"></a><span class="co">    folder_to_save : str</span></span>
-<span id="cb17-37"><a href="#cb17-37" tabindex="-1"></a><span class="co">          folder to save the data files</span></span>
-<span id="cb17-38"><a href="#cb17-38" tabindex="-1"></a><span class="co">    root_name: str</span></span>
-<span id="cb17-39"><a href="#cb17-39" tabindex="-1"></a><span class="co">          root of the filenames to save the data</span></span>
-<span id="cb17-40"><a href="#cb17-40" tabindex="-1"></a><span class="co">    Returns</span></span>
-<span id="cb17-41"><a href="#cb17-41" tabindex="-1"></a><span class="co">    -------</span></span>
-<span id="cb17-42"><a href="#cb17-42" tabindex="-1"></a><span class="co">    None</span></span>
-<span id="cb17-43"><a href="#cb17-43" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb17-44"><a href="#cb17-44" tabindex="-1"></a>    years <span class="op">=</span> all_data.publication_date.unique()</span>
-<span id="cb17-45"><a href="#cb17-45" tabindex="-1"></a>    <span class="co"># "end_year" is the last year of data we want to pull, so we loop to end_year+1</span></span>
-<span id="cb17-46"><a href="#cb17-46" tabindex="-1"></a>    <span class="cf">for</span> year <span class="kw">in</span> <span class="bu">range</span>(start_year, end_year<span class="op">+</span><span class="dv">1</span>):</span>
-<span id="cb17-47"><a href="#cb17-47" tabindex="-1"></a>      <span class="cf">if</span> year <span class="kw">in</span> years:</span>
-<span id="cb17-48"><a href="#cb17-48" tabindex="-1"></a>        one_year_csv_writer(<span class="bu">str</span>(year), all_data, folder_to_save, root_name)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="kw">def</span> one_year_csv_writer(this_year, all_data, folder_to_save, root_name):</span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a><span class="co">    Writes a csv file for data from a given year.</span></span>
+<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a><span class="co">    Parameters</span></span>
+<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a><span class="co">    ---------</span></span>
+<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a><span class="co">    this_year : int</span></span>
+<span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a><span class="co">        year for which data is extracted</span></span>
+<span id="cb18-9"><a href="#cb18-9" tabindex="-1"></a><span class="co">    all_data: pd.DataFrame</span></span>
+<span id="cb18-10"><a href="#cb18-10" tabindex="-1"></a><span class="co">        DataFrame with multi-year data </span></span>
+<span id="cb18-11"><a href="#cb18-11" tabindex="-1"></a><span class="co">    folder_to_save : str</span></span>
+<span id="cb18-12"><a href="#cb18-12" tabindex="-1"></a><span class="co">        folder to save the data files</span></span>
+<span id="cb18-13"><a href="#cb18-13" tabindex="-1"></a><span class="co">    root_name: str</span></span>
+<span id="cb18-14"><a href="#cb18-14" tabindex="-1"></a><span class="co">        root of the filenames to save the data</span></span>
+<span id="cb18-15"><a href="#cb18-15" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb18-16"><a href="#cb18-16" tabindex="-1"></a></span>
+<span id="cb18-17"><a href="#cb18-17" tabindex="-1"></a>    <span class="co"># Select data for the year</span></span>
+<span id="cb18-18"><a href="#cb18-18" tabindex="-1"></a>    texts_year <span class="op">=</span> all_data[all_data.year <span class="op">==</span> this_year]</span>
+<span id="cb18-19"><a href="#cb18-19" tabindex="-1"></a></span>
+<span id="cb18-20"><a href="#cb18-20" tabindex="-1"></a>    <span class="co"># Write the new DataFrame to a csv file</span></span>
+<span id="cb18-21"><a href="#cb18-21" tabindex="-1"></a>    filename <span class="op">=</span> os.path.join(folder_to_save, <span class="st">''</span>.join([root_name, <span class="bu">str</span>(this_year), <span class="st">'.csv'</span>]))</span>
+<span id="cb18-22"><a href="#cb18-22" tabindex="-1"></a>    texts_year.to_csv(filename)</span>
+<span id="cb18-23"><a href="#cb18-23" tabindex="-1"></a></span>
+<span id="cb18-24"><a href="#cb18-24" tabindex="-1"></a><span class="kw">def</span> yearly_data_csv_writer(start_year, end_year, all_data, folder_to_save, root_name):</span>
+<span id="cb18-25"><a href="#cb18-25" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb18-26"><a href="#cb18-26" tabindex="-1"></a><span class="co">    Writes separate csv files for each year of data.</span></span>
+<span id="cb18-27"><a href="#cb18-27" tabindex="-1"></a></span>
+<span id="cb18-28"><a href="#cb18-28" tabindex="-1"></a><span class="co">    Parameters</span></span>
+<span id="cb18-29"><a href="#cb18-29" tabindex="-1"></a><span class="co">    ----------</span></span>
+<span id="cb18-30"><a href="#cb18-30" tabindex="-1"></a><span class="co">    start_year: int</span></span>
+<span id="cb18-31"><a href="#cb18-31" tabindex="-1"></a><span class="co">        the first year of data we want</span></span>
+<span id="cb18-32"><a href="#cb18-32" tabindex="-1"></a><span class="co">    end_year: int</span></span>
+<span id="cb18-33"><a href="#cb18-33" tabindex="-1"></a><span class="co">        the last year of data we want</span></span>
+<span id="cb18-34"><a href="#cb18-34" tabindex="-1"></a><span class="co">    all_data: pandas Dataframe</span></span>
+<span id="cb18-35"><a href="#cb18-35" tabindex="-1"></a><span class="co">        DataFrame with multi-year data</span></span>
+<span id="cb18-36"><a href="#cb18-36" tabindex="-1"></a><span class="co">    folder_to_save : str</span></span>
+<span id="cb18-37"><a href="#cb18-37" tabindex="-1"></a><span class="co">          folder to save the data files</span></span>
+<span id="cb18-38"><a href="#cb18-38" tabindex="-1"></a><span class="co">    root_name: str</span></span>
+<span id="cb18-39"><a href="#cb18-39" tabindex="-1"></a><span class="co">          root of the filenames to save the data</span></span>
+<span id="cb18-40"><a href="#cb18-40" tabindex="-1"></a><span class="co">    Returns</span></span>
+<span id="cb18-41"><a href="#cb18-41" tabindex="-1"></a><span class="co">    -------</span></span>
+<span id="cb18-42"><a href="#cb18-42" tabindex="-1"></a><span class="co">    None</span></span>
+<span id="cb18-43"><a href="#cb18-43" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb18-44"><a href="#cb18-44" tabindex="-1"></a>    years <span class="op">=</span> all_data.publication_date.unique()</span>
+<span id="cb18-45"><a href="#cb18-45" tabindex="-1"></a>    <span class="co"># "end_year" is the last year of data we want to pull, so we loop to end_year+1</span></span>
+<span id="cb18-46"><a href="#cb18-46" tabindex="-1"></a>    <span class="cf">for</span> year <span class="kw">in</span> <span class="bu">range</span>(start_year, end_year<span class="op">+</span><span class="dv">1</span>):</span>
+<span id="cb18-47"><a href="#cb18-47" tabindex="-1"></a>      <span class="cf">if</span> year <span class="kw">in</span> years:</span>
+<span id="cb18-48"><a href="#cb18-48" tabindex="-1"></a>        one_year_csv_writer(<span class="bu">str</span>(year), all_data, folder_to_save, root_name)</span></code></pre>
 </div>
 </div>
 </div>
@@ -829,31 +840,31 @@ an equal sign in the function declaration. Any arguments in the function
 without default values (here, <code>all_data</code>) is a required
 argument and MUST come before the argument with default values (which
 are optional in the function call).</p>
-<div class="codewrapper sourceCode" id="cb18">
+<div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="kw">def</span> yearly_data_csv_writer(all_data, start_year<span class="op">=</span><span class="dv">1948</span>, end_year<span class="op">=</span><span class="dv">2024</span>):</span>
-<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a><span class="co">    Writes separate csv files for each year of data.</span></span>
-<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a></span>
-<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a><span class="co">    Parameters</span></span>
-<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a><span class="co">    ----------</span></span>
-<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a><span class="co">    start_year: int</span></span>
-<span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a><span class="co">        the first year of data we want</span></span>
-<span id="cb18-9"><a href="#cb18-9" tabindex="-1"></a><span class="co">    end_year: int</span></span>
-<span id="cb18-10"><a href="#cb18-10" tabindex="-1"></a><span class="co">        the last year of data we want</span></span>
-<span id="cb18-11"><a href="#cb18-11" tabindex="-1"></a><span class="co">    all_data: pandas Dataframe</span></span>
-<span id="cb18-12"><a href="#cb18-12" tabindex="-1"></a><span class="co">        DataFrame with multi-year data</span></span>
-<span id="cb18-13"><a href="#cb18-13" tabindex="-1"></a></span>
-<span id="cb18-14"><a href="#cb18-14" tabindex="-1"></a><span class="co">    Returns</span></span>
-<span id="cb18-15"><a href="#cb18-15" tabindex="-1"></a><span class="co">    -------</span></span>
-<span id="cb18-16"><a href="#cb18-16" tabindex="-1"></a><span class="co">    None</span></span>
-<span id="cb18-17"><a href="#cb18-17" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb18-18"><a href="#cb18-18" tabindex="-1"></a>    years <span class="op">=</span> all_data.publication_date.unique()</span>
-<span id="cb18-19"><a href="#cb18-19" tabindex="-1"></a>    <span class="co"># "end_year" is the last year of data we want to pull, so we loop to end_year+1</span></span>
-<span id="cb18-20"><a href="#cb18-20" tabindex="-1"></a>    <span class="cf">for</span> year <span class="kw">in</span> <span class="bu">range</span>(start_year, end_year<span class="op">+</span><span class="dv">1</span>):</span>
-<span id="cb18-21"><a href="#cb18-21" tabindex="-1"></a>      <span class="cf">if</span> year <span class="kw">in</span> years:</span>
-<span id="cb18-22"><a href="#cb18-22" tabindex="-1"></a>        one_year_csv_writer(<span class="bu">str</span>(year), all_data)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="kw">def</span> yearly_data_csv_writer(all_data, start_year<span class="op">=</span><span class="dv">1948</span>, end_year<span class="op">=</span><span class="dv">2024</span>):</span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a><span class="co">    Writes separate csv files for each year of data.</span></span>
+<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a><span class="co">    Parameters</span></span>
+<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a><span class="co">    ----------</span></span>
+<span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a><span class="co">    start_year: int</span></span>
+<span id="cb19-8"><a href="#cb19-8" tabindex="-1"></a><span class="co">        the first year of data we want</span></span>
+<span id="cb19-9"><a href="#cb19-9" tabindex="-1"></a><span class="co">    end_year: int</span></span>
+<span id="cb19-10"><a href="#cb19-10" tabindex="-1"></a><span class="co">        the last year of data we want</span></span>
+<span id="cb19-11"><a href="#cb19-11" tabindex="-1"></a><span class="co">    all_data: pandas Dataframe</span></span>
+<span id="cb19-12"><a href="#cb19-12" tabindex="-1"></a><span class="co">        DataFrame with multi-year data</span></span>
+<span id="cb19-13"><a href="#cb19-13" tabindex="-1"></a></span>
+<span id="cb19-14"><a href="#cb19-14" tabindex="-1"></a><span class="co">    Returns</span></span>
+<span id="cb19-15"><a href="#cb19-15" tabindex="-1"></a><span class="co">    -------</span></span>
+<span id="cb19-16"><a href="#cb19-16" tabindex="-1"></a><span class="co">    None</span></span>
+<span id="cb19-17"><a href="#cb19-17" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb19-18"><a href="#cb19-18" tabindex="-1"></a>    years <span class="op">=</span> all_data.publication_date.unique()</span>
+<span id="cb19-19"><a href="#cb19-19" tabindex="-1"></a>    <span class="co"># "end_year" is the last year of data we want to pull, so we loop to end_year+1</span></span>
+<span id="cb19-20"><a href="#cb19-20" tabindex="-1"></a>    <span class="cf">for</span> year <span class="kw">in</span> <span class="bu">range</span>(start_year, end_year<span class="op">+</span><span class="dv">1</span>):</span>
+<span id="cb19-21"><a href="#cb19-21" tabindex="-1"></a>      <span class="cf">if</span> year <span class="kw">in</span> years:</span>
+<span id="cb19-22"><a href="#cb19-22" tabindex="-1"></a>        one_year_csv_writer(<span class="bu">str</span>(year), all_data)</span></code></pre>
 </div>
 <div id="challenge---optional-variables" class="callout discussion">
 <div class="callout-square">
@@ -878,25 +889,25 @@ values in the function definition!)</li>
 that values of <code>year</code> are in the dataframe. <em>If</em> loops
 execute the body of the loop when some condition is met. They commonly
 look something like this:</p>
-<div class="codewrapper sourceCode" id="cb19">
+<div class="codewrapper sourceCode" id="cb20">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a><span class="cf">if</span> a<span class="op">&lt;</span><span class="dv">0</span>: <span class="co"># meets first condition?</span></span>
-<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a></span>
-<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a>    <span class="co"># if a IS less than zero</span></span>
-<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'a is a negative number'</span>)</span>
-<span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a></span>
-<span id="cb19-8"><a href="#cb19-8" tabindex="-1"></a><span class="cf">elif</span> a<span class="op">&gt;</span><span class="dv">0</span>: <span class="co"># did not meet first condition. meets second condition?</span></span>
-<span id="cb19-9"><a href="#cb19-9" tabindex="-1"></a></span>
-<span id="cb19-10"><a href="#cb19-10" tabindex="-1"></a>    <span class="co"># if a ISN'T less than zero and IS more than zero</span></span>
-<span id="cb19-11"><a href="#cb19-11" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'a is a positive number'</span>)</span>
-<span id="cb19-12"><a href="#cb19-12" tabindex="-1"></a></span>
-<span id="cb19-13"><a href="#cb19-13" tabindex="-1"></a><span class="cf">else</span>: <span class="co"># met neither condition</span></span>
-<span id="cb19-14"><a href="#cb19-14" tabindex="-1"></a></span>
-<span id="cb19-15"><a href="#cb19-15" tabindex="-1"></a>    <span class="co"># if a ISN'T less than zero and ISN'T more than zero</span></span>
-<span id="cb19-16"><a href="#cb19-16" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'a must be zero!'</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a><span class="cf">if</span> a<span class="op">&lt;</span><span class="dv">0</span>: <span class="co"># meets first condition?</span></span>
+<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a>    <span class="co"># if a IS less than zero</span></span>
+<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'a is a negative number'</span>)</span>
+<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a><span class="cf">elif</span> a<span class="op">&gt;</span><span class="dv">0</span>: <span class="co"># did not meet first condition. meets second condition?</span></span>
+<span id="cb20-9"><a href="#cb20-9" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" tabindex="-1"></a>    <span class="co"># if a ISN'T less than zero and IS more than zero</span></span>
+<span id="cb20-11"><a href="#cb20-11" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'a is a positive number'</span>)</span>
+<span id="cb20-12"><a href="#cb20-12" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" tabindex="-1"></a><span class="cf">else</span>: <span class="co"># met neither condition</span></span>
+<span id="cb20-14"><a href="#cb20-14" tabindex="-1"></a></span>
+<span id="cb20-15"><a href="#cb20-15" tabindex="-1"></a>    <span class="co"># if a ISN'T less than zero and ISN'T more than zero</span></span>
+<span id="cb20-16"><a href="#cb20-16" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'a must be zero!'</span>)</span></code></pre>
 </div>
 <p>Which would return:</p>
 <pre><code>a is a positive number</code></pre>
@@ -914,14 +925,14 @@ conditional statements must end in a colon.</p>
 <ol style="list-style-type: decimal"><li>The code below checks to see whether a directory exists and creates
 one if it doesn’t. Add some code to your function that writes out the
 CSV files, to check for a directory to write to.</li>
-</ol><div class="codewrapper sourceCode" id="cb21">
+</ol><div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>  <span class="cf">if</span> <span class="st">'dir_name_here'</span> <span class="kw">in</span> os.listdir(<span class="st">'.'</span>):</span>
-<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>      <span class="bu">print</span>(<span class="st">'Processed directory exists'</span>)</span>
-<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>  <span class="cf">else</span>:</span>
-<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a>      os.mkdir(<span class="st">'dir_name_here'</span>)</span>
-<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a>      <span class="bu">print</span>(<span class="st">'Processed directory created'</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a>  <span class="cf">if</span> <span class="st">'dir_name_here'</span> <span class="kw">in</span> os.listdir(<span class="st">'.'</span>):</span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>      <span class="bu">print</span>(<span class="st">'Processed directory exists'</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a>  <span class="cf">else</span>:</span>
+<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a>      os.mkdir(<span class="st">'dir_name_here'</span>)</span>
+<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a>      <span class="bu">print</span>(<span class="st">'Processed directory created'</span>)</span></code></pre>
 </div>
 </div>
 </div>
@@ -933,35 +944,35 @@ CSV files, to check for a directory to write to.</li>
 </button>
 <div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb22">
+<div class="codewrapper sourceCode" id="cb23">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a>      <span class="kw">def</span> one_year_csv_writer(this_year, all_data, folder_to_save, root_name):</span>
-<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>      <span class="co">"""</span></span>
-<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a><span class="co">      Writes a csv file for data from a given year.</span></span>
-<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a></span>
-<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a><span class="co">      Parameters</span></span>
-<span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a><span class="co">      ---------</span></span>
-<span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a><span class="co">      this_year : int</span></span>
-<span id="cb22-8"><a href="#cb22-8" tabindex="-1"></a><span class="co">          year for which data is extracted</span></span>
-<span id="cb22-9"><a href="#cb22-9" tabindex="-1"></a><span class="co">      all_data: pd.DataFrame</span></span>
-<span id="cb22-10"><a href="#cb22-10" tabindex="-1"></a><span class="co">          DataFrame with multi-year data </span></span>
-<span id="cb22-11"><a href="#cb22-11" tabindex="-1"></a><span class="co">      folder_to_save : str</span></span>
-<span id="cb22-12"><a href="#cb22-12" tabindex="-1"></a><span class="co">          folder to save the data files</span></span>
-<span id="cb22-13"><a href="#cb22-13" tabindex="-1"></a><span class="co">      root_name: str</span></span>
-<span id="cb22-14"><a href="#cb22-14" tabindex="-1"></a><span class="co">          root of the filenames to save the data</span></span>
-<span id="cb22-15"><a href="#cb22-15" tabindex="-1"></a><span class="co">      """</span></span>
-<span id="cb22-16"><a href="#cb22-16" tabindex="-1"></a>      <span class="cf">if</span> folder_to_save <span class="kw">in</span> os.listdir(<span class="st">'.'</span>):</span>
-<span id="cb22-17"><a href="#cb22-17" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'Output directory exists'</span>)</span>
-<span id="cb22-18"><a href="#cb22-18" tabindex="-1"></a>      <span class="cf">else</span>:</span>
-<span id="cb22-19"><a href="#cb22-19" tabindex="-1"></a>        os.mkdir(folder_to_save)</span>
-<span id="cb22-20"><a href="#cb22-20" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'folder_to_save, directory created'</span>)</span>
-<span id="cb22-21"><a href="#cb22-21" tabindex="-1"></a>      <span class="co"># Select data for the year</span></span>
-<span id="cb22-22"><a href="#cb22-22" tabindex="-1"></a>      texts_year <span class="op">=</span> all_data[all_data.year <span class="op">==</span> this_year]</span>
-<span id="cb22-23"><a href="#cb22-23" tabindex="-1"></a></span>
-<span id="cb22-24"><a href="#cb22-24" tabindex="-1"></a>      <span class="co"># Write the new DataFrame to a csv file</span></span>
-<span id="cb22-25"><a href="#cb22-25" tabindex="-1"></a>      filename <span class="op">=</span> os.path.join(folder_to_save, <span class="st">''</span>.join([root_name, <span class="bu">str</span>(this_year), <span class="st">'.csv'</span>]))</span>
-<span id="cb22-26"><a href="#cb22-26" tabindex="-1"></a>      texts_year.to_csv(filename)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a>      <span class="kw">def</span> one_year_csv_writer(this_year, all_data, folder_to_save, root_name):</span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>      <span class="co">"""</span></span>
+<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a><span class="co">      Writes a csv file for data from a given year.</span></span>
+<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a><span class="co">      Parameters</span></span>
+<span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a><span class="co">      ---------</span></span>
+<span id="cb23-7"><a href="#cb23-7" tabindex="-1"></a><span class="co">      this_year : int</span></span>
+<span id="cb23-8"><a href="#cb23-8" tabindex="-1"></a><span class="co">          year for which data is extracted</span></span>
+<span id="cb23-9"><a href="#cb23-9" tabindex="-1"></a><span class="co">      all_data: pd.DataFrame</span></span>
+<span id="cb23-10"><a href="#cb23-10" tabindex="-1"></a><span class="co">          DataFrame with multi-year data </span></span>
+<span id="cb23-11"><a href="#cb23-11" tabindex="-1"></a><span class="co">      folder_to_save : str</span></span>
+<span id="cb23-12"><a href="#cb23-12" tabindex="-1"></a><span class="co">          folder to save the data files</span></span>
+<span id="cb23-13"><a href="#cb23-13" tabindex="-1"></a><span class="co">      root_name: str</span></span>
+<span id="cb23-14"><a href="#cb23-14" tabindex="-1"></a><span class="co">          root of the filenames to save the data</span></span>
+<span id="cb23-15"><a href="#cb23-15" tabindex="-1"></a><span class="co">      """</span></span>
+<span id="cb23-16"><a href="#cb23-16" tabindex="-1"></a>      <span class="cf">if</span> folder_to_save <span class="kw">in</span> os.listdir(<span class="st">'.'</span>):</span>
+<span id="cb23-17"><a href="#cb23-17" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'Output directory exists'</span>)</span>
+<span id="cb23-18"><a href="#cb23-18" tabindex="-1"></a>      <span class="cf">else</span>:</span>
+<span id="cb23-19"><a href="#cb23-19" tabindex="-1"></a>        os.mkdir(folder_to_save)</span>
+<span id="cb23-20"><a href="#cb23-20" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'folder_to_save, directory created'</span>)</span>
+<span id="cb23-21"><a href="#cb23-21" tabindex="-1"></a>      <span class="co"># Select data for the year</span></span>
+<span id="cb23-22"><a href="#cb23-22" tabindex="-1"></a>      texts_year <span class="op">=</span> all_data[all_data.year <span class="op">==</span> this_year]</span>
+<span id="cb23-23"><a href="#cb23-23" tabindex="-1"></a></span>
+<span id="cb23-24"><a href="#cb23-24" tabindex="-1"></a>      <span class="co"># Write the new DataFrame to a csv file</span></span>
+<span id="cb23-25"><a href="#cb23-25" tabindex="-1"></a>      filename <span class="op">=</span> os.path.join(folder_to_save, <span class="st">''</span>.join([root_name, <span class="bu">str</span>(this_year), <span class="st">'.csv'</span>]))</span>
+<span id="cb23-26"><a href="#cb23-26" tabindex="-1"></a>      texts_year.to_csv(filename)</span></code></pre>
 </div>
 </div>
 </div>
