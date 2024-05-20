@@ -479,4 +479,36 @@ Experiment with selecting various subsets of the "works" data.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+## Setting values using slicing by criteria
 
+Using slicing by criteria, we can directly set values.  For example, if 
+we thought *Abusive men--Drama* was relevant to DEI, we could set the *is_dei* flag on all records where subject
+contained that string using the following syntax
+
+```python
+works_df.loc[works_df.subjects.str.contains('Abusive men--Drama'), 'is_dei'] = True
+```
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Challenge - Adjusting the DEI flag
+
+Create a true copy of the works_df.
+Find a subject value you would like to remove.  If there is nothing you have issue with, just pick one
+at random.
+
+Use those critera to change the *is_dei* flag in your true copy to *False*.
+
+:::::::::: solution
+For the example we will use "Aristocracy (Social class"
+``` python
+copy = works_df.copy()
+# we have to escape the '(' symbol
+copy.loc[works_df.subjects.str.contains('Aristocracy \(Social class'), 'is_dei'] = False
+
+```
+
+
+::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
