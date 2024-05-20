@@ -160,6 +160,20 @@ the number of the space in the grid that particular plot is occupying:
 
     plt.show()
 ```
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+## What can we and can't we ask?
+
+- What other DEI related questions could you ask of the data as is?  
+- What questions could you answer by reformulating the data currently in the dataset.  
+- What is a question you have that cannot be answered with the current data?  
+    - How would you go about getting the data needed.
+    - How much would that data cost in time, effort, dollars?
+
+
+
+:::::::::::::::::::::::::::::::::::::::::::
+
 :::::::::::::::::::::::::::::::::::::::  challenge
 ### Make other types of plots:
 
