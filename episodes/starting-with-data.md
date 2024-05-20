@@ -90,7 +90,8 @@ This section will use the `all_works.csv` file that can be found in your data fo
 - Diversity, Equity and Inclusion are not concrete terms that can be divorced from history and geography. Thus, it is incumbent on academic researchers to define what that means in their practice.  
 - Arguably, any resource is potentially useful in the pursuit of DEI research if for no other reason as to provide contrast and foreground for other works, so designating something a DEI resource will always be a judgment call.  
 - Here, though, the *is_dei* flag is applied to any works with subjects deemed outside those with a male, western European lineage. That determination is also a judgment call on multiple levels that you may disagree with, and that is okay. Not only might you disagree with what subjects do or do not share a male, western European lineage, but we are also at the mercy of the cataloger wrestling with their own biases while applying a limited scope of slowly evolving options.
-- Our flag will never be perfect, so our goal should be good enough with the time and information we have. 
+- Our flag will never be perfect, so our goal should be good enough with the time and information we have.
+  You can spot check the subjects deemed [dei][dei] and [non-dei][non_dei].
 - All datasets should be approached with a sceptical eye. When we are done here, you should not only know how to leverage datasets, but interogate and adjust them to adhere to different assumptions. Just be sure to make those adjustments and assumptions clear to those who follow after you.
 
 :::::::::::::::::::::
@@ -599,3 +600,5 @@ jpn	NaN	20.0
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
+[dei]: episodes/data/dei.csv 
+[non_dei]: episodes/data/non_dei.csv
