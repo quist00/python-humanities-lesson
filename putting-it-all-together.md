@@ -32,7 +32,7 @@ through as well as the Python documentation to help you along.
 
 There are many repositories online from which you can obtain data. We are
 providing you with one data file to use with these exercises (`works-original.csv`), but feel free to
-use any data that is relevant to your research.
+use any data that is relevant to your research. You can also explore the [GLAM Workbench](https://glam-workbench.net/) for data set ideas as well as examples of the full potential of **Humanities Computing**.
 
 ## 2\. Clean up your data and open it using Python and Pandas
 
