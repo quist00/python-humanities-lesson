@@ -600,5 +600,5 @@ jpn	NaN	20.0
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-[dei]: episodes/data/dei.csv 
-[non_dei]: episodes/data/non_dei.csv
+[dei]: episodes/files/dei.csv 
+[non_dei]: episodes/files/non_dei.csv
