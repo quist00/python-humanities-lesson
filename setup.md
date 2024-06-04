@@ -21,7 +21,7 @@ You can download these [example files][dataset] as a compressed zip file. You sh
 [Python](https://python.org) is a popular language for scientific computing, and great for
 general-purpose programming as well. Installing all of the scientific packages we use in this lesson
 individually can be a bit cumbersome, and therefore we recommend the all-in-one
-installer [anaconda](https://www.anaconda.com/).
+installer [anaconda](https://www.anaconda.com/download/success).
 
 Regardless of how you choose to install it, please make sure you get a recent version of Python 3.  If you are not using the latest version, consult [Status of Python versions
 ](https://devguide.python.org/versions/) to ensure your version is still getting security updates.
@@ -35,7 +35,7 @@ Regardless of how you choose to install it, please make sure you get a recent ve
 ### Anaconda installation
 
 Anaconda will install the workshop packages for you. 
-Download and install [Anaconda](https://www.anaconda.com/distribution/).
+Download and install [Anaconda](https://www.anaconda.com/download/success).
 Remember to download and install the installer for Python 3.x.
 
 ### Miniconda installation
