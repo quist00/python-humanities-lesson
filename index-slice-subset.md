@@ -269,6 +269,7 @@ be selected by their index, but the index is not necessarily an integer as it is
   they are interpreted as a *label*.
 - `iloc` is primarily *integer* based indexing
 
+### iloc
 To select a subset of rows **and** columns from our DataFrame, we can use the
 `iloc` method. For example, we can select subjects,	mms_id, and	author (columns 2, 3
 and 4 if we start counting at 1), like this:
@@ -290,27 +291,6 @@ which gives the **output**
 Notice that we asked for a slice from 0:3. This yielded 3 rows of data. When you
 ask for 0:3, you are actually telling Python to start at index 0 and select rows
 0, 1, 2 **up to but not including 3**.
-
-Let's explore some other ways to index and select subsets of data:
-
-```python
-# select all columns for rows of index values 0 and 10
-works_df.loc[[0, 10], :]
-
-# what does this do?
-works_df.loc[0, ['author', 'title', 'checkouts']]
-
-# What happens when you type the code below?
-works_df.loc[[0, 10, 149], :]
-```
-
-**NOTE**: Labels must be found in the DataFrame or you will get a `KeyError`.
-
-Indexing by labels `loc` differs from indexing by integers `iloc`.
-With `iloc`, the start bound and the stop bound are **inclusive**. When using
-`loc` instead, integers *can* also be used, but the integers refer to the
-index label and not the position. For example, using `loc` and select 1:4
-will get a different result than using `iloc` to select rows 1:4.
 
 We can also select a specific data value using a row and
 column location within the DataFrame and `iloc` indexing:
@@ -334,6 +314,30 @@ gives the **output**
 
 Remember that Python indexing begins at 0. So, the index location [2, 6]
 selects the element that is 3 rows down and 7 columns over in the DataFrame.
+
+### loc
+Let's explore ways to index and select subsets of data with loc:
+
+```python
+# select all columns for rows of index values 0 and 10
+works_df.loc[[0, 10], :]
+
+# what does this do?
+works_df.loc[0, ['author', 'title', 'checkouts']]
+
+# What happens when you type the code below?
+works_df.loc[[0, 10, 149], :]
+```
+
+**NOTE**: Labels must be found in the DataFrame or you will get a `KeyError`.
+
+Indexing by labels `loc` differs from indexing by integers `iloc`.
+With `iloc`, the start bound and the stop bound are **inclusive**. When using
+`loc` instead, integers *can* also be used, but the integers refer to the
+index label and not the position. For example, using `loc` and select 1:4
+will get a different result than using `iloc` to select rows 1:4.
+
+
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
