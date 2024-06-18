@@ -511,7 +511,7 @@ What does this graph show? Let's step through
 - `works_df.groupby("is_dei")["mms_id"].count()` : this counts the instances, i.e. how many works per given boolean value?
 
 
-- `plot = is_dei_count.plot(kind="bar",logy=True)` : this plots a bar chart with the boolean flag on x axis and count on the y axis.
+- `plot = is_dei_count.plot(kind="bar",title="Checkout by DEI Status")` : this plots a bar chart with the boolean flag on x axis and count on the y axis, sets title.
 - `plot.set_ylabel("Checkouts")` : this labels the y-axis
 
 
@@ -565,23 +565,45 @@ Summary Plotting Challenge
  First we group data by language_code and then by is_dei. 
 
  ```python
-grouping = works_df.groupby(['language_code','is_dei'])
-checkouts = grouping['checkouts'].sum()
-top_checkouts = checkouts.sort_values(ascending=False).head(10)
+# Step 1: Aggregate total checkouts per language_code regardless of is_dei
+total_checkouts_per_language = works_df.groupby('language_code')['checkouts'].sum()
+
+# Step 2: Sort these totals and get the top 10 language codes
+top_10_languages = total_checkouts_per_language.sort_values(ascending=False).head(10).index
+
+# Step 3: Filter the original DataFrame to include only these top 10 languages
+filtered_df = works_df[works_df['language_code'].isin(top_10_languages)]
+
+# Step 4: Group by both language_code and is_dei, and sum the checkouts
+grouping = filtered_df.groupby(['language_code', 'is_dei'])['checkouts'].sum()
+
  ```
 
- The last two lines above calculates the sum of checkouts, for each language_code further broken down be DEI boolean flag, as a table and keeps only the top 10 most checked out items.
+ The last lines above calculates the sum of checkouts, for each language_code further broken down by DEI boolean flag, as a table and keeps only the top 10 most checked out items.
 
 ```output
 language_code  is_dei
-is_dei	False	True
-language_code		
-eng	4441.0	2530.0
-spa	95.0	92.0
-fre	70.0	62.0
-per	27.0	26.0
-ita	21.0	NaN
-jpn	NaN	20.0
+chi            False        7
+               True         7
+eng            False     4441
+               True      2530
+fre            False       70
+               True        62
+ger            False        7
+               True         6
+heb            False        6
+               True         6
+ita            False       21
+               True         2
+jpn            False       20
+               True        20
+kor            False        3
+               True         3
+per            False       27
+               True        26
+spa            False       95
+               True        92
+Name: checkouts, dtype: int64
 ```
  
  After that, we use the `.unstack()` function on our grouped data to figure
@@ -589,8 +611,12 @@ jpn	NaN	20.0
  data. 
 
  ```python
- plot = top_checkouts.unstack.plot(kind="bar", stacked=True, title="DEI Checkouts By Language", figsize=(10,5),logy=True)
- plot.set_ylabel("Checkouts")
+# Step 5: Unstack the is_dei level for plotting
+grouping_unstacked = grouping.unstack()
+
+# Plot the data
+plot = grouping_unstacked.plot(kind="bar", stacked=True, title="DEI Checkouts By Language", figsize=(10, 5), logy=True)
+plot.set_ylabel("Checkouts")
  ```
 
 
