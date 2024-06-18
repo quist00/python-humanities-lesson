@@ -302,7 +302,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Starting With Data</h1>
-        <p>Last updated on 2024-05-21 |
+        <p>Last updated on 2024-06-18 |
         
         <a href="https://github.com/carpentries-incubator/python-humanities-lesson/edit/main/episodes/starting-with-data.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -655,7 +655,7 @@ on tuples, here</a>.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li><p><code>works_df.columns</code> return list of column as a data
 type <em>pandas.core.indexes.base.Index</em></p></li>
@@ -804,7 +804,7 @@ data?</p></li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li>Create a list of unique locations found in the index data. Call it
 <code>places</code>. How many unique location are there in the
@@ -855,7 +855,7 @@ syntax and then grab mean values:</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3">Show me the solution</h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li>
 </li></ol><div class="codewrapper sourceCode" id="cb21">
@@ -970,9 +970,9 @@ want one number to plot. You could effectively pick any column.</p></li>
 <li><p><code>works_df.groupby("is_dei")["mms_id"].count()</code> : this
 counts the instances, i.e. how many works per given boolean
 value?</p></li>
-<li><p><code>plot = is_dei_count.plot(kind="bar",logy=True)</code> :
-this plots a bar chart with the boolean flag on x axis and count on the
-y axis.</p></li>
+<li><p><code>plot = is_dei_count.plot(kind="bar",title="Checkout by DEI Status")</code>
+: this plots a bar chart with the boolean flag on x axis and count on
+the y axis, sets title.</p></li>
 <li><p><code>plot.set_ylabel("Checkouts")</code> : this labels the
 y-axis</p></li>
 </ul><div id="challenge4" class="callout challenge">
@@ -1021,31 +1021,52 @@ create a stacked plot.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4">Show me the solution</h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <p>First we group data by language_code and then by is_dei.</p>
 <div class="codewrapper sourceCode" id="cb30">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a>grouping <span class="op">=</span> works_df.groupby([<span class="st">'language_code'</span>,<span class="st">'is_dei'</span>])</span>
-<span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a>checkouts <span class="op">=</span> grouping[<span class="st">'checkouts'</span>].<span class="bu">sum</span>()</span>
-<span id="cb30-3"><a href="#cb30-3" tabindex="-1"></a>top_checkouts <span class="op">=</span> checkouts.sort_values(ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a><span class="co"># Step 1: Aggregate total checkouts per language_code regardless of is_dei</span></span>
+<span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a>total_checkouts_per_language <span class="op">=</span> works_df.groupby(<span class="st">'language_code'</span>)[<span class="st">'checkouts'</span>].<span class="bu">sum</span>()</span>
+<span id="cb30-3"><a href="#cb30-3" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" tabindex="-1"></a><span class="co"># Step 2: Sort these totals and get the top 10 language codes</span></span>
+<span id="cb30-5"><a href="#cb30-5" tabindex="-1"></a>top_10_languages <span class="op">=</span> total_checkouts_per_language.sort_values(ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>).index</span>
+<span id="cb30-6"><a href="#cb30-6" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="#cb30-7" tabindex="-1"></a><span class="co"># Step 3: Filter the original DataFrame to include only these top 10 languages</span></span>
+<span id="cb30-8"><a href="#cb30-8" tabindex="-1"></a>filtered_df <span class="op">=</span> works_df[works_df[<span class="st">'language_code'</span>].isin(top_10_languages)]</span>
+<span id="cb30-9"><a href="#cb30-9" tabindex="-1"></a></span>
+<span id="cb30-10"><a href="#cb30-10" tabindex="-1"></a><span class="co"># Step 4: Group by both language_code and is_dei, and sum the checkouts</span></span>
+<span id="cb30-11"><a href="#cb30-11" tabindex="-1"></a>grouping <span class="op">=</span> filtered_df.groupby([<span class="st">'language_code'</span>, <span class="st">'is_dei'</span>])[<span class="st">'checkouts'</span>].<span class="bu">sum</span>()</span></code></pre>
 </div>
-<p>The last two lines above calculates the sum of checkouts, for each
-language_code further broken down be DEI boolean flag, as a table and
+<p>The last lines above calculates the sum of checkouts, for each
+language_code further broken down by DEI boolean flag, as a table and
 keeps only the top 10 most checked out items.</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>language_code  is_dei
-is_dei	False	True
-language_code		
-eng	4441.0	2530.0
-spa	95.0	92.0
-fre	70.0	62.0
-per	27.0	26.0
-ita	21.0	NaN
-jpn	NaN	20.0</code></pre>
+chi            False        7
+               True         7
+eng            False     4441
+               True      2530
+fre            False       70
+               True        62
+ger            False        7
+               True         6
+heb            False        6
+               True         6
+ita            False       21
+               True         2
+jpn            False       20
+               True        20
+kor            False        3
+               True         3
+per            False       27
+               True        26
+spa            False       95
+               True        92
+Name: checkouts, dtype: int64</code></pre>
 </div>
 <p>After that, we use the <code>.unstack()</code> function on our
 grouped data to figure out the total contribution of DEI verse non-DEI
@@ -1053,8 +1074,12 @@ for each language_code, and then plot the data.</p>
 <div class="codewrapper sourceCode" id="cb32">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a>plot <span class="op">=</span> top_checkouts.unstack.plot(kind<span class="op">=</span><span class="st">"bar"</span>, stacked<span class="op">=</span><span class="va">True</span>, title<span class="op">=</span><span class="st">"DEI Checkouts By Language"</span>, figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">5</span>),logy<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb32-2"><a href="#cb32-2" tabindex="-1"></a>plot.set_ylabel(<span class="st">"Checkouts"</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a><span class="co"># Step 5: Unstack the is_dei level for plotting</span></span>
+<span id="cb32-2"><a href="#cb32-2" tabindex="-1"></a>grouping_unstacked <span class="op">=</span> grouping.unstack()</span>
+<span id="cb32-3"><a href="#cb32-3" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="#cb32-4" tabindex="-1"></a><span class="co"># Plot the data</span></span>
+<span id="cb32-5"><a href="#cb32-5" tabindex="-1"></a>plot <span class="op">=</span> grouping_unstacked.plot(kind<span class="op">=</span><span class="st">"bar"</span>, stacked<span class="op">=</span><span class="va">True</span>, title<span class="op">=</span><span class="st">"DEI Checkouts By Language"</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>), logy<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb32-6"><a href="#cb32-6" tabindex="-1"></a>plot.set_ylabel(<span class="st">"Checkouts"</span>)</span></code></pre>
 </div>
 </div>
 </div>
@@ -1117,8 +1142,8 @@ for each language_code, and then plot the data.</p>
   "creativeWorkStatus": "active",
   "url": "https://carpentries-incubator.github.io/python-humanities-lesson/instructor/starting-with-data.html",
   "identifier": "https://carpentries-incubator.github.io/python-humanities-lesson/instructor/starting-with-data.html",
-  "dateCreated": "2024-06-04",
-  "dateModified": "2024-05-21",
+  "dateCreated": "2024-06-18",
+  "dateModified": "2024-06-18",
   "datePublished": "2024-06-18"
 }
 
