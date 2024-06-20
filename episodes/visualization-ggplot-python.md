@@ -82,7 +82,7 @@ gallery for more examples.
 
 ```python
     plt.plot(list_numbers,[200, 400, 800, 1600], 'ro-.')
-    plt.axis([0,6,0,10])
+    plt.axis([0,10,0,2000])
     plt.show()
 ```
 
