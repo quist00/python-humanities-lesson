@@ -31,7 +31,7 @@ of the works_df instead of loading in data from multiple files.
 
 ```python
 top_concat_df = works_df.head()
-bottom_concat = works_df.tail().reset_index()
+bottom_concat_df = works_df.tail().reset_index()
 left_concat_df = works_df.iloc[:,0:3]
 right_concat_df = works_df.iloc[:,3:]
 left_merge_df = works_df[['mms_id','title']]
