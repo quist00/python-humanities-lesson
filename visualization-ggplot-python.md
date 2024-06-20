@@ -130,8 +130,6 @@ figure number inside the parentheses:
     plt.legend(loc='upper left', shadow=True, fontsize='x-large')
     plt.title('This is figure 1')
 
-    plt.show()
-
     # this is a second figure
     plt.figure(2)
     plt.plot(acquisition_non_dei.index, acquisition_non_dei.values,"g^",label="non-DEI")
