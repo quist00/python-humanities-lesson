@@ -2784,7 +2784,7 @@ means for your work</li>
 <li>How to replace NaN values, if desired</li>
 </ul></section></section><section id="aio-merging-data"><p>Content from <a href="merging-data.html">Combining DataFrames with pandas</a></p>
 <hr>
-<p>Last updated on 2024-06-20 |
+<p>Last updated on 2024-08-05 |
 
         <a href="https://github.com/carpentries-incubator/python-humanities-lesson/edit/main/episodes/merging-data.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -2837,7 +2837,8 @@ multiple files.</p>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>left_concat_df <span class="op">=</span> works_df.iloc[:,<span class="dv">0</span>:<span class="dv">3</span>]</span>
 <span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>right_concat_df <span class="op">=</span> works_df.iloc[:,<span class="dv">3</span>:]</span>
 <span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>left_merge_df <span class="op">=</span> works_df[[<span class="st">'mms_id'</span>,<span class="st">'title'</span>]]</span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>right_merge_df <span class="op">=</span> works_df[[<span class="st">'mms_id'</span>,<span class="st">'author'</span>]].sample(frac<span class="op">=</span><span class="fl">.8</span>,random_state<span class="op">=</span><span class="dv">42</span>).drop_duplicates()</span></code></pre>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>left_merge_df <span class="op">=</span> left_merge_df.drop_duplicates()</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>right_merge_df <span class="op">=</span> works_df[[<span class="st">'mms_id'</span>,<span class="st">'author'</span>]].sample(frac<span class="op">=</span><span class="fl">.8</span>,random_state<span class="op">=</span><span class="dv">42</span>).drop_duplicates()</span></code></pre>
 </div>
 <section><h2 class="section-heading" id="concatenating-dataframes">Concatenating DataFrames<a class="anchor" aria-label="anchor" href="#concatenating-dataframes"></a>
 <a class="anchor" aria-label="anchor" href="#concatenating-dataframes"></a>
@@ -3135,7 +3136,7 @@ left join where gender is the left dataframe.</p>
   Solution to challenge
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -4491,9 +4492,9 @@ matplotlib can handle dates and times for figures.</p>
   "creativeWorkStatus": "active",
   "url": "https://carpentries-incubator.github.io/python-humanities-lesson/aio.html",
   "identifier": "https://carpentries-incubator.github.io/python-humanities-lesson/aio.html",
-  "dateCreated": "2024-06-20",
-  "dateModified": "2024-07-30",
-  "datePublished": "2024-07-30"
+  "dateCreated": "2024-08-05",
+  "dateModified": "2024-08-05",
+  "datePublished": "2024-08-05"
 }
 
   </script><script>
