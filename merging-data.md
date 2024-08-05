@@ -35,8 +35,8 @@ bottom_concat_df = works_df.tail().reset_index()
 left_concat_df = works_df.iloc[:,0:3]
 right_concat_df = works_df.iloc[:,3:]
 left_merge_df = works_df[['mms_id','title']]
+left_merge_df = left_merge_df.drop_duplicates()
 right_merge_df = works_df[['mms_id','author']].sample(frac=.8,random_state=42).drop_duplicates()
-
 ```
 
 ## Concatenating DataFrames
