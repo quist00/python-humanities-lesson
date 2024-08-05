@@ -370,7 +370,7 @@ def yearly_data_csv_writer(start_year, end_year, all_data):
     # "end_year" is the last year of data we want to pull, so we loop to end_year+1
     for year in range(start_year, end_year+1):
       if year in years:
-        one_year_csv_writer(str(year), all_data)
+        one_year_csv_writer(year, all_data)
 ```
 
 Because people will naturally expect that the end year for the files is the last
@@ -463,7 +463,7 @@ output to change.
       # "end_year" is the last year of data we want to pull, so we loop to end_year+1
       for year in range(start_year, end_year+1):
         if year in years:
-          one_year_csv_writer(str(year), all_data, folder_to_save, root_name)
+          one_year_csv_writer(year, all_data, folder_to_save, root_name)
 ```
 
 :::::::::::::::
@@ -501,7 +501,7 @@ def yearly_data_csv_writer(all_data, start_year=1948, end_year=2024):
     # "end_year" is the last year of data we want to pull, so we loop to end_year+1
     for year in range(start_year, end_year+1):
       if year in years:
-        one_year_csv_writer(str(year), all_data)
+        one_year_csv_writer(year, all_data)
 ```
 
 :::::::::::::::::::::::::::::::::::::::  challenge
