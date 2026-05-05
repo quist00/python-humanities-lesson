@@ -687,7 +687,7 @@ type?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: decimal">
 <li><p>As a tuple is immutable, it does not support item assignment.
@@ -796,7 +796,7 @@ changed.</p></li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>You should see the following output:
 <code>{1: 'one', 2: 'two', 3: 'three'}</code></p>
@@ -959,53 +959,53 @@ represent diferent aspects (variables) of each entry:</p>
 <col width="20%">
 <col width="79%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th>Column</th>
 <th>Description</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>title</td>
 <td>Title of Work</td>
 </tr>
-<tr class="even">
+<tr>
 <td>subjects</td>
 <td>List of Subjects</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>mms_id</td>
 <td>Metadata Management System ID</td>
 </tr>
-<tr class="even">
+<tr>
 <td>author</td>
 <td>Author(s) delimited with ‘;’</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>publication_date</td>
 <td>Year of Publication</td>
 </tr>
-<tr class="even">
+<tr>
 <td>publication_place</td>
 <td>Place of Publication</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>language_code</td>
 <td>Language of Text</td>
 </tr>
-<tr class="even">
+<tr>
 <td>resource_type</td>
 <td>Type of resource, e.g. physical, electronic</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>acquisition_date</td>
 <td>Date of Acquisition</td>
 </tr>
-<tr class="even">
+<tr>
 <td>is_dei</td>
 <td>Boolean for whether work meets broadest definition of a DEI
 work</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>checkouts</td>
 <td>Count of number of times</td>
 </tr>
@@ -2345,7 +2345,7 @@ copy to <em>False</em>.</p>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" tabindex="-1" aria-label="code-block-32-1"></a>copy <span class="op">=</span> works_df.copy()</span>
 <span id="cb32-2"><a href="#cb32-2" tabindex="-1" aria-label="code-block-32-2"></a><span class="co"># we have to escape the '(' symbol</span></span>
-<span id="cb32-3"><a href="#cb32-3" tabindex="-1" aria-label="code-block-32-3"></a>copy.loc[works_df.subjects.<span class="bu">str</span>.contains(<span class="st">'Aristocracy \(Social class'</span>), <span class="st">'is_dei'</span>] <span class="op">=</span> <span class="va">False</span></span></code></pre>
+<span id="cb32-3"><a href="#cb32-3" tabindex="-1" aria-label="code-block-32-3"></a>copy.loc[works_df.subjects.<span class="bu">str</span>.contains(<span class="st">'Aristocracy </span><span class="er">\</span><span class="st">(Social class'</span>), <span class="st">'is_dei'</span>] <span class="op">=</span> <span class="va">False</span></span></code></pre>
 </div>
 </div>
 </div>
@@ -2444,32 +2444,32 @@ More on this is in the table below:</p>
 <col width="17%">
 <col width="73%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th>Pandas Type</th>
 <th>Native Python Type</th>
 <th>Description</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>object</td>
 <td>string</td>
 <td>The most general dtype. Will be assigned to your column if column
 has mixed types (numbers and strings).</td>
 </tr>
-<tr class="even">
+<tr>
 <td>int64</td>
 <td>int</td>
 <td>Numeric characters. 64 refers to the memory allocated to hold this
 character.</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>float64</td>
 <td>float</td>
 <td>Numeric characters with decimals. If a column contains numbers and
 NaNs(see below), pandas will default to float64, in case your missing
 value has a decimal.</td>
 </tr>
-<tr class="even">
+<tr>
 <td>datetime64, timedelta[ns]</td>
 <td>N/A (but see the <a href="https://doc.python.org/2/library/datetime.html" class="external-link">datetime</a>
 module in Python’s standard library)</td>
@@ -3114,7 +3114,7 @@ left join where gender is the left dataframe.</p>
   Solution to challenge
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -4463,8 +4463,8 @@ matplotlib can handle dates and times for figures.</p>
   "url": "https://carpentries-incubator.github.io/python-humanities-lesson/instructor/aio.html",
   "identifier": "https://carpentries-incubator.github.io/python-humanities-lesson/instructor/aio.html",
   "dateCreated": "2025-02-18",
-  "dateModified": "2026-04-28",
-  "datePublished": "2026-04-28"
+  "dateModified": "2026-05-05",
+  "datePublished": "2026-05-05"
 }
 
   </script><script>

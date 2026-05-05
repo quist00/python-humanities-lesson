@@ -932,7 +932,7 @@ copy to <em>False</em>.</p>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" tabindex="-1" aria-label="code-block-32-1"></a>copy <span class="op">=</span> works_df.copy()</span>
 <span id="cb32-2"><a href="#cb32-2" tabindex="-1" aria-label="code-block-32-2"></a><span class="co"># we have to escape the '(' symbol</span></span>
-<span id="cb32-3"><a href="#cb32-3" tabindex="-1" aria-label="code-block-32-3"></a>copy.loc[works_df.subjects.<span class="bu">str</span>.contains(<span class="st">'Aristocracy \(Social class'</span>), <span class="st">'is_dei'</span>] <span class="op">=</span> <span class="va">False</span></span></code></pre>
+<span id="cb32-3"><a href="#cb32-3" tabindex="-1" aria-label="code-block-32-3"></a>copy.loc[works_df.subjects.<span class="bu">str</span>.contains(<span class="st">'Aristocracy </span><span class="er">\</span><span class="st">(Social class'</span>), <span class="st">'is_dei'</span>] <span class="op">=</span> <span class="va">False</span></span></code></pre>
 </div>
 </div>
 </div>
@@ -999,7 +999,7 @@ copy to <em>False</em>.</p>
   "identifier": "https://carpentries-incubator.github.io/python-humanities-lesson/instructor/index-slice-subset.html",
   "dateCreated": "2025-02-18",
   "dateModified": "2024-06-18",
-  "datePublished": "2026-04-28"
+  "datePublished": "2026-05-05"
 }
 
   </script><script>
